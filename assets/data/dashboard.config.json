@@ -1,0 +1,20 @@
+{
+  "deviceUrl": "http://YOUR_PLC_HOST:PORT/getvar.csv",
+  "pollingMs": 1000,
+  "units": [
+    {
+      "name": "Chiller-1",
+      "vars": {
+        "PowerCmd": "UnitOnOffCmd",
+        "PowerFb": "UnitOnOffFb",
+        "TempCurrent": "RoomTemp",
+        "TempSetpoint": "RoomSetpoint",
+        "ModeCmd": "SystemStatusCmd",
+        "ModeFb": "SystemStatusFb",
+        "FanSpeedFb": "FanSpeed",
+        "AlarmActive": "AlarmActive"
+      },
+      "setpoint": { "min": 10, "max": 30, "step": 0.5 }
+    }
+  ]
+}

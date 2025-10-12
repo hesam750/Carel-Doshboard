@@ -1,0 +1,83 @@
+<div class="pgd1-component" data-bind="visible: IsPgd1Init">
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 col-centered no-padding ">
+           <div id="pgd1Container" class="pgd1-container col-centered">
+            <table>
+              <tr>
+                <!-- Note about event listener: the click down/touch tap and press are registered in the Javascript code using Hammer js.
+                     Here only the mouseup and mouseout events are binding using the Keys.text field (see pLan.js) as id (and not the value).
+                     In addition I prevent the onContextMenu otherwise the long touch press show the context menu  -->
+                <td id="alarmButton" class="pgdLateralBtn" onContextMenu="return false;"
+                    data-bind=" css: { kbrButtonPressed: IsAlarmButtonPressed }, 
+                                event: { mouseup: onRelease.bind($data, 'Alarm'),
+                                         mouseout: onRelease.bind($data, 'Alarm') }">
+                  <div>
+                    <img data-bind="attr: {src: AlarmImagePath}">
+                  </div>
+                </td>
+                <td id="lcdCanvasContainer" rowspan="3" class="fit">
+                    <canvas id="lcdCanvas" class="fit"></canvas>
+                </td> 
+                <td id="upButton" class="pgdLateralBtn" onContextMenu="return false;"
+                    data-bind="css: { kbrButtonPressed: IsUpButtonPressed },
+                               event: { mouseup: onRelease.bind($data, 'Up'),
+                                        mouseout: onRelease.bind($data, 'Up')}">
+                    <div>
+                        <img data-bind="attr: {src: UpImagePath}">
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <td id="prgButton" class="pgdLateralBtn" onContextMenu="return false;"
+                    data-bind="css: { kbrButtonPressed: IsPrgButtonPressed },
+                               event: { mouseup: onRelease.bind($data, 'Program'),
+                                        mouseout: onRelease.bind($data, 'Program')}">
+                    <div>
+                        <img data-bind="attr: {src: PrgImagePath}">
+                    </div>
+                </td>
+                <td id="enterButton" class="pgdLateralBtn" onContextMenu="return false;"
+                    data-bind="css: { kbrButtonPressed: IsEnterButtonPressed },
+                               event: { mouseup: onRelease.bind($data, 'Enter'),
+                                        mouseout: onRelease.bind($data, 'Enter')}">
+                    <div>
+                        <img data-bind="attr: {src: EnterImagePath}">                
+                    </div>
+                </td>
+              </tr>
+              <tr>
+                <td id="escButton" class="pgdLateralBtn" onContextMenu="return false;"
+                    data-bind="css: { kbrButtonPressed: IsEscButtonPressed },
+                               event: { mouseup: onRelease.bind($data, 'Esc'),
+                                        mouseout: onRelease.bind($data, 'Esc')}">
+                    <div>
+                        <img data-bind="attr: {src: EscImagePath}">
+                    </div>
+                </td>
+                <td id="downButton" class="pgdLateralBtn" onContextMenu="return false;"
+                    data-bind="css: { kbrButtonPressed: IsDownButtonPressed },
+                               event: { mouseup: onRelease.bind($data, 'Down'),
+                                        mouseout: onRelease.bind($data, 'Down') }">
+                    <div>
+                        <img data-bind="attr: {src: DownImagePath}">
+                    </div>
+                </td>
+              </tr>
+            </table>
+        </div>  
+        </div>      
+    </div>
+    <div class="row" data-bind="visible: IsPgd1Init">
+        <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 col-centered no-padding " style="background: black;padding-bottom: 15px">
+            <div class="col-xs-4 col-xs-offset-4 col-centered no-padding" >
+                <div class="multiKeyButton"
+                    data-bind="css: { shortLongUp: IsShortLongButtonUp,
+                                    shortPressDown: IsShortButtonDown,
+                                    longPressDown: IsLongButtonDown }">
+                    <div class="singleMultiKeyButton singleLeftMultiKeyButton" data-bind="click: onShortBtnClick"></div>
+                    <div class="singleMultiKeyButton singleRightMultiKeyButton" data-bind="click: onLongBtnClick" ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

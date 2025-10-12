@@ -1,0 +1,67 @@
+{
+	"properties": {
+		"isLoginEnabled": false
+	},
+	"menu": [
+		{
+			"idRoute": "system-network",
+			"componentName": "system-network-page",
+			"icon": "server",
+			"translationKey": "system"
+		},
+		{
+			"idRoute": "pgd1",
+			"componentName": "pgd1-page",
+			"icon": "tv",
+			"translationKey": "pgd1"
+		},
+		{
+			"idRoute": "alarm-history",
+			"componentName": "alarm-history-page",
+			"icon": "bell",
+			"translationKey": "alarms"
+		},
+		{
+			"idRoute": "unit",
+			"componentName": "unit-page",
+			"iconPath": "assets/img/icon/editor_io_black.png",
+			"translationKey": "unit"
+		},
+		{
+			"idRoute": "log",
+			"componentName": "log-page",
+			"icon": "book",
+			"translationKey": "log"
+		},
+		{
+			"idRoute": "variables",
+			"componentName": "variable-page",
+			"icon": "database",
+			"translationKey": "variables"
+		},
+		{
+			"idRoute": "parameter",
+			"componentName": "parameter-page",
+			"icon": "wrench",
+			"translationKey": "parameters"
+		},
+		{
+			"idRoute": "upload",
+			"componentName": "upload-page",
+			"icon": "arrow-down",
+			"translationKey": "upgrade"
+		},
+		{
+			"idRoute": "time",
+			"componentName": "time-page",
+			"icon": "clock-o",
+			"translationKey": "clock"
+		},
+		{
+			"idRoute": "cweb",
+			"componentName": "cweb-page",
+			"icon": "bookmark",
+			"translationKey": "webInterface"
+		}
+	]
+}

@@ -1,0 +1,365 @@
+/* --------- Navbar */ 
+/* Disable navbar collapse. From: http://getbootstrap.com/examples/non-responsive/non-responsive.css */
+.container .navbar-header,
+.container .navbar-collapse {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+/* Always float the navbar header */
+.navbar-header {
+  float: left;
+}
+
+/* Undo the collapsing navbar */
+.navbar-collapse {
+  display: block !important;
+  height: auto !important;
+  padding-bottom: 0;
+  overflow: visible !important;
+  visibility: visible !important;
+}
+
+.navbar-toggle {
+  display: none;
+}
+.navbar-collapse {
+  border-top: 0;
+}
+
+/* Always apply the floated nav */
+.navbar-nav {
+  float: left;
+  margin: 0;
+}
+.navbar-nav > li {
+  float: left;
+}
+.navbar-nav > li > a {
+  padding: 15px;
+}
+
+/* Redeclare since we override the float above */
+.navbar-nav.navbar-right {
+  float: right;
+}
+
+/* Used to insert an empty row */
+.blank-row {
+    height: 20px !important; /* overwrites any other rules */
+    background-color: #FFFFFF;
+}
+
+/* Width of key column of pair table */
+.column-key {
+    width: 30%
+}
+
+/* Width of value column of pair table */
+.column-value {
+    width: 70%
+}
+
+/* Align right the content of column */
+td.alignRight {
+    text-align: right;
+}
+
+.small-input {
+    padding: 0px;
+    height: 18px;
+}
+
+/* Patch bootstrap select */
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    text-align: center;
+}
+
+.main-page .navbar {
+    background: black;
+    margin-bottom: 0px
+}
+
+.main-page #main-component-left-navbar {
+    margin-left: -12px !important
+}
+
+.main-page #main-component-right-navbar #navbar-logo-container {
+    height: 50px;
+}
+
+.main-page #main-component-right-navbar #navbar-logo {
+    width: 100px;
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.main-page #main-component-right-navbar #beta-logo {
+    display: inline;
+    color: white;
+    font-size: 13px;
+    position: relative;
+    top: 6.5px;
+    left: 3px;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    letter-spacing: 1px;
+}
+
+.main-page .navbar-header button {
+    border: none;
+    color: #fff;
+}
+
+.main-page .navbar-header i,
+.main-page .navbar i {
+    color: #fff;
+}
+
+.main-page .navbar i:hover {
+    color: #9d9d9d;
+}
+
+/* Icon alignment */
+.main-page .navbar li i {
+    vertical-align: middle
+}
+
+.main-page .navbar-right li img {
+    vertical-align: middle;
+    width: 18.4px
+}
+
+.main-page .navbar li .icon-text {
+    font-size: 7px;
+    text-align: left;
+    position: absolute;
+    margin-top: -5px;
+    padding-left: 8px;
+    font-weight: bold;
+    color: white;
+    width: 100%;
+}
+
+#changeLanguageIcon {
+    width: 17.5px !important;
+    height: 17.5px !important;
+}
+
+.main-page #navbar-logout {
+    right: 0%;
+    position: absolute;
+    padding: 5px
+}
+
+.main-page #navbar-item-alarm {
+    visibility: unset;
+}
+
+.main-page {
+    user-select: text !important;
+    height: 100vh;
+}
+
+.main-page #menu-toggle {
+    float: left;
+    margin-left: 10px;
+}
+
+/*  Styles for main-component: wrapper */
+ .main-page #wrapper {
+    position: relative;
+    height: 100%;
+    padding-top: 50px;
+    padding-left: 0;
+    overflow: hidden;
+    -webkit-transition: all 0.5s ease;  /* Chrome, Safari */
+    -moz-transition: all 0.5s ease;     /* Firefox */
+    -o-transition: all 0.5s ease;       /* Opera */
+    transition: all 0.5s ease;
+}
+
+.main-page #wrapper.sidebarClosed {
+    padding-left: 0px;
+}
+
+.main-page #sidebar-wrapper {
+    z-index: 90;
+    position: absolute; 
+    width: 250px;
+    padding-top: 50px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden; 
+    background: #F0F0F0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.main-page #wrapper.sidebarClosed #sidebar-wrapper {
+    width: 0px;
+}
+
+.main-page #page-content-wrapper {
+    position: absolute;
+    padding: 15px;
+    width: 100%; 
+    height: 100%; 
+    overflow-x: hidden; 
+}
+
+.main-page #wrapper.sidebarClosed #page-content-wrapper {
+    position: relative;
+    margin-right: 0px; 
+}
+
+.main-page .fixed-brand {
+    width: 250px;
+}
+
+.main-page .xyz{
+    min-width: 250px;
+}
+
+.main-page .menu-icon {
+    width: 28px
+}
+
+/*  Slidebar */
+.main-page .sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-top: 2px;
+}
+ 
+.main-page .sidebar-nav li {
+    text-indent: 15px;
+    line-height: 40px;
+    display: table;
+    width: 100%;
+}
+
+.white {
+    color: white;
+}
+
+.main-page .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+ 
+.main-page .sidebar-nav li a:hover {
+    text-decoration: none;
+    background-color: #d1d1d1;
+    border-radius: 0
+}
+ 
+.main-page .sidebar-nav li a:active,
+.main-page .sidebar-nav li a:focus {
+    text-decoration: none;
+}
+ 
+.main-page .sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+ 
+.main-page .sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+ 
+.main-page .sidebar-nav > .sidebar-brand a:hover {
+    color: #4f4f4f;
+    background: none;
+}
+
+.main-page .sidebar-nav i {
+    color: black;
+}
+
+.main-page .sidebar-nav i:hover {
+    color: #4f4f4f;
+}
+
+.main-page .no-margin{
+    margin:0;
+}
+
+.main-page .footer {
+    display: none
+}
+ 
+/* Warning: 768px threshold is used also into main viewmodel. Remember to propagate the reference. The values is the same of bootstrap-table Mobile plugin */
+@media(min-width:768px) {
+    .main-page #wrapper {
+        padding-left: 250px;       
+    }
+
+    .main-page #wrapper.sidebarClosed {
+        padding-left: 25px;
+    }
+
+    .main-page #sidebar-wrapper {
+        left: 250px;
+        margin-left: -250px;
+    }
+
+    .main-page #wrapper.sidebarClosed #sidebar-wrapper {
+        width: 50px;
+    }
+
+    .main-page #wrapper.sidebarClosed #sidebar-wrapper:hover {
+        width: 250px;
+    }
+    
+    .main-page #page-content-wrapper {
+        height: 100%; 
+        position: relative;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+ 
+    .main-page #wrapper.sidebarClosed #page-content-wrapper {
+        padding-left: 250px;
+    }
+
+    .main-page #wrapper.sidebarClosed #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+        margin-left: -200px;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        width: auto;
+    }
+
+    .main-page .footer {
+        display: block;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 14px;
+        background-color: #ED1C24;
+        color: white;
+        text-align: right;
+        z-index: 100;
+    }
+
+    .main-page .footer p {
+        font-size: 10px;
+        padding-right: 5px;
+    }
+}

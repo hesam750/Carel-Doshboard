@@ -1,0 +1,15 @@
+<div>
+    <div class="category-box">
+        <ul data-bind="foreach: Categories">
+            <li>
+                <button class="btn" 
+                    data-bind="{text: $data.CategoryName, 
+                                css: $data.CurrentCategoryCssClass,
+                                click: $data.onCategoryClicked}"></button>
+            </li>
+        </ul>
+    </div>
+    <button id="category-unselect-all" 
+        class="btn btn-primary btn-xs" 
+        data-bind="{text: UnselectAllCategoriesTitle, click: UnselectAllCategoriesClick}"></button>
+</div>

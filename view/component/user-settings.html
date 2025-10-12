@@ -1,0 +1,48 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="userSettingsDialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class='fa fa-times'></i></button>
+                <div class="modal-title">
+                    <h2 data-bind="text: Username"></h2>
+                    <h3 data-bind="text: UserProfile"></h3>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <!-- Alert msg -->
+                <div class="alert-msg-box" role="alert" 
+                        data-bind="{visible: IsAlertVisible, css: AlertCssClass}">                    
+                    <div class="alert-msg-title" data-bind="text: AlertTitle"></div>
+                    <div data-bind="visible: AlertIsErrorDetailVisible">
+                        <div data-bind="text: AlertErrorDetailMsg"></div>
+                    </div>
+                </div>
+
+                <div><h4 data-bind="text: ChangePwdTitle"></h4></div>
+                <table class="modal-table-settings">
+                    <tr class="spaceUnder">
+                        <td><div data-bind="text: InsertPwd"></div></td>
+                        <td><input type="password" class="form-control" data-bind="textInput: PwdValue, attr: { type: InsertPwdInputType }"></td> 
+                    </tr>
+                    <tr class="spaceUnder" data-bind="style: { visibility: !CanShowPassword() ? 'visible' : 'hidden'}">
+                        <td><div data-bind="text: RetypePwd"></div></td>
+                        <td><input type="password" class="form-control" data-bind="value: RetypePwdValue"></td> 
+                    </tr>
+                </table>
+                
+                <div class="checkboxes">
+                    <label for="canShowPwd">
+                        <input type="checkbox" data-bind="checked: CanShowPassword" id="canShowPwd" /> 
+                        <span data-bind="text: ShowPwd"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bind="text: UserSave, click: save, enable: IsPwdValid"></button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="text: UserCancel"></button>
+            </div>
+        </div>
+    </div>
+</div>

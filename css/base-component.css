@@ -1,0 +1,1132 @@
+/** Not compatible with IE11 */
+:root {
+    --primary-color:#00529e;
+}
+
+/* Common style */
+iframe {
+    overflow: scroll
+}
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder, 
+.bootstrap-select>.dropdown-toggle.bs-placeholder:active, 
+.bootstrap-select>.dropdown-toggle.bs-placeholder:focus, 
+.bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
+    color: #333
+}
+
+.notEditableValue {
+    display: inline;
+    cursor: not-allowed;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.editableValueContainer {
+    white-space: nowrap;
+    display: inline;
+}
+
+.editableValue {
+    text-align: center;
+    height: 18px;
+    margin: auto;
+    padding: 0px;
+}
+
+.editableValueNoPadding {
+    padding: 0px;
+}
+
+/* REMOVE? */
+input {
+    text-align: center;
+}
+
+.inputAlignLeft {
+    text-align: left;
+}
+
+.blackColor {
+    color: #333;
+}
+
+.notEqual {
+    /* Sometimes this class is used with "warning". */
+    background: #ffbe75 !important;
+}
+
+.card-views .editableValue {
+    display: inline;
+}
+
+.error {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px red;
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px red;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px red;	
+	outline: thin auto red !important;
+    background: transparent;
+}
+
+.errorText {
+    color: red;
+    font-weight: bold;
+}
+
+.centerText {
+    text-align: center
+}
+
+.uom {
+	display: inline;
+}
+
+div.chart-relative {
+    position: relative;
+    width: 100%;
+    height: 320px;
+}
+
+tr.spaceUnder>td {
+    padding-bottom: 5pt;
+}
+
+.bottomSpace {
+    padding-bottom: 5pt;
+}
+
+.modal-header {
+    border-bottom: none
+}
+
+.modal-footer {
+    border: none
+}
+
+.alert-msg-box {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 10px;
+    margin-top: 10px
+}
+
+.alert-msg-title {
+    font-weight: bold;
+    font-size: 1em
+}
+
+.alert-msg-box td,
+.alert-msg-box th {
+    text-align: left;
+    padding-right: 6px;
+    padding-left: 6px;
+}
+
+.alert-msg-box th { 
+    font-weight: normal;
+    font-size: 0.8em;
+} 
+
+.alert-msg-box td {
+    font-size: 0.65em;
+}
+
+.right-side-button {
+    margin-top: 5px;
+    position: relative;
+    float: right;
+}
+
+.display-none {
+    display: none;
+}
+
+.display-inline {
+    display: inline;
+}
+
+.horizontal-row-padding {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+summary {
+    outline: transparent
+}
+
+.card-view .value .centerText {
+    display: inline
+}
+
+.card-view .value .form-control {
+    max-width: 150px;
+    text-align: left;
+}
+
+.circle {
+    float: left;
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    -webkit-border-radius: 18px;
+    -moz-border-radius: 18px;
+    border-radius: 18px;
+}
+
+/** Bootstrap-table settings */
+.noLeftPaddingTableHeader .fixed-table-container thead th .th-inner, .fixed-table-container tbody td .th-inner {
+    padding-left: 0px
+}
+
+.noRightPaddingTableHeader .fixed-table-container thead th .th-inner, .fixed-table-container tbody td .th-inner {
+    padding-right: 0px
+}
+
+/** Modal settings */
+#settingsDialog .modal-title {
+    text-align: center;
+    color: #428BCA;
+    font-weight: bold;
+}
+
+/** User settings */
+#userSettingsDialog .modal-body {
+    padding-top: 0px;
+}
+
+#userSettingsDialog .modal-header {
+    padding-bottom: 0px;
+}
+
+#userSettingsDialog .modal-title h3 {
+    margin-top: 0px;
+}
+
+#userSettingsDialog .checkboxes label {
+    display: block;
+    float: left;
+    padding-right: 10px;
+    padding-left: 22px;
+    text-indent: -22px;
+  }
+#userSettingsDialog .checkboxes input {
+    vertical-align: middle;
+}
+
+#userSettingsDialog .checkboxes label span {
+    vertical-align: middle;
+    font-weight: normal;
+}
+
+.modal-table-settings {
+    width: 100%
+}
+
+.bootstrap-table .pagination a {
+    cursor: pointer;
+}
+
+/* Style for login-form-component */
+.login-form-component {
+  -webkit-font-smoothing: antialiased;
+  padding-top: 50px; 
+}
+
+.login-form-component .form-login {
+    background-color: #EDEDED;
+    padding: 10px;
+    border-radius: 15px;
+    border-color:#d2d2d2;
+    border-width: 5px;
+    box-shadow:0 1px 0 #cfcfcf;
+    max-width: 250px;
+    margin: 0 auto;
+}
+
+.login-form-component .form-login .input-group {
+    margin-bottom: 10px
+}
+
+.login-form-component .alert {
+    margin-top: 25px
+}
+
+.login-form-component .alert div {
+    display: inline
+}
+
+.login-form-component .login-component-login {
+    text-align: center;
+}
+.login-form-component .login-component-login button {
+    width: 100%;
+}
+
+.login-form-component p {
+    text-align: center;
+}
+
+.login-form-component #login-logo {
+    margin-left: 35px;
+    margin-right: 35px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    max-width: 200px;
+}
+
+/* Style for init-progress-component */
+.init-progress-component .progress {
+    margin-top: 50px;
+}
+
+.init-progress-component .progress-bar {
+    width: 100%
+}
+
+.init-progress-component .progress-text { 
+  text-align: center;
+}
+
+/* Style for alarm-component */
+.alarm-history-component td button {
+    font-size: 0.75em;
+    padding: 2px;
+}
+
+.alarm-history-component .danger {
+    color: red
+}
+
+/* Style for log-component */
+.log-component #log-component-configs label {
+    display: block;
+    text-align: center;
+    max-width: 220px;
+}
+
+.log-component #log-view-component-load-alert-container {
+    min-height: 35px
+}
+
+.log-component #log-component-interval-period .bootstrap-select {
+    display: block;
+}
+
+.log-component #log-component-chart-container {
+    margin-top: 35px;
+}
+
+.log-component #container-chart {
+    width: 100%;
+    height: 100%
+}
+
+.log-component .progress {
+    margin-top: 50px;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+.log-component #log-component-quick-load-date {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.log-component #log-component-quick-load-date input {
+    display: inline-block;
+    width: 60px;
+    height: 22px;
+}
+
+.log-component #log-component-quick-load-date button {
+    height: 22px;
+    padding-top: 0px;
+    color: #555;
+}
+
+.log-component #log-component-quick-load-date .bootstrap-select {
+    margin-top: -2px;
+}
+
+.log-component .progress-bar {
+    width: 100%
+}
+
+/* .log-component #log-chart {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    top: 95px;
+    bottom: 10px;
+}  */
+
+.log-component #log-chart {
+    width: 95%;
+    height: 60vh;
+}
+
+/* .log-component #log-chart-legend {
+    text-align: center;
+} */
+
+.log-component .fixed-table-container {
+    border: none !important;
+}
+
+.log-component .fixed-table-container thead th,
+.log-component .fixed-table-container tbody td {
+    border-left: none !important;
+}
+
+/* Hide detail column */
+.log-component #log-component-configs .hide-first-column > thead > tr > th.detail,
+.log-component #log-component-configs .hide-first-column > tbody > tr:not(.detail-view) > td:first-of-type {
+  display: none;
+}
+
+.log-component .bs-checkbox input {
+    width: 15px
+}
+
+/* Select style */
+.log-component #axis-type .bootstrap-select button,
+.variable-view-component #axis-type .bootstrap-select button {
+    font-size: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px; 
+    width: 110px;
+}
+
+.log-component #axis-type .bootstrap-select .dropdown-menu ul,
+.variable-view-component #axis-type .bootstrap-select .dropdown-menu ul {
+    font-size: 10px;
+    width: 110px;
+} 
+
+.log-component #serie-style .bootstrap-select button,
+.variable-view-component #serie-style .bootstrap-select button {
+    font-size: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px; 
+    width: 80px;
+}
+
+.log-component #serie-style .bootstrap-select .dropdown-menu ul,
+.variable-view-component #serie-style .bootstrap-select .dropdown-menu ul {
+    font-size: 10px;
+    width: 80px;
+}
+
+.log-component .colorpicker-component input,
+.variable-view-component .colorpicker-component input {
+    height: 20px;
+    font-size: 10px;
+}
+
+.log-component .colorpicker-component span,
+.variable-view-component .colorpicker-component span {
+    height: 20px;
+    padding: 2px;
+}
+
+.log-component .colorpicker-element .add-on i, 
+.log-component .colorpicker-element .input-group-addon i,
+.variable-view-component .colorpicker-element .add-on i, 
+.variable-view-component .colorpicker-element .input-group-addon i  {
+    vertical-align: middle;
+    width: 10px;
+    height: 10px;
+}
+
+.log-component #log-component-serie-table,
+.variable-view-component #variable-view-serie-table {
+    font-size: 12px;
+}
+
+.log-component #log-component-serie-table tbody td,
+.variable-view-component #variable-view-serie-table tbody td {
+    padding: 2px
+}
+
+/* Override overflow of inner log table. So select menu is always visible */
+/* .log-component #log-component-periodic-table > tbody > tr.detail-view > td > div.bootstrap-table > div.fixed-table-container > div.fixed-table-body*/
+.log-component #log-component-periodic-table .detail-view .fixed-table-body,
+.log-component #log-component-event-table .detail-view .fixed-table-body {
+    overflow-x: unset !important;
+    overflow-y: unset !important;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+/** Add padding to the bottom to avoid that the horizontal scrollbar appears when select picker is shown. */
+.log-component #log-component-configs-periodic > div.bootstrap-table > div.fixed-table-container > div.fixed-table-body,
+.log-component #log-component-configs-event > div.bootstrap-table > div.fixed-table-container > div.fixed-table-body {
+    padding-bottom: 45px;
+}
+
+/* SelectBootstrap and ColorPicker */
+.log-component .bs-container,
+.log-component .colorpicker {
+    z-index: 10000
+}
+
+.log-component .colorpicker-component span,
+.variable-view-component .colorpicker-component span {
+    width: 24px !important;
+    /*border: 1px solid #adadad !important;*/
+    border: none;
+    border-radius: 4px !important;
+}
+
+.log-component .colorpicker-component input,
+.variable-view-component  .colorpicker-component input {
+    width: 140px
+}
+
+.log-component .colorpicker-element, 
+.variable-view-component .colorpicker-element {
+    display: inline;
+}
+
+.log-component #log-component-export-log {
+    margin-right: 5px
+}
+
+/** Style for pgd1 compoment */
+.pgd1-component .fit {
+    width: 100%;
+    min-height: 165px;
+}
+
+.pgd1-component table td {
+    border: white 2px solid;
+}
+
+.pgd1-component table {
+    margin: auto
+}
+
+.pgd1-component .col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.pgd1-component .pgd1-container {
+    background: black;
+    padding: 10px
+}
+
+.pgd1-component canvas {
+    background: #6ABCE7;
+    padding: 5px;
+    display: block;
+    margin: auto;
+    min-width: 132px;
+    min-height: 64px
+}
+
+.pgd1-component .pgdLateralBtn {
+    background: black;
+    max-width: 55px;
+    min-width: 55px;
+    padding: 5px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.pgd1-component .led {
+    width: 50%;
+    height: 50%;
+}
+
+.pgd1-component .no-padding {
+    padding: 0px;
+    margin: auto;
+}
+
+.pgd1-component .kbrButtonPressed {
+    background: url('../assets/img/pgd1/Button_DOWN.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pgd1-component .multiKeyButton {
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: 100% auto; 
+    height: 0;
+    padding-top: 30%;
+    cursor: pointer;
+}
+
+.pgd1-component .shortLongUp {
+    background: url('../assets/img/pgd1/ShortLong_UP.svg');
+}
+
+.pgd1-component .shortPressDown {
+    background: url('../assets/img/pgd1/ShortPress_DOWN.svg');
+}
+
+.pgd1-component .longPressDown {
+    background: url('../assets/img/pgd1/LongPress_DOWN.svg'); 
+}
+
+.pgd1-component .singleMultiKeyButton {
+    position:absolute; 
+    top:0; 
+    width: 50%; 
+    height: 100%;
+}
+
+.pgd1-component .singleLeftMultiKeyButton {
+    left:0; 
+}
+
+.pgd1-component .singleRightMultiKeyButton {
+    right:0; 
+}
+
+/* Style for upload-upgrade component */
+.upload-component .progress,
+.upgrade-component .progress {
+    margin-top: 10px;
+}
+
+.upload-component .progress-bar,
+.upgrade-component .progress-bar {
+    width: 100%;
+}
+
+.upload-component .progress-text,
+.upgrade-component .progress-text {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+/* Style for info-component */
+.info-component .fixed-table-container tbody td,
+.info-component .fixed-table-container thead th {
+  /* Remove vertical border between columns */
+    border-left: 0px
+}
+
+.info-component #info-component-filesystem-table {
+    margin-top: 15px
+}
+
+.info-component #info-component-system-table td:nth-child(2)  {
+    text-align: center;
+}
+
+.info-component #info-component-network-table td:nth-child(2)  {
+    text-align: center;
+}
+
+.info-component #info-component-application-table td:nth-child(2)  {
+    text-align: center;
+}
+
+/** Move to text editable */
+.info-component #info-component-network-table input[type=text] {
+    width: 66%;
+    background: transparent;
+    text-align: center;
+    margin: 0 auto;
+    height: 18px
+}
+
+.info-component #info-component-network-table input.error {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px red;
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px red;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px red;	
+	outline: thin auto red;
+    background: transparent;
+}
+
+.info-component div.bootstrap-table div.fixed-table-container.table-no-bordered > div.fixed-table-body {
+    padding: 5px;
+}
+
+.info-component .panel-body .btn-primary {
+    float: right;
+}
+
+.info-component .sublabel {
+    margin-top: 16px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.info-component .network-config {
+    table-layout: fixed;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.info-component .network-config table {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.info-component .network-config .bootstrap-select button {
+    font-size: 14px;
+    padding-top: 0px;
+    padding-bottom: 0px; 
+}
+
+.info-component .network-config table input {
+    height: 18px;
+    /*width: calc(100% - 10px);*/
+}
+
+.info-component #info-component-network-ipv4,
+.info-component #info-component-network-ipv6 {
+    margin-top: 40px;
+}
+
+.info-component .network-config td table {
+    width: 100%;
+}
+
+.info-component #info-component-network-hostname input {
+    color: #333
+}
+
+/* Io component (direction type view) */
+.io-direction-type-component .io-panel {
+    /** Primary color */
+    border-color: #00529e;
+}
+
+.io-direction-type-component .io-panel .panel-heading {
+    /** Primary color */
+    background: #00529e;
+    border-color: #00529e;
+}
+
+.io-direction-type-component #io-direction-type-table-toolbar {
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.io-direction-type-component #io-direction-type-table-toolbar label {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+}
+
+.io-direction-type-component #io-direction-type-table-toolbar label div {
+    display: inline;
+    padding-left: 5px;
+}
+
+.io-direction-type-component table,
+.io-direction-type-component th,
+.io-direction-type-component .table-bordered>tbody>tr>th,
+.io-direction-type-component .table-bordered>tbody>tr>td,
+.io-direction-type-component .table-bordered>thead>tr>th,
+.io-direction-type-component .table-bordered>thead>tr>td {
+    border: none
+}
+
+/* Style for parameter */
+.parameter-component .exportToFile #share-icon {
+    font-size: 8px;
+    position: absolute;
+    left: 15px;
+    top: 5px;
+}
+
+.parameter-component .exportToFile #file-icon {
+    font-size: 12px;
+}
+
+/** Style for categoies */
+.category-box ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.category-box ul li {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.category-box ul li button,
+.category-box ul li button:focus,
+.category-box ul li button:active,
+.category-box ul li button:checked,
+.category-box ul li .btn:focus, 
+.category-box ul li .btn:active:focus
+ {
+    border: none;
+    color: white;
+    font-weight: bold;
+    outline: none;
+}
+
+.smallCategoryLabelColumn ul li .category-circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 25px;
+}
+
+ #category-unselect-all {
+    margin-top: 5px;
+}
+
+.card-views ul li .category-circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 25px;
+}
+
+.smallCategoryLabelColumn ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.smallCategoryLabelColumn ul li {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 1px;
+}
+
+.categoryNoClickedStyle {
+    background: #e0e0e0
+}
+
+.unusedCategoryStyle {
+    background: #839192
+}
+
+/** Palette. These labels are used into js code */
+.paletteDark0 {
+    background: #009788
+}
+
+.paletteDark1 {
+    background: #00bcd5
+}
+
+.paletteDark2 {
+    background: #3f51b5
+}
+
+.paletteDark3 {
+    background: #9c28b1
+}
+
+.paletteDark4 {
+    background: #ea1e63
+}
+
+.paletteDark5 {
+    background: #dc4437
+}
+
+.paletteDark6 {
+    background: #ff9801
+}
+
+.paletteMedium0 {
+    background: #66c0b7
+}
+
+.paletteMedium1 {
+    background: #66d7e5
+}
+
+.paletteMedium2 {
+    background: #8d97d4
+}
+
+.paletteMedium3 {
+    background: #c57dd1
+}
+
+.paletteMedium4 {
+    background: #f278a1
+}
+
+.paletteMedium5 {
+    background: #e98f87
+}
+
+.paletteMedium6 {
+    background: #fec166
+}
+
+.paletteLight0 {
+    background: #b2dfdc
+}
+
+.paletteLight1 {
+    background: #b2ebf2
+}
+
+.paletteLight2 {
+    background: #c5cae8
+}
+
+.paletteLight3 {
+    background: #e1bee8
+}
+
+.paletteLight4 {
+    background: #f9bbd0
+}
+
+.paletteLight5 {
+    background: #f4c7c2
+}
+
+.paletteLight6 {
+    background: #ffe0b2
+}
+
+/* Style for variable */
+.variable-view-component .smallCategoryLabelColumn ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.variable-view-component .smallCategoryLabelColumn ul li {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 1px;
+}
+
+.variable-view-component .card-views ul li {
+    display: inline-block;
+    margin-right: 2px;
+}
+
+.variable-view-component #variable-view-component-msgbox {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 0px;
+    margin-top: 10px
+}
+
+.variable-view-component #variable-view-component-msgbox #variable-view-component-msgbox-msg {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.variable-view-component #variable-view-component-msgbox td,
+.variable-view-component #variable-view-component-msgbox th { 
+    text-align: left;
+    padding-right: 6px;
+    padding-left: 6px;
+} 
+
+.variable-view-component #variable-view-component-msgbox th { 
+    font-weight: normal;
+    font-size: 0.8em;
+} 
+
+.variable-view-component #variable-view-component-msgbox td {
+    font-size: 0.65em;
+}
+
+.parameter-component .card-views ul,
+.variable-view-component .card-views ul {
+    list-style-type: none;
+    display: inline-table;
+    margin-bottom: 0px;
+}
+
+.variable-view-component .card-views input {
+    text-align: left;
+}
+
+.variable-view-component #live-chart {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    bottom: 10px;
+}
+
+/* Style to minimize modal */
+.variable-view-component .modal-header .btnGrp {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+} 
+
+.variable-view-component .min {
+    width: 250px; 
+    height: 35px;
+    overflow: hidden !important;
+    padding: 0px !important;
+    margin: 0px;    
+
+    float: left;  
+    position: static !important; 
+}
+
+.variable-view-component .min .modal-dialog, 
+.variable-view-component .min .modal-content {
+    height: 100%;
+    width: 100%;
+    margin: 0px !important;
+    padding: 0px !important; 
+}
+
+.variable-view-component .min .modal-header {
+    height: 100%;
+    width: 100%;
+    margin: 0px !important;
+    padding: 3px 5px !important; 
+}
+
+.variable-view-component .min .fa {
+    font-size: 14px; 
+}
+
+.variable-view-component .min .menuTab {
+    display: none;
+}
+
+.variable-view-component .chartContainerDialog button .fa {
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.variable-view-component .modal button:focus { 
+    outline: none; 
+}
+
+.variable-view-component .minmaxCon {
+    height: 35px;
+    bottom: 1px;
+    left: 1px;
+    position: fixed;
+    right: 1px;
+    z-index: 9999;
+    max-width: 350px;
+}
+
+.variable-view-component .chartContainerDialog .fixed-table-body {
+    overflow-y: -webkit-paged-y !important;
+    overflow-y: auto;
+}
+
+.variable-view-component #container-chart {
+    width: 95%;
+    height: 50vh;
+    position: relative;
+}
+
+.variable-view-component  #legend-live-chart {
+    margin-left: 15px;
+    margin-bottom: 15px;
+    margin-right: 15px;
+}
+
+/* End style of modal */
+
+#alarmHistorySettings table,
+#alarmHistorySettings table input  {
+    width: 100%
+}
+
+/* Clock component */
+
+#clock-component td {
+    padding-right: 5px;
+}
+
+#clock-component .input-group span {
+    cursor: pointer;
+}
+
+#clock-component table {
+    width: 100%
+}
+
+#clock-component #clock-save-button {
+    margin: 0 5px;
+}
+
+@media only screen and (max-width: 767px) {
+    /* Force table to not be like tables anymore */
+    .variable-component table,
+    .variable-component thead,
+    .variable-component tbody,
+    .variable-component th,
+    .variable-component td,
+    .variable-component tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    .variable-component  thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .variable-component tr { 
+        border: 1px solid #ccc; 
+    }
+
+    /* Behave like a "row" */
+    .variable-component td {    
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 30% !important; 
+        white-space: normal;
+        text-align:left;
+        min-height: 32px;
+        word-wrap: break-word !important;
+    }
+
+    /* Now like a table header */
+    /* Top/left values mimic padding */
+    .variable-component td:before {
+        position: absolute;  
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    /* Label the data */
+    .variable-component td:before { 
+        content: attr(data-title); 
+    }
+
+    .log-component #log-chart {
+        width: 95%;
+        height: 85vh;
+    }
+
+    .clock-td {
+        width: 35%;
+    }
+
+    /* In small devices, if a row has a very large input than it overflow the table. Fix it to the size of first raw*/
+    .fixed-first-row-table {
+        width: 100%;
+        table-layout: fixed;
+    }
+}

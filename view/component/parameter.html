@@ -1,0 +1,154 @@
+<div class="parameter-component col-xs-12">
+	<div class="row">
+		<category-component params="parentViewmodel: $component"></category-component>
+	</div>
+	<div class="row" >
+		<div data-bind="visible: IsParameterInit">
+			<!-- Left toolbar: it isn't visible on cField web app because its functionality are moved to navbar -->
+			<div id="parametery-toolbar" class="btn-group" data-bind="visible: !HideExtraToolbar">
+				<button type="button" class="btn btn-default" data-bind="click: refreshConfiguration">
+					<i class="fa fa-refresh"></i>
+				</button>
+				<button type="button" class="btn btn-default" data-bind="click: changeLanguage">
+					<i class="fa fa-flag"></i>
+				</button>
+			</div>
+		</div>
+
+		<!-- Alert -->
+		<div id="parameter-view-component-msgbox-msg" class="alert alert-msg-box" role="alert" 
+			data-bind="{visible: IsAlertVisible, css: AlertCssClass}">
+			<button type="button" class="close" aria-label="Close" data-bind="click: closeAlert()"><i class='fa fa-times'></i></button>
+			
+			<div data-bind="text: AlertTitle1"></div>
+			<div data-bind="visible: AlertIsErrorDetailVisible">
+				<div data-bind="text: AlertErrorDetailMsg"></div>
+			</div>
+
+			<table data-bind="visible: AlertIsUpdateFailedTableVisible">
+				<thead>
+					<tr>
+						<th data-bind="text: AlertVariableNameHeader"></th>
+						<th data-bind="text: AlertSetValueHeader"></th>
+						<th data-bind="text: AlertServerResponseHeader"></th></tr>
+				</thead>
+				<tbody data-bind="foreach: AlertNotUpdatedArray">
+					<tr>
+						<td data-bind="text: VariableName"></td>
+						<td data-bind="text: SetValue"></td>
+						<td data-bind="text: ServerResponse"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div data-bind="text: AlertTitle2"></div>
+			<table data-bind="visible: AlertIsUpdateInvalidTableVisible">
+				<thead>
+					<tr>
+						<th data-bind="text: AlertVariableNameHeader"></th>
+						<th data-bind="text: AlertEditValueHeader"></th>
+				</thead>
+				<tbody data-bind="foreach: AlertInvalidUpdateArray">
+					<tr>
+						<td data-bind="text: VariableName"></td>
+						<td data-bind="text: VariableEditValue"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div data-bind="visible: IsParameterInit">
+			<!-- Parameter table. It uses bootstrap-table library -->
+			<table class="table-bordered table-condensed"
+				id="parameter-component-table"
+				data-pagination="true" 
+				data-show-refresh="true"
+				data-show-toggle="true"
+				data-toolbar="#parameter-toolbar"
+				data-toolbar-align="left"
+				data-show-columns="true"
+				data-icons-prefix="fa"
+				data-sort-name="VariableName"
+				data-sort-order="asc"
+				data-search="true"
+				data-row-style="variableViewRowStyle"
+				data-bind="attr: {'data-page-size': DataPageSize}"
+				data-bind="attr: {'data-card-view': EnableCardView}"
+				data-cookie="true"
+                data-cookie-id-table="parameterTableId"
+				data-cookie-expire="1y"			
+                data-mobile-responsive="false"
+				data-check-on-init="true"
+				data-min-width="768">
+				<thead>
+					<tr>
+						<th data-field="VariableName" 
+							data-bind="text: VariableNameHeader"
+							data-sortable="true" 
+                            data-align="left"
+                            data-halign="left"
+                            data-visible="true"></th>
+						<th data-field="VariableDescription" 
+							data-bind="text: VariableDescriptionHeader"
+							data-sortable="true" 
+                            data-align="left"
+							data-halign="left"
+							data-formatter="descriptionColumnFormatter"></th>
+						<th data-field="CategoryArray"
+                            data-class="smallCategoryLabelColumn"
+                            data-bind="text: CategoryHeader"
+                            data-formatter="categoryColumnFormatter"
+                            data-sortable="false" 
+                            data-align="center"
+                            data-halign="center"
+                            data-searchable="false"></th>
+						<th data-field="VariableType" 
+							data-bind="text: VariableTypeHeader"
+							data-halign="left"
+                            data-sortable="true"
+                            data-searchable="false"
+                            data-visible="false"></th>
+						<th data-field="VariableMinValue" 
+							data-bind="text: VariableMinValueHeader"
+							data-formatter="readOnlyMinValueFormatter"
+							data-align="center"
+							data-halign="center"
+							data-searchable="false"></th>
+						<th data-field="VariableMaxValue"
+							data-bind="text: VariableMaxValueHeader"
+							data-formatter="readOnlyMaxValueFormatter"
+							data-align="center"
+							data-halign="center"
+							data-searchable="false"></th>
+						<th data-field="VariableInitValue" 
+							data-bind="text: VariableInitValueHeader"
+							data-formatter="readOnlyParameterInitValueFormatter"
+							data-align="center"
+                            data-halign="center"></th>
+						<th data-field="VariableDevValue" 
+							data-bind="text: VariableDevValueHeader"
+							data-formatter="readOnlyParameterDevValueFormatter"
+							data-align="center"
+                            data-halign="center"></th>
+						<th data-field="VariableCurrentValue"
+							data-bind="text: VariableCurrentValueHeader"
+							data-formatter="writableParameterValueFormatter"
+							data-events="writableVariableValueFormatterEvent"
+							data-align="center"
+							data-halign="center"
+							data-class="fixWidth150px"></th>
+						<th data-field="VariableImportedValue"
+							data-bind="text: VariableImportedValueHeader"
+							data-formatter="writableParameterImportedValueFormatter"
+							data-events="writableParameterImportedValueFormatterEvent"
+							data-cell-style="readOnlyParameterImportedValueCellStyle"
+							data-visible="true"
+							data-align="center"
+							data-halign="center"
+							data-class="fixWidth150px"></th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+    </div>
+</div>

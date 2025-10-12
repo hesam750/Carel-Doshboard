@@ -1,0 +1,35 @@
+<div data-bind="if: IsAgentSupported">
+	<div data-bind="if: IsCfieldInitialized">
+		<div>
+			<!-- Component view -->
+            <div data-bind="component: {name: SubComponentName, params: { hideExtraToolbar: HideExtraToolbar }}"></div>
+		</div>
+	</div>
+	<div data-bind="if: !IsCfieldInitialized()">
+		<div data-bind="if: IsCfieldBootSuccess()">
+			<div data-bind="if: IsLoginEnabled()">
+					<div data-bind="if: IsLoginRequired">
+						<!-- Login -->
+						<login-form-component></login-form-component>
+					</div>
+					<div data-bind="if: !IsLoginRequired()">
+						<!-- Progress bar + error msg -->
+						<init-progress-component></init-progress-component>
+					</div>
+				</div>
+				<div data-bind="if: !IsLoginEnabled()">
+					<!-- Progress bar + error msg -->
+					<init-progress-component></init-progress-component>
+				</div>
+		</div>
+
+		<div data-bind="if: IsCfieldError()">
+			<!-- Msg -->
+			<div data-bind="text: ErrorMsg"></div>
+		</div>
+	</div>
+</div>
+<div data-bind="if: !IsAgentSupported">
+	<!-- Error msg -->
+	<div data-bind="text: AgentNotSupportedMsg"></div>
+</div>

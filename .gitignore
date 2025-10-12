@@ -1,0 +1,7 @@
+# Temp and local artifacts
+out.tmp
+proxy.log
+log.text
+vars_dump_*.htm
+getvar_dump*.csv
+test_setpoint.log

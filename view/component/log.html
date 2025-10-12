@@ -1,0 +1,152 @@
+<!-- Log view -->
+<div class="log-component col-xs-12">
+    <div data-bind="{visible: IsLogViewInit()}">
+        <div data-bind="{visible: IsLogDefined()}">
+            <div class="row">
+                <!-- Alert msg -->
+                <div id="log-view-component-msgbox-msg" class="alert-msg-box" role="alert" data-bind="{visible: IsTopAlertVisible, css: TopAlertCssClass}">
+                    <button type="button" class="close" aria-label="Close" data-bind="click: closeTopAlert()"><span aria-hidden="true">&times;</span></button>
+                    
+                    <div class="alert-msg-title" data-bind="text: TopAlertTitle"></div>
+                    <div data-bind="visible: TopAlertIsErrorDetailVisible">
+                        <div data-bind="text: TopAlertErrorDetailMsg"></div>
+                    </div>
+                </div>
+        
+                <!-- Log definition -->
+                <div id="log-component-configs">
+                    <!-- Log periodic list -->
+                    <div id="log-component-configs-periodic" data-bind="visible: AtLeastAPeriodicLog">
+                        <h3 data-bind="text: PeriodicLogsTitle"></h3>
+                        <!-- Table with radio box -->
+                        <table 
+                            class="table table-no-bordered hide-first-column" 
+                            id="log-component-periodic-table" 
+                            data-detail-view=true 
+                            data-click-to-select=true
+                            data-detail-formatter="logComponentSerieTableFormatter">
+                            <thead>
+                                <tr>
+                                    <th data-field="IsSelected" data-width="15px" data-radio="true"></th>
+                                    <th data-field="LogName" data-bind="text: LogNameTitle"></th>
+                                    <th data-field="LogNrecord" data-bind="text: RecordNumberTitle"></th>
+                                    <th data-field="LogSampledVariableValue" data-bind="text: IntervalSecondTitle"></th>                        
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+        
+                    <!-- Log event list -->
+                    <div id="log-component-configs-event" data-bind="visible: AtLeastAEventLog">
+                        <h3 data-bind="text: EventLogsTitle"></h3>
+                        <!-- Table with radio box -->
+                        <table 
+                            class="table table-no-bordered hide-first-column" 
+                            id="log-component-event-table" 
+                            data-detail-view=true 
+                            data-click-to-select=true
+                            data-detail-formatter="logComponentSerieTableFormatter">
+                            <thead>
+                                <tr>
+                                    <th data-field="IsSelected" data-radio="true"></th>
+                                    <th data-field="LogName" data-bind="text: LogNameTitle"></th>
+                                    <th data-field="LogNrecord" data-bind="text: RecordNumberTitle"></th>                       
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick date select -->
+            <div class="row">
+                <h3 data-bind="text: IntervalTitle"></h3>
+                <div class="form-group" id="log-component-quick-load-date">
+                    <div class="display-inline" data-bind="text: QuickLoadTitle"></div>
+                    <input type="number" class="form-control" data-bind="textInput: IntervalDateNumber">
+                    <select class="selectpicker" id="intervalPeriod" data-width="auto">
+                        <option data-bind="text: PeriodItemViewModelArray[0].Description"></option>
+                        <option data-bind="text: PeriodItemViewModelArray[1].Description"></option>
+                        <option data-bind="text: PeriodItemViewModelArray[2].Description"></option>
+                    </select> 
+                    <div class="display-inline" data-bind="text: AgoTitle"></div>
+                </div>
+            </div>
+        
+            <!-- Date interval -->
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label for="starttime" data-bind="text: StarttimeTitle"></label>
+                        <div class="input-group date" data-bind="dateTimePicker: StartDate" id="startDate">
+                            <input type='text' class="form-control" id="starttime"/>
+                            <span class="input-group-addon">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-sm-12 col-md-6">
+                    <div class="form-group">
+                        <label for="starttime" data-bind="text: StoptimeTitle"></label>
+                        <div class="input-group date" data-bind="dateTimePicker: StopDate" id="stopDate">
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="fa fa-clock-o"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="errorText horizontal-row-padding" data-bind="visible: IsInvalidDate, text: InvalidDateMsg"></div>
+            </div>
+
+            <!-- Export/load buttons -->
+            <div id="log-view-component-load-alert-container">
+                <div class="right-side-button">
+                    <button type="button" class="btn btn-primary" id="log-component-export-log" data-bind="{click: exportData, visible: IsChartLoaded, text: ExportTitle}"></button>
+                    <button type="button" class="btn btn-primary" data-bind="{click: getLog, enable: EnableLoadLog() && !IsInvalidDate(), text: LoadTitle}"></button>
+                </div>
+            </div>
+        
+            <!-- Alert msg -->
+            <div id="log-view-component-msgbox-msg" class="alert-msg-box" role="alert" data-bind="{visible: IsBottomAlertVisible, css: BottomAlertCssClass}">
+                <button type="button" class="close" aria-label="Close" data-bind="click: closeBottomAlert()"><span aria-hidden="true">&times;</span></button>
+                
+                <div class="alert-msg-title" data-bind="text: BottomAlertTitle"></div>
+                <div data-bind="visible: BottomAlertIsErrorDetailVisible">
+                    <div data-bind="text: BottomAlertErrorDetailMsg"></div>
+                </div>
+            </div>
+        
+            <!-- Chart -->
+            <div class="row" data-bind="visible: IsChartContainterVisible">
+                <div>
+                    <div data-bind="visible: IsLoadingLog">
+                        <div class="progress" id="log-component-chart-row">
+                            <div class="progress-bar progress-bar-striped active" 
+                                role="progressbar" 
+                                aria-valuenow="100" 
+                                aria-valuemin="0" 
+                                aria-valuemax="100"> 
+                            </div>  
+                        </div>
+                    </div>
+
+                    <div id="log-component-chart-container" data-bind="visible: IsChartLoaded">          
+                        <div id="container-chart">                
+                            <div id="log-chart"></div>
+                        </div>
+                        <div id="log-chart-legend"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div data-bind="{visible: !IsLogDefined()}">
+            <div data-bind="{if: !AtLeastAPeriodicLog() && !AtLeastAEventLog()}"></div>
+                <div data-bind="{text: NoLogAvailableText}"></div>
+            </div>      
+        </div>
+    </div>
+</div>

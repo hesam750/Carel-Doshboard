@@ -1,0 +1,63 @@
+<div class="time-component">
+    <div data-bind="if: !IsClockSupported">
+        <div data-bind="text: ClockConfigNotSupported"></div>
+    </div>
+
+    <div data-bind="if: IsClockSupported && IsComponentInit">
+        <!-- Alert -->
+        <div class="alert-msg-box" role="alert" data-bind="{visible: IsAlertVisible, css: AlertCssClass}">                    
+            <div class="alert-msg-title" data-bind="text: AlertTitle"></div>
+            <div data-bind="visible: AlertIsErrorDetailVisible"></div>
+            <div data-bind="text: AlertErrorDetailMsg"></div>
+        </div>           
+        
+        <!-- Clock -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-lg-8">
+                <div class="panel panel panel-primary" id="clock-component">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" data-bind="text: ClockTitle"></h3>
+                    </div>                    
+                    <div class="panel-body">
+                        <table class="fixed-first-row-table">
+                            <tbody>
+                                <tr>
+                                    <td class="bottomSpace clock-td" data-bind="text: DeviceClockTitle"></td>
+                                    <td class="bottomSpace "><input type="text" class="form-control inputAlignLeft blackColor" data-bind="textInput: TimeValue" disabled></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="alignRight"><button type="button" class="btn btn-primary btn-xs" data-bind="text: SyncTimeTitle, click: syncWithLocalDate"></button></td>
+                                </tr>
+                                <tr class="blank-row bottomSpace"><td colspan="2"></td></tr>
+                                <tr>
+                                    <td class="bottomSpace clock-td" data-bind="text: ModeTitle"></td>
+                                    <td class="bottomSpace "><select data-width="auto" id="clock-select-modes"
+                                        data-bind="options: ModeTypes, value: SelectedModeType, optionsText: 'Title', selectPicker: { width: '100%'}"></select></td>
+                                </tr>
+                                <tr>
+                                    <td class="bottomSpace clock-td" data-bind="text: TimezoneTitle"></td>
+                                    <td class="bottomSpace "><select data-width="auto" 
+                                            data-bind="options: Timezones, value: SelectedTimezone, optionsText: 'Name', selectPicker: {width:'100%'}"></select></td>
+                                </tr>
+                                <tr>
+                                    <td class="bottomSpace clock-td" data-bind="text: Server1Title"></td>
+                                    <td class="bottomSpace "><input type="text" class="form-control inputAlignLeft blackColor" data-bind="textInput: Server1Value, enable: IsServerValueEnabled"></td>
+                                </tr>
+                                <tr>
+                                    <td class="bottomSpace clock-td" data-bind="text: Server2Title"></td>
+                                    <td class="bottomSpace "><input type="text" class="form-control inputAlignLeft blackColor" data-bind="textInput: Server2Value, enable: IsServerValueEnabled"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="alignRight"><button type="button" class="btn btn-primary btn-xs" data-bind="text: SaveTitle, click: save, enable: IsSaveEnabled"></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
+            </div>
+        </div> 
+    </div>
+</div>
+

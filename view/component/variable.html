@@ -1,0 +1,242 @@
+<div class="variable-view-component col-xs-12">
+    <div class="row">
+        <category-component params="parentViewmodel: $component"></category-component>
+    </div>
+
+    <div class="row">
+        <!-- Settings dialog -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="settingsDialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class='fa fa-times'></i></button>
+                        <h2 class="modal-title" data-bind="text: SettingsTitle"></h2>
+                    </div>
+
+                    <div class="modal-body">
+                        <table class="modal-table-settings">
+                            <tr>
+                                <td><div data-bind="text: SettingsRefreshInterval"></div></td>
+                                <td><input type="number" min="0" data-bind="value: RefreshIntervalSecondsValue"></td> 
+                            </tr>
+                            <tr>
+                                <td><div data-bind="text: ExportSettingsSeparatorChar"></div></td>
+                                <td><input type="text" maxlength="1" data-bind="value: ExportSettingsSeparatorCharValue"></td> 
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="text: SettingsSave, click: save"></button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="text: SettingsCancel"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart dialog -->
+        <div class="modal fade chartContainerDialog" data-backdrop="static" role="dialog" id="chartDialog"> <!-- data-bind="visible: IsPlotModalVisible" -->
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="click: closePlotDialog"><i class='fa fa-times'></i></button>
+                        <button class="close modalMinimize" data-bind="visible: IsSelectedAtLeastOneChartVariable()"><i class='fa fa-minus'></i> </button>
+                            <h4 class="modal-title" data-bind="text: LiveTitle"></h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div data-bind="text: SelectAtLeastOneChartVariableMsg, visible: !IsSelectedAtLeastOneChartVariable()"></div>
+
+                        <div data-bind="visible: IsSelectedAtLeastOneChartVariable">
+                            <div id="container-chart">                
+                                <div id="live-chart"></div>
+                            </div>
+                            <div id="live-chart-legend"></div>
+
+                            <table id="variable-view-serie-table">
+                                <thead>
+                                    <th data-field="SerieName" 
+                                        data-sortable="true"
+                                        data-title="Name"></th>
+                                    <th data-field="IsSerieVisible" 
+                                        data-title="Visible"
+                                        data-halign="center"
+                                        data-formatter="serieVisibleCheckboxFormatter"
+                                        data-events="serieVisibleCheckboxFormatterEvent"></th>
+                                    <th data-field="AxisName" 
+                                        data-title="Axis"
+                                        data-align="center"
+                                        data-visible="true"
+                                        data-formatter="serieSelectAxisFormatter"
+                                        data-events="serieSelectAxisFormatterEvent"></th>
+                                    <th data-field="ColorName" 
+                                        data-title="Color"
+                                        data-align="center"
+                                        data-formatter="serieColorPickerFormatter"
+                                        data-events="serieColorPickerFormatterEvent"></th>
+                                    <th data-field="StyleName" 
+                                        data-title="Style"
+                                        data-align="center"
+                                        data-formatter="serieSelectStyleFormatter"
+                                        data-events="serieSelectStyleFormatterEvent"></th>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer" data-bind="visible: IsSelectedAtLeastOneChartVariable()">
+                        <button type="button" class="btn btn-primary" data-bind="click: resetZoomChart,  text: ResetZoomTitle"></button>
+                        <button type="button" class="btn btn-primary" data-bind="click: exportLive,  text: ExportTitle"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="variable-view-component-msgbox" class="alert" role="alert" 
+                    data-bind="{visible: IsUpdateInfoVisible, css: AlertState}">
+            <div id="variable-view-component-msgbox-msg" data-bind="text: UpdateInfoMsg"></div>
+            <div>
+                <table data-bind="{visible: IsUpdateErrorInfoDetailsVisible}">
+                    <thead>
+                        <tr>
+                            <th data-bind="text: VariableNameHeader"></th>
+                            <th data-bind="text: SetValueHeader"></th>
+                            <th data-bind="text: ServerResponseHeader"></th></tr>
+                    </thead>
+                    <tbody data-bind="foreach: FailedSetVarItemArray">
+                        <tr>
+                            <td data-bind="text: VariableName"></td>
+                            <td data-bind="text: SetValue"></td>
+                            <td data-bind="text: ServerResponse"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table data-bind="{visible: IsUpdateWarningInfoDetailsVisible}">
+                    <thead>
+                        <tr>
+                            <th data-bind="text: VariableNameHeader"></th>
+                            <th data-bind="text: ValueThatItryToSetHeader"></th>
+                            <th data-bind="text: ValueAfterTheUpdateHeader">/th></tr>
+                    </thead>
+                    <tbody data-bind="foreach: NotUpdatedSetVarItemArray">
+                        <tr>
+                            <td data-bind="text: VariableName"></td>
+                            <td data-bind="text: SetValue"></td>
+                            <td data-bind="text: ReadValueAfterSet"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div data-bind="visible: IsVariableViewInit">
+            <!-- Left toolbar: it isn't visible on cField web app because its functionality are moved to navbar -->
+            <div id="variable-view-component-toolbar" class="btn-group" data-bind="if: !HideExtraToolbar">
+                <button type="button" class="btn btn-default" data-bind="click: refreshConfiguration">
+                    <i class="fa fa-refresh"></i>
+                </button>
+                <button type="button" class="btn btn-default" data-bind="click: changeLanguage">
+                    <i class="fa fa-language"></i>
+                </button>
+                <button type="button" class="btn btn-default" data-bind="click: logout">
+                    <i class="fa fa-sign-out"></i>
+                </button>
+            </div>
+
+            <table class="table-bordered table-condensed"
+                id="variable-view-component-table"
+                data-toolbar="#variable-view-component-toolbar"
+                data-pagination="true" 
+                data-show-refresh="true"
+                data-show-toggle="true"
+                data-show-columns="true"
+                data-icons-prefix="fa"
+                data-sort-name="Name"
+                data-sort-order="asc"
+                data-sort-stable="true"
+                data-search="true"
+                data-row-style="variableViewRowStyle"
+                data-bind="attr: {'data-page-size': DataPageSize}"
+                data-bind="attr: {'data-card-view': EnableCardView}"
+                data-sort-name="VariableName"
+                data-cookie="true"
+                data-cookie-id-table="variableTableId"
+                data-cookie-expire="1y"
+                data-mobile-responsive="false"
+                data-check-on-init="true"
+                data-min-width="768">
+                <thead>
+                    <tr>
+                        <th data-field="VariableName" 
+                            data-sortable="true" 
+                            data-align="left"
+                            data-halign="left"
+                            data-visible="true"
+                            data-bind="text: VariableNameHeader"></th>
+                        <th data-field="VariableDescription" 
+                            data-sortable="true" 
+                            data-align="left"
+                            data-halign="left"
+                            data-bind="text: VariableDescriptionHeader"
+                            data-formatter="descriptionColumnFormatter"></th>
+                        <th data-field="CategoryArray"
+                            data-class="smallCategoryLabelColumn"
+                            data-bind="text: CategoryHeader"
+                            data-formatter="categoryColumnFormatter"
+                            data-sortable="false" 
+                            data-align="center"
+                            data-halign="center"
+                            data-searchable="false"></th>      
+                        <th data-field="VariableType" 
+                            data-bind="text: VariableTypeHeader"
+                            data-align="left"
+                            data-halign="left"
+                            data-sortable="true"
+                            data-searchable="false"
+                            data-visible="false"></th>
+                        <th data-field="IsRetain" 
+                            data-bind="text: IsRetainHeader"
+                            data-formatter="readOnlyBooleanValueFormatter"
+                            data-sortable="true"
+                            data-searchable="false"
+                            data-align="center"
+                            data-halign="center"
+                            data-visible="false"></th>
+                        <th data-field="VariableMinValue" 
+							data-bind="text: VariableMinValueHeader"
+                            data-formatter="readOnlyMinValueFormatter"
+                            data-align="center"
+                            data-halign="center"
+                            data-searchable="false"></th>
+						<th data-field="VariableMaxValue"
+							data-bind="text: VariableMaxValueHeader"
+                            data-formatter="readOnlyMaxValueFormatter"
+                            data-align="center"
+                            data-halign="center"
+                            data-searchable="false"></th>    
+                        <th data-field="VariableCurrentValue" 
+                            data-bind="text: VariableValueHeader"
+                            data-formatter="writableVariableValueFormatter"
+                            data-events="writableVariableValueFormatterEvent"
+                            data-sortable="true" 
+                            data-class="fixWidth150px"
+                            data-align="center"
+                            data-halign="center"></th>
+                        <th data-field="IsPlotSelected"
+                            data-bind="text: PlotHeader"
+                            data-formatter="writableIsPlotValueFormatter"
+                            data-events="variableViewPlotFormatterEvents"
+                            data-sortable="true" 
+                            data-align="center"
+                            data-halign="center"
+                            data-searchable="false"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>    
+    </div>
+
+    <!-- Minimize modal -->
+    <div class="minmaxCon"></div>  
+</div>

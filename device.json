@@ -1,0 +1,87 @@
+[
+	{
+		"deviceFamilyId": "pco5plus",
+		"devices": [ 
+			{
+				"modelId": "small",
+				"path": "assets/data/pco5plus/Small.json"
+			},
+			{
+				"modelId": "medium",
+				"path": "assets/data/pco5plus/Medium.json"
+			},
+			{
+				"modelId": "large",
+				"path": "assets/data/pco5plus/Large.json"
+			},
+			{
+				"modelId": "extraLarge",
+				"path": "assets/data/pco5plus/ExtraLarge.json"
+			}
+		]
+	},
+	{
+		"deviceFamilyId": "pcoMini",
+		"devices": [ 
+			{
+				"modelId": "miniBasic",
+				"path": "assets/data/pcoMini/Basic.json"
+			},
+			{
+				"modelId": "miniEnhanced",
+				"path": "assets/data/pcoMini/Enhanced.json"
+			},
+			{
+				"modelId": "miniHighEnd",
+				"path": "assets/data/pcoMini/HighEnd.json"
+			}
+		]
+	},
+	{
+		"deviceFamilyId": "pcoOem",
+		"devices": [ 
+			{
+				"modelId": "small",
+				"path": "assets/data/pcoOem/Small.json"
+			},
+			{
+				"modelId": "medium",
+				"path": "assets/data/pcoOem/Medium.json"
+			}
+		]
+	},
+	{
+		"deviceFamilyId": "uPC3",
+		"devices": [ 
+			{
+				"modelId": "small",
+				"path": "assets/data/uPC3/Small.json"
+			},
+			{
+				"modelId": "extraSmall",
+				"path": "assets/data/uPC3/ExtraSmall.json"
+			},
+			{
+				"modelId": "medium",
+				"path": "assets/data/uPC3/Medium.json"
+			},
+			{
+				"modelId": "superMedium",
+				"path": "assets/data/uPC3/SuperMedium.json"
+			}
+		]
+	},
+	{
+		"deviceFamilyId": "pHC",
+		"devices": [ 
+			{
+				"modelId": "basic",
+				"path": "assets/data/pHC/Basic.json"
+			},
+			{
+				"modelId": "extended",
+				"path": "assets/data/pHC/Extended.json"
+			}
+		]
+	}
+]

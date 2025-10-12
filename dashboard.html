@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chiller Dashboard</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/base-page.css" />
+  <style>
+    body { background: #0f141a; color: #e6edf3; }
+    :root { --fanSize: clamp(80px, 10vw, 120px); --gap: 12px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:#111822; border-bottom:1px solid #243040; }
+    .brand { display:flex; align-items:center; gap:10px; }
+    .brand img { height:26px; }
+    .status-dot { width:10px; height:10px; border-radius:50%; display:inline-block; margin-right:8px; }
+    .status-ok { background:#2ecc71; }
+    .status-warn { background:#f1c40f; }
+    .status-err { background:#e74c3c; }
+    
+    .top-actions { display:flex; align-items:center; gap:12px; }
+    .top-actions .meta { display:flex; align-items:center; gap:8px; }
+    .muted { color:#8b949e; font-size:12px; }
+    .device-url { max-width:260px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:#8b949e; font-size:12px; }
+    
+    /* Desktop polish */
+     .cards { display:grid; grid-template-columns: repeat(5, minmax(220px, 1fr)); gap: 14px; padding: 14px; }
+     .card { background:#141b24; border:1px solid #243040; border-radius:12px; overflow:hidden; box-shadow:0 4px 14px rgba(0,0,0,.35); min-height: 240px; }
+     .card-header { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid #243040; }
+     /* Always single-column body to avoid overflow: fan on top, controls below */
+     .card-body { padding:12px; display:grid; grid-template-columns: 1fr; gap:12px; align-items:center; }
+     
+     /* Remove previous 2-column override on wide screens */
+     @media (min-width: 1200px) { .card-body { grid-template-columns: 1fr; } }
+     @media (max-width: 1199.98px) { .card-body { grid-template-columns: 1fr; } }
+     
+     /* Controls remain vertical */
+     .controls { display:grid; grid-template-columns: 1fr; gap: 10px; }
+     
+     /* Setpoint row: allow wrapping and full-width slider to avoid spilling out */
+     .setpoint { display:flex; align-items:center; gap:8px; flex-wrap: wrap; }
+     .setpoint input[type=range] { flex: 1 1 100%; width: 100%; }
+     
+     /* On small screens keep one column for controls as well */
+     @media (max-width: 768px) { .controls { grid-template-columns: 1fr; } }
+     .card-body { padding:14px; display:grid; grid-template-columns: auto 1fr; gap:14px; align-items:center; }
+  
+    /* Cooler motor look: casing + grille + state glow */
+    .fan { position:relative; width: var(--fanSize); height: var(--fanSize); border-radius:50%; background: radial-gradient(60% 60% at 50% 50%, #0c121a, #09111a 60%, #071018 100%); border:1px solid #233042; box-shadow: inset 0 0 12px rgba(0,0,0,.6), 0 8px 18px rgba(0,0,0,.4); display:flex; align-items:center; justify-content:center; margin:auto; }
+    .fan svg { width: calc(var(--fanSize) - 24px); height: calc(var(--fanSize) - 24px); }
+    .fan .blade { transform-origin:50% 50%; animation: spin linear infinite; }
+    .fan.stopped .blade { animation-play-state: paused; }
+    .fan.running svg { filter: drop-shadow(0 0 12px rgba(46,204,113,.45)); }
+    .fan.alarm svg { filter: drop-shadow(0 0 12px rgba(241,196,15,.45)); }
+    .fan.stopped svg { filter: drop-shadow(0 0 10px rgba(231,76,60,.35)); }
+    .fan.running .blade path { fill:#2ecc71; }
+    .fan.alarm .blade path { fill:#f1c40f; }
+    .fan.stopped .blade path { fill:#e74c3c; }
+    /* Ambient status glow on casing */
+    .fan.running { box-shadow: inset 0 0 12px rgba(0,0,0,.6), 0 8px 18px rgba(0,0,0,.4), 0 0 0 2px rgba(46,204,113,.25), 0 0 26px rgba(46,204,113,.22); }
+    .fan.alarm { box-shadow: inset 0 0 12px rgba(0,0,0,.6), 0 8px 18px rgba(0,0,0,.4), 0 0 0 2px rgba(241,196,15,.25), 0 0 26px rgba(241,196,15,.22); }
+    .fan.stopped { box-shadow: inset 0 0 12px rgba(0,0,0,.6), 0 8px 18px rgba(0,0,0,.4), 0 0 0 2px rgba(231,76,60,.22), 0 0 22px rgba(231,76,60,.18); }
+    /* Grille: concentric rings */
+    .fan::before { content:""; position:absolute; inset: 10px; border-radius:50%; pointer-events:none; opacity:.35; background: repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.09) 0 1px, transparent 1px 8px); }
+    /* Grille: radial spokes */
+    .fan::after { content:""; position:absolute; inset: 6px; border-radius:50%; pointer-events:none; opacity:.35; background: repeating-conic-gradient(from 0deg, rgba(255,255,255,.08) 0 8deg, transparent 8deg 22deg); -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 0 34%, black 34% 100%); mask-image: radial-gradient(circle at 50% 50%, transparent 0 34%, black 34% 100%); }
+    @keyframes spin { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
+  
+    .controls { display:grid; grid-template-columns: 1fr; gap:10px; }
+    .control { background:#101620; border:1px solid #243040; border-radius:10px; padding:10px; }
+    .control h6 { margin:0 0 8px; color:#c9d1d9; font-size:12px; text-transform:uppercase; letter-spacing:.06em; }
+  
+    .toggle { display:flex; align-items:center; gap:10px; }
+    .toggle input { width:44px; height:22px; }
+  
+    .setpoint { display:flex; align-items:center; gap:8px; }
+    .setpoint input[type=range] { flex:1; }
+    .value-big { font-size:28px; font-weight:600; min-width:72px; text-align:right; }
+  
+    .btn-step { width:28px; height:28px; border-radius:8px; border:1px solid #2b3647; background:#0f1722; color:#cde9ff; line-height:26px; text-align:center; padding:0; font-weight:600; }
+    .btn-step:hover { background:#132033; }
+    .btn-step.plus { box-shadow: inset 0 0 8px rgba(46,204,113,.25); }
+    .btn-step.minus { box-shadow: inset 0 0 8px rgba(231,76,60,.25); }
+  
+    .footer { padding:10px 16px; color:#8b949e; font-size:12px; border-top:1px solid #243040; }
+  
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .cards { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .controls { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 576px) {
+      .card-body { grid-template-columns: 1fr; }
+      .fan { margin: 8px auto 12px; }
+      .controls { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Revert topbar controls to original minimal status display -->
+  <div class="topbar">
+    <div class="brand">
+      <img src="assets/img/logo.svg" alt="logo" />
+      <strong>Dashboard</strong>
+    </div>
+    <div class="meta" style="display:flex;align-items:center;gap:8px;">
+      <span class="muted">Status:</span>
+      <span class="status-dot" data-bind="css: connectionClass"></span>
+      <span data-bind="text: connectionText"></span>
+    </div>
+  </div>
+
+  <div style="padding:8px 16px 0">
+    <div class="alert alert-danger" style="display:none" data-bind="visible: lastError, text: lastError"></div>
+  </div>
+
+  <div class="cards" data-bind="foreach: units">
+    <div class="card" data-bind="css: { running: powerFb(), alarm: alarmActive(), stopped: !powerFb() && !alarmActive() }">
+      <div class="card-header">
+        <div>
+          <strong data-bind="text: name"></strong>
+        </div>
+        <div>
+          <span class="badge-state" data-bind="css: stateBadgeClass, text: stateText"></span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="fan" data-bind="css: { running: powerFb(), alarm: alarmActive(), stopped: !powerFb() && !alarmActive() }">
+          <!-- Inline SVG fan with animated blades; speed controlled by animation-duration -->
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="56" fill="#0b1119" stroke="#1f2a38" stroke-width="4" />
+            <g class="blade" data-bind="style: { animationDuration: fanAnimDuration }">
+              <path d="M60 15 C70 22, 76 30, 78 40 C80 52, 68 56, 60 60 C52 56, 40 52, 42 40 C44 30, 50 22, 60 15" />
+              <path d="M15 60 C22 50, 30 44, 40 42 C52 40, 56 52, 60 60 C56 68, 52 80, 40 78 C30 76, 22 70, 15 60" />
+              <path d="M60 105 C50 98, 44 90, 42 80 C40 68, 52 64, 60 60 C68 64, 80 68, 78 80 C76 90, 70 98, 60 105" />
+              <path d="M105 60 C98 70, 90 76, 80 78 C68 80, 64 68, 60 60 C64 52, 68 40, 80 42 C90 44, 98 50, 105 60" />
+            </g>
+            <circle cx="60" cy="60" r="8" fill="#1f2a38" stroke="#2b90d9" />
+          </svg>
+        </div>
+        <div class="controls">
+          <div class="control">
+            <h6>Power</h6>
+            <div class="toggle">
+              <label class="switch">
+                <input class="form-check-input" type="checkbox" data-bind="checked: powerCmd, enable: $root.canWriteUnit(name) && !isBusy(), click: onTogglePower" id="powerSwitch_1">
+                <span class="slider"></span>
+                <span class="switch-label" data-bind="text: powerFb() ? 'ON' : 'OFF'"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="control">
+            <h6>Setpoint (°C)</h6>
+            <div class="setpoint">
+              <button class="btn-step minus" data-bind="attr: { title: '-' + spStep }, click: function(){ var v = parseFloat(setpointCmd()); if(isNaN(v)) v = spMin; var s = +spStep; setpointCmd(Math.min(spMax, Math.max(spMin, +(v - s).toFixed(1)))); }">-</button>
+              <input type="range" data-bind="value: setpointCmd, valueUpdate: 'input', enable: !isBusy(), attr: {min: spMin, max: spMax, step: spStep}" />
+              <button class="btn-step plus" data-bind="attr: { title: '+' + spStep }, click: function(){ var v = parseFloat(setpointCmd()); if(isNaN(v)) v = spMin; var s = +spStep; setpointCmd(Math.min(spMax, Math.max(spMin, +(v + s).toFixed(1)))); }">+</button>
+              <span class="value-big" data-bind="text: Number(setpointCmd()).toFixed(1)"></span>
+            </div>
+            <div class="muted" style="margin-top:6px; font-size:12px;">Applied:&nbsp;<strong data-bind="text: (setpointFb()==null? '-' : setpointFb())"></strong>&nbsp;°C</div>
+            <button type="button" class="btn btn-primary btn-sm" data-bind="click: onApplySetpoint, enable: $root.canWriteUnit(name) && !isBusy()">Apply</button>
+          </div>
+
+          <div class="control">
+            <h6>Temperature</h6>
+            <div>
+              <div>Current: <strong data-bind="text: tempCurrent"></strong> °C</div>
+            </div>
+          </div>
+
+          <!-- Mode control removed as requested -->
+          
+        </div>
+      </div>
+      <div class="footer">
+        <span data-bind="visible: alarmActive">Alarm Active</span>
+        <span data-bind="visible: !alarmActive()">No Alarm</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minimal deps temporarily disabled to isolate SyntaxError source -->
+  <!-- Removed deviceengine.js and pLan-min.js because the distributed files are gzipped and trigger SyntaxError in browser -->
+  <script src="lib/jquery.min.js"></script>
+  <script src="lib/knockout-latest.js"></script>
+  <script src="lib/moment-with-locales.min.js"></script>
+  <script src="lib/bootstrap.min.js"></script>
+  <script src="lib/jquery.csv.min.js"></script>
+  <script>
+    (function(){
+      function parseVarsTable(html){
+        try {
+          var rows = [];
+          var t = String(html||'');
+          var tableMatch = t.match(/<table[^>]*id=["']?varsTable["']?[^>]*>[\s\S]*?<\/table>/i) || t.match(/<table[^>]*>[\s\S]*?<\/table>/i);
+          if(!tableMatch){ return rows; }
+          var tbodyMatch = tableMatch[0].match(/<tbody[^>]*>([\s\S]*?)<\/tbody>/i);
+          var body = tbodyMatch ? tbodyMatch[1] : tableMatch[0];
+          var trRe = /<tr[^>]*>([\s\S]*?)<\/tr>/ig, tdRe = /<td[^>]*>([\s\S]*?)<\/td>/ig;
+          var tr;
+          while((tr = trRe.exec(body))){
+            var tds = [];
+            var m; tdRe.lastIndex = 0;
+            while((m = tdRe.exec(tr[1]))){
+              var txt = m[1].replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').trim();
+              if(txt !== '') tds.push(txt);
+            }
+            if(tds.length){
+              var name = (tds[1] || tds[0] || '').trim();
+              var value = (tds[3] || tds[2] || tds[1] || '').trim();
+              var id = (tds[0] || name);
+              if(name){ rows.push({ id: id, name: name, desc: tds[2] || '', value: value }); }
+            }
+          }
+          try { console.debug('[Dashboard] parseVarsTable rows', rows.length); } catch(e){}
+          return rows;
+        } catch(e){ console.warn('parseVarsTable error', e); return []; }
+      }
+
+      function parseVarsCsv(text){
+        try {
+          var out = [];
+          var t = String(text || '');
+          if(!t.trim()) return out;
+          var tt = t.trim();
+          // If the payload looks like HTML (e.g., vars.htm), skip CSV parsing entirely
+          if (tt[0] === '<' || /<table/i.test(tt)) { return out; }
+          var firstLine = t.split(/\r?\n/)[0] || '';
+          var cntComma=0,cntSemi=0; for(var i=0;i<firstLine.length;i++){ var c=firstLine[i]; if(c===',')cntComma++; else if(c===';')cntSemi++; }
+          var delimiter = cntSemi>cntComma ? ';' : ',';
+          if (window.$ && $.csv && $.csv.toObjects && delimiter === ',') {
+            var arr = $.csv.toObjects(t);
+            arr.forEach(function(o){
+              var name = (o.name || o.Name || '').toString().trim();
+              var val = (o.val || o.Val || o.value || o.Value || '').toString().trim();
+              if(name){ out.push({ name: name, value: val, id: o.id || o.ID, desc: o.desc || o.Desc, type: o.type || o.Type, access: o.access || o.Access }); }
+            });
+            try { console.debug('[Dashboard] parseVarsCsv via $.csv rows', out.length); } catch(e){}
+            return out;
+          }
+          // Fallback naive parser with quoted fields and chosen delimiter
+          var lines = t.trim().split(/\r?\n/);
+          if(lines.length <= 1) return out;
+          var header = lines[0].split(delimiter);
+          var idx = {}; header.forEach(function(h,i){ idx[String(h||'').trim().toLowerCase()] = i; });
+          function unq(s){ return String(s==null?'':s).replace(/^"(.*)"$/,'$1'); }
+          function splitSmart(line, delim){
+            var res = [], cur = '', inQ = false; var L = line.length;
+            for(var j=0;j<L;j++){
+              var ch = line[j];
+              if(ch === '"'){
+                if(inQ && j+1 < L && line[j+1] === '"'){ cur += '"'; j++; }
+                else { inQ = !inQ; }
+              } else if(ch === delim && !inQ){
+                res.push(cur); cur = '';
+              } else { cur += ch; }
+            }
+            res.push(cur);
+            return res;
+          }
+          for(var i=1;i<lines.length;i++){
+            var cols = splitSmart(lines[i], delimiter);
+            var name = unq(cols[idx['name']]);
+            if(name){
+              var val = unq(cols[idx['val']] || cols[idx['value']]);
+              out.push({ name: name, value: val });
+            }
+          }
+          try { console.debug('[Dashboard] parseVarsCsv fallback rows', out.length); } catch(e){}
+          return out;
+        } catch(e){ console.warn('parseVarsCsv error', e); return []; }
+      }
+
+      function parseResponse(text){
+        var t = String(text || '');
+        var tt = t.trim();
+        // Prefer HTML table parsing if response looks like HTML (e.g., vars.htm)
+        if (tt[0] === '<' || /<table/i.test(tt)) { return parseVarsTable(t); }
+        if (/^\s*name\s*[,;]\s*id\s*[,;]\s*desc\s*[,;]\s*type\s*[,;]\s*access\s*[,;]\s*val/i.test(t)) { return parseVarsCsv(t); }
+        var csv = parseVarsCsv(t); if(csv && csv.length) return csv;
+        return parseVarsTable(t);
+      }
+
+      function VarsAdapter(baseUrl){
+        var deviceUrl = baseUrl || 'http://169.254.61.68/getvar.csv';
+        var TTL = 400; var inflight = null, inflightAt = 0; var lastText = '', lastTime = 0, lastMap = null;
+        function fetchOnce(url){
+          var proxied = '/proxy?url=' + encodeURIComponent(url);
+          var ctrl = (window.AbortController ? new AbortController() : null);
+          var timeoutId = null;
+          if(ctrl){ timeoutId = setTimeout(function(){ try{ ctrl.abort(); }catch(e){} }, 5000); }
+          return fetch(proxied, { cache: 'no-store', signal: ctrl ? ctrl.signal : undefined }).then(function(r){
+            if(!r.ok) throw new Error('HTTP ' + r.status);
+            return r.text();
+          }).finally(function(){ if(timeoutId) try{ clearTimeout(timeoutId); }catch(e){} });
+        }
+
+        // Extended fetch that supports GET and POST through the same proxy
+        function fetchOnceExt(method, url, body){
+          var proxied = '/proxy?url=' + encodeURIComponent(url);
+          var ctrl = (window.AbortController ? new AbortController() : null);
+          var timeoutId = null;
+          var opts = { method: (method||'GET'), cache: 'no-store', signal: ctrl ? ctrl.signal : undefined, headers: {} };
+          if(String(opts.method).toUpperCase() === 'POST'){
+            opts.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+            opts.body = String(body||'');
+          }
+          if(ctrl){ timeoutId = setTimeout(function(){ try{ ctrl.abort(); }catch(e){} }, 6000); }
+          return fetch(proxied, opts).then(function(r){ if(!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+            .finally(function(){ if(timeoutId) try{ clearTimeout(timeoutId); }catch(e){} });
+        }
+        function fetchVars(force){
+          var now = Date.now();
+          if(!force && lastText && (now - lastTime) <= TTL){ return Promise.resolve(lastText); }
+          if(inflight && (now - inflightAt) <= TTL){ return inflight; }
+          inflightAt = now;
+          inflight = fetchOnce(deviceUrl).catch(function(err){
+            try { console.warn('[Dashboard] fetchVars primary failed', deviceUrl, err); } catch(e){}
+            var alt = deviceUrl.indexOf('getvar.csv') > -1 ? deviceUrl.replace('getvar.csv','vars.htm')
+                     : deviceUrl.indexOf('vars.htm') > -1 ? deviceUrl.replace('vars.htm','getvar.csv') : null;
+            if(!alt) throw err;
+            return fetchOnce(alt).then(function(t){ deviceUrl = alt; try { console.info('[Dashboard] switched deviceUrl to', deviceUrl); } catch(e){} return t; });
+          }).then(function(t){
+            try { console.debug('[Dashboard] fetchVars ok', { url: deviceUrl, len: (t||'').length }); } catch(e){}
+            lastText = t; lastTime = Date.now();
+            return t;
+          }).finally(function(){ inflight = null; });
+          return inflight;
+        }
+        function buildIndex(rows){ var idx = {}; rows.forEach(function(r){ idx[r.name] = r.value; }); return idx; }
+        return {
+          read: function(key){
+            return fetchVars().then(function(txt){
+              if(txt === lastText && lastMap){ return lastMap[key]; }
+              var rows = parseResponse(txt) || [];
+              lastMap = buildIndex(rows);
+              return lastMap[key];
+            });
+          },
+          batchRead: function(keys){
+            return fetchVars().then(function(txt){
+              if(txt === lastText && lastMap){ var outCached = {}; keys.forEach(function(k){ outCached[k] = lastMap[k]; }); return outCached; }
+              var rows = parseResponse(txt) || []; lastMap = buildIndex(rows); var out = {}; keys.forEach(function(k){ out[k] = lastMap[k]; }); return out;
+            });
+          },
+          // NEW: write variable using setvar.csv with multiple fallback patterns
+          write: function(name, value){
+            var base;
+            try {
+              if(/getvar\.csv/i.test(deviceUrl)) base = deviceUrl.replace(/getvar\.csv/i,'setvar.csv');
+              else if(/vars\.htm/i.test(deviceUrl)) base = deviceUrl.replace(/vars\.htm/i,'setvar.csv');
+              else { var u = new URL(deviceUrl); base = u.origin + u.pathname.replace(/[^\/]+$/,'') + 'setvar.csv'; }
+            } catch(e){ base = String(deviceUrl||'').replace(/[^\/]+$/,'setvar.csv'); }
+
+            var getAttempts, postBodies;
+            if(window && window.DASHBOARD_STRICT){
+              var pat = (window.DASHBOARD_WRITE_PATTERN || 'name=value');
+              if(pat === 'name=value') { getAttempts = [ base + '?name=' + encodeURIComponent(name) + '&value=' + encodeURIComponent(value) ]; postBodies = [ 'name=' + encodeURIComponent(name) + '&value=' + encodeURIComponent(value) ]; }
+              else if(pat === 'name=val') { getAttempts = [ base + '?name=' + encodeURIComponent(name) + '&val=' + encodeURIComponent(value) ]; postBodies = [ 'name=' + encodeURIComponent(name) + '&val=' + encodeURIComponent(value) ]; }
+              else if(pat === 'id=value') { getAttempts = [ base + '?id=' + encodeURIComponent(name) + '&value=' + encodeURIComponent(value) ]; postBodies = [ 'id=' + encodeURIComponent(name) + '&value=' + encodeURIComponent(value) ]; }
+              else if(pat === 'var=val') { getAttempts = [ base + '?var=' + encodeURIComponent(name) + '&val=' + encodeURIComponent(value) ]; postBodies = [ 'var=' + encodeURIComponent(name) + '&val=' + encodeURIComponent(value) ]; }
+              else { getAttempts = [ base + '?name=' + encodeURIComponent(name) + '&value=' + encodeURIComponent(value) ]; postBodies = [ 'name=' + encodeURIComponent(name) + '&value=' + encodeURIComponent(value) ]; }
+            } else {
+              getAttempts = [
+                base + '?name=' + encodeURIComponent(name) + '&value=' + encodeURIComponent(value),
+                base + '?name=' + encodeURIComponent(name) + '&val=' + encodeURIComponent(value),
+                base + '?id='   + encodeURIComponent(name) + '&value=' + encodeURIComponent(value),
+                base + '?var='  + encodeURIComponent(name) + '&val=' + encodeURIComponent(value)
+              ];
+              postBodies = [
+                'name=' + encodeURIComponent(name) + '&value=' + encodeURIComponent(value),
+                'name=' + encodeURIComponent(name) + '&val='   + encodeURIComponent(value),
+                'id='   + encodeURIComponent(name) + '&value=' + encodeURIComponent(value),
+                'var='  + encodeURIComponent(name) + '&val='   + encodeURIComponent(value)
+              ];
+            }
+
+            var i = 0, j = 0;
+            function tryGetNext(){
+              if(i >= getAttempts.length) return Promise.reject(new Error('All GET patterns failed for ' + name));
+              var url = getAttempts[i++];
+              return fetchOnce(url).then(function(t){
+                lastText = ''; lastMap = null; lastTime = 0;
+                try { console.debug('[Dashboard] write ok (GET)', { name:name, value:value, url:url }); } catch(e){}
+                return t;
+              }).catch(function(err){ try { console.warn('[Dashboard] write attempt failed (GET)', url, err); } catch(e){} return tryGetNext(); });
+            }
+            function tryPostNext(){
+              if(j >= postBodies.length) return Promise.reject(new Error('All POST patterns failed for ' + name));
+              var body = postBodies[j++];
+              return fetchOnceExt('POST', base, body).then(function(t){
+                lastText = ''; lastMap = null; lastTime = 0;
+                try { console.debug('[Dashboard] write ok (POST)', { name:name, value:value, base:base, body:body }); } catch(e){}
+                return t;
+              }).catch(function(err){ try { console.warn('[Dashboard] write attempt failed (POST)', base, body, err); } catch(e){} return tryPostNext(); });
+            }
+
+            // First try GET variants, then POST variants
+            return tryGetNext().catch(function(){ return tryPostNext(); });
+          }
+          ,
+          // NEW: batch write convenience (serial to preserve order)
+          batchWrite: function(map){
+            var entries = [];
+            for(var k in (map||{})) if(Object.prototype.hasOwnProperty.call(map,k)) entries.push([k, map[k]]);
+            var self = this; var p = Promise.resolve();
+            entries.forEach(function(pair){ p = p.then(function(){ return self.write(pair[0], pair[1]); }); });
+            return p;
+          }
+        };
+      }
+
+      function SafeAdapter(url) {
+        try { return VarsAdapter(url); } catch(e) { console.warn('VarsAdapter fallback', e); }
+        return { read:function(){return Promise.resolve(null);}, batchRead:function(){return Promise.resolve({});} };
+      }
+
+      function UnitVM(cfg, adapter, root){
+        var self = this; cfg = cfg||{}; self.name = cfg.name || 'Unit'; self.vars = cfg.vars || {}; self.root = root || null;
+        self.powerFb = ko.observable(false); self.tempCurrent = ko.observable(0).extend({ rateLimit: 250 }); self.modeFb = ko.observable('auto'); self.fanSpeedFb = ko.observable(0).extend({ rateLimit: 250 }); self.alarmActive = ko.observable(false);
+
+        // Added: UI state and command observables referenced by bindings
+        self.isBusy = ko.observable(false);
+        self.powerCmd = ko.observable(false);
+        // Keep command checkbox in sync with feedback when not busy
+        self.powerFb.subscribe(function(v){ if(!self.isBusy()) self.powerCmd(!!v); });
+        self.setpointCmd = ko.observable(20);
+        var spCfg = cfg.setpoint || {};
+        self.spMin = (spCfg.min != null ? spCfg.min : 0);
+        self.spMax = (spCfg.max != null ? spCfg.max : 50);
+        self.spStep = (spCfg.step != null ? spCfg.step : 0.5);
+        // Added: setpoint feedback from device
+        self.setpointFb = ko.observable(null);
+        self.modeCmd = ko.observable('auto');
+
+        // Helpers used across poll and subscriptions
+        function toBool(v){
+          if(v == null) return false;
+          var n = Number(v);
+          if(!isNaN(n)) return n > 0; // treat any positive numeric status as true
+          var s = String(v).toLowerCase();
+          return s==='1'||s==='on'||s==='true'||s==='running'||s==='active'||s==='enabled';
+        }
+        function toNum(v){ var s=String(v==null?'':v).replace(',', '.'); var m=s.match(/-?\d+(?:\.\d+)?/); var n=m?parseFloat(m[0]):NaN; return isNaN(n)?0:n; }
+        function clamp(v, mn, mx){ v = Number(v); if(isNaN(v)) return mn; return Math.max(mn, Math.min(mx, v)); }
+
+        // Persist user setpoint locally (decoupled from device feedback for offline use)
+        var lsKey = 'setpointCmd:' + self.name;
+        try {
+          var savedSp = localStorage.getItem(lsKey);
+          if(savedSp != null) self.setpointCmd(clamp(toNum(savedSp), self.spMin, self.spMax));
+        } catch(e){}
+        self.setpointCmd.subscribe(function(v){ try { localStorage.setItem(lsKey, String(v)); } catch(e){} });
+
+        // Sync UI commands from feedback when not busy
+        // self.setpointFb.subscribe(function(v){ if(!self.isBusy()) self.setpointCmd(clamp(toNum(v), self.spMin, self.spMax)); });
+        self.modeFb.subscribe(function(m){ if(!self.isBusy()) self.modeCmd(String(m)); });
+
+        // Added: computed properties used by bindings
+        self.stateText = ko.pureComputed(function(){
+          if(self.alarmActive()) return 'Alarm';
+          return self.powerFb() ? 'Running' : 'Stopped';
+        });
+        self.stateBadgeClass = ko.pureComputed(function(){
+          if(self.alarmActive()) return 'badge-alarm';
+          return self.powerFb() ? 'badge-running' : 'badge-stopped';
+        });
+        self.fanAnimDuration = ko.pureComputed(function(){
+          var sp = Number(self.fanSpeedFb() || 0);
+          var dur = 3 - Math.min(2.5, Math.max(0, sp)/100*2.5); // 3s (0%) -> 0.5s (100%)
+          return dur.toFixed(2) + 's';
+        });
+
+        // Added: command handlers (no device write yet; just local state + logging)
+        self.onTogglePower = function(){
+          if(self.isBusy()) return;
+          var target = !self.powerCmd();
+          self.powerCmd(target);
+          var varName = self.vars.PowerCmd;
+          if(!varName){ try{ console.warn('[Dashboard] PowerCmd var not configured'); }catch(e){} return; }
+          self.isBusy(true);
+          adapter.write(varName, target ? 1 : 0)
+            .then(function(){ try { console.info('[Dashboard] Power written', { name: varName, value: target }); } catch(e){} })
+            .catch(function(err){
+              // If device is offline, keep local state for demo so user can see the fan spinning
+              if(self.root && !self.root.isConnected()){
+                try { console.warn('[Dashboard] Power write failed (offline). Demo: keeping local state and reflecting as feedback.'); } catch(e){}
+                self.powerCmd(target);
+                self.powerFb(!!target);
+                return;
+              }
+              // revert on failure when connected
+              self.powerCmd(!target);
+              try { console.error('[Dashboard] Power write failed', err); } catch(e){}
+            })
+            .finally(function(){ self.isBusy(false); });
+        };
+        self.onApplySetpoint = function(){
+          if(self.isBusy()) return;
+          var offlineDemo = (window.DEMO_MODE === true);
+          // Allow Apply in offline demo mode even if canWriteUnit() blocks
+          if(self.root && !self.root.canWriteUnit(self.name) && !(offlineDemo && !self.root.isConnected())) return;
+          var now = Date.now();
+          if(self._lastSetAt && (now - self._lastSetAt) < 1000){ return; }
+          var v = Number(self.setpointCmd());
+          if(isNaN(v)) return;
+          v = clamp(v, self.spMin, self.spMax);
+          self.setpointCmd(v);
+          var varName = self.vars.TempSetpoint;
+          if(!varName){ try{ console.warn('[Dashboard] TempSetpoint var not configured'); }catch(e){} return; }
+      
+          // Begin controlled write with readback + fallbacks (dot/comma) and optional unlock (PwdUser/PwdService)
+          self.isBusy(true);
+          self._lastSetAt = now;
+      
+          // If offline and in demo mode, reflect locally and exit early
+          if(offlineDemo && self.root && !self.root.isConnected()){
+            self.setpointFb(v);
+            try { console.warn('[Dashboard] Offline demo: Setpoint applied locally', { name: varName, value: v }); } catch(e){}
+            self.isBusy(false);
+            return;
+          }
+      
+          var desiredDot = v.toFixed(1);
+          var desiredComma = desiredDot.replace('.', ',');
+          var unlockVars = ['PwdUser', 'PwdService', 'PwdManuf'];
+          var unlockCodes = ['1489', '1234'];
+      
+          // Decide target variable list: write only to the configured target var (e.g., Comfort)
+          var targetVars = [varName];
+          function delay(ms){ return new Promise(function(res){ setTimeout(res, ms); }); }
+          function readbackAny(){
+            return adapter.read(varName).then(function(rv){
+              var s=String(rv==null?'':rv).replace(',', '.');
+              var mm=s.match(/-?\d+(?:\.\d+)?/);
+              var num=mm?parseFloat(mm[0]):NaN;
+              if(!isNaN(num)) return num;
+              throw new Error('no primary');
+            }).catch(function(){
+              var reads = targetVars.map(function(n){
+                return adapter.read(n).then(function(rv){
+                  var s=String(rv==null?'':rv).replace(',', '.');
+                  var mm=s.match(/-?\d+(?:\.\d+)?/);
+                  var num=mm?parseFloat(mm[0]):NaN;
+                  return { name:n, num:num };
+                }).catch(function(){ return { name:n, num:NaN }; });
+              });
+              return Promise.all(reads).then(function(arr){
+                var any = arr.find(function(o){ return !isNaN(o.num); });
+                return any ? any.num : NaN;
+              });
+            });
+          }
+          function trySetAll(valueStr){
+            var p = Promise.resolve();
+            targetVars.forEach(function(n){ p = p.then(function(){ return adapter.write(n, valueStr); }).catch(function(){ /* ignore per-item */ }); });
+            return p.then(function(){ return delay(700); })
+              .then(function(){ return readbackAny(); })
+              .then(function(num){ if(!isNaN(num) && Math.abs(num - v) <= 0.15){ return { ok: true, actual: num }; } return { ok: false, actual: num }; })
+              .catch(function(){ return { ok: false, actual: NaN }; });
+          }
+          function tryWriteWithFallbacks(){
+            return trySetAll(desiredDot).then(function(res){ if(res && res.ok) return res; return trySetAll(desiredComma); });
+          }
+          function tryUnlockThenWrite(){
+            var seq = []; unlockVars.forEach(function(u){ unlockCodes.forEach(function(c){ seq.push([u,c]); }); });
+            var idx = 0;
+            function next(){
+              if(idx >= seq.length) return Promise.resolve({ ok:false, actual: NaN });
+              var pair = seq[idx++];
+              return adapter.write(pair[0], pair[1]).catch(function(){}).then(function(){ return delay(600); })
+                .then(function(){ return tryWriteWithFallbacks(); })
+                .then(function(res){
+                  if(res && res.ok){
+                    return adapter.write(pair[0], '0').catch(function(){}).then(function(){ return res; });
+                  }
+                  return next();
+                });
+            }
+            return next();
+          }
+      
+          tryWriteWithFallbacks()
+            .then(function(res){ return (res && res.ok) ? res : tryUnlockThenWrite(); })
+            .then(function(res){
+              if(res && res.ok){
+                var actual = Number(res.actual);
+                if(!isNaN(actual)){
+                  self.setpointFb(actual);
+                  var adj = clamp(+actual.toFixed(1), self.spMin, self.spMax);
+                  self.setpointCmd(adj);
+                }
+                try { console.info('[Dashboard] Setpoint written and verified', { names: targetVars, value: (isNaN(res.actual)? v : Number(res.actual).toFixed(1)) }); } catch(e){}
+              }
+              else { try { console.error('[Dashboard] Setpoint write failed after fallbacks/unlock'); } catch(e){} }
+            })
+            .finally(function(){ self.isBusy(false); });
+        };
+        self.onApplyMode = function(){
+          if(self.isBusy()) return;
+          if(self.root && !self.root.canWriteUnit(self.name)) return;
+          var m = String(self.modeCmd()||'auto');
+          self.modeCmd(m);
+          var varName = self.vars.ModeCmd;
+          if(!varName){ try{ console.warn('[Dashboard] ModeCmd var not configured'); }catch(e){} return; }
+          self.isBusy(true);
+          adapter.write(varName, m)
+            .then(function(){ try { console.info('[Dashboard] Mode written', { name: varName, value: m }); } catch(e){} })
+            .catch(function(err){ try { console.error('[Dashboard] Mode write failed', err); } catch(e){} })
+            .finally(function(){ self.isBusy(false); });
+        };
+
+        self.pollKeys = (function(){ var keys = [self.vars.PowerFb, self.vars.TempCurrent, self.vars.ModeFb, self.vars.FanSpeedFb, self.vars.AlarmActive, self.vars.TempSetpoint]; return keys.filter(Boolean); })();
+        self.poll = function(){
+          if(!self.pollKeys.length) return Promise.resolve(true);
+          return adapter.batchRead(self.pollKeys).then(function(resp){ if(!resp) return true;
+            if(self.vars.PowerFb in resp) self.powerFb(toBool(resp[self.vars.PowerFb]));
+            if(self.vars.TempCurrent in resp) self.tempCurrent(toNum(resp[self.vars.TempCurrent]).toFixed(1));
+            if(self.vars.ModeFb in resp) self.modeFb(String(resp[self.vars.ModeFb]));
+            if(self.vars.FanSpeedFb in resp) self.fanSpeedFb(toNum(resp[self.vars.FanSpeedFb]||0));
+            if(self.vars.AlarmActive in resp) self.alarmActive(toBool(resp[self.vars.AlarmActive]));
+            if(self.vars.TempSetpoint in resp){
+              var sp = toNum(resp[self.vars.TempSetpoint]);
+              self.setpointFb(sp);
+              // Do not override the user's slider; keep setpointCmd decoupled from feedback
+            }
+            return true;
+          });
+        };
+      }
+
+      function RootVM(){
+        var self = this; self.units = ko.observableArray([]); self.connectionClass = ko.observable('status-warn'); self.connectionText = ko.observable('Connecting...'); self.pollingMs = 1000; self.lastError = ko.observable('');
+        self.strictMode = ko.observable(true);
+        self.requireConfirmPower = ko.observable(true);
+        self.writeWhitelist = ko.observableArray(['Chiller-1']);
+        self.isConnected = ko.observable(false);
+        self.canWriteUnit = function(unitName){
+          if(!self.isConnected()) return false;
+          if(self.strictMode()) return self.writeWhitelist().indexOf(unitName) !== -1;
+          return true;
+        };
+        window.DASHBOARD_STRICT = false; window.DASHBOARD_WRITE_PATTERN = 'auto';
+        var adapter = SafeAdapter();
+        self.load = function(){
+          return $.getJSON('assets/data/dashboard.config.json').then(function(cfg){
+            self.pollingMs = (cfg && cfg.pollingMs) || 1000;
+            if(cfg && cfg.deviceUrl){ adapter = SafeAdapter(cfg.deviceUrl); }
+            var arr = (cfg && cfg.units) || [];
+            self.units(arr.map(function(u){ return new UnitVM(u, adapter, self); }));
+          }).catch(function(){
+            self.units([ new UnitVM({ name:'Chiller-1', vars:{} }, adapter, self) ]);
+          });
+        };
+        var timer = null, ticking = false, consecutiveFails = 0;
+        self.startPolling = function(){
+          if(timer) { clearTimeout(timer); timer = null; }
+          function tick(){
+            if(ticking){ timer = setTimeout(tick, self.pollingMs); return; }
+            ticking = true;
+            // Simple connectivity probe: read once to build cache even if no units vars defined
+            adapter.read('__probe__').catch(function(){}).finally(function(){
+              var polls = self.units().map(function(u){ return u.poll(); });
+              Promise.allSettled(polls).then(function(results){
+                var ok = results.some(function(r){ return r.status==='fulfilled'; });
+                var allRejected = results.every(function(r){ return r.status==='rejected'; });
+                if(allRejected){
+                  self.isConnected(false);
+                  consecutiveFails++; self.connectionClass('status-err'); self.connectionText('No connection');
+                  var firstErr = results.find(function(r){ return r.status==='rejected'; });
+                  var msg = (firstErr && firstErr.reason && (firstErr.reason.message || String(firstErr.reason))) || 'Connection failed'; self.lastError(msg);
+                } else if(ok){
+                  self.isConnected(true);
+                  consecutiveFails = 0; self.lastError(''); self.connectionClass('status-ok'); self.connectionText('Connected');
+                } else { self.isConnected(false); consecutiveFails = 0; self.lastError(''); self.connectionClass('status-warn'); self.connectionText('Partial'); }
+              }).finally(function(){
+                ticking = false; var delay = self.pollingMs * (consecutiveFails > 3 ? 2 : 1); timer = setTimeout(tick, delay);
+              });
+            });
+          }
+          tick();
+        };
+        return self;
+      }
+
+      try {
+        var vm = new RootVM();
+        // Detect demo mode from query string (?demo=1)
+        try {
+          var m = (location.search || '').match(/[?&]demo=(\d+)/i);
+          window.DEMO_MODE = (m && m[1] === '1') ? true : false;
+        } catch(e){ window.DEMO_MODE = false; }
+        ko.applyBindings(vm);
+        vm.load().then(function(){ vm.startPolling();
+        // Only auto-turn on in demo mode
+        if(window.DEMO_MODE){
+          setTimeout(function(){
+            try {
+              if(!vm.isConnected() && vm.units() && vm.units().length){
+                var u = vm.units()[0];
+                u.powerCmd(true);
+                u.powerFb(true);
+                u.fanSpeedFb(900);
+                console.warn('[Dashboard] Demo mode: Auto ON Chiller-1 (no connection)');
+              }
+            } catch(e){}
+          }, 800);
+        }
+        });
+        console.log('dashboard app initialized');
+      } catch(e){ console.error('dashboard init error', e); }
+    })();
+  </script>
+</body>
+</html>

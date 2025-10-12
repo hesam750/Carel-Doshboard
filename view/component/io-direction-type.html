@@ -1,0 +1,291 @@
+<div class="io-direction-type-component">
+    <div class="row">
+        <!-- Alert msg -->
+		<div id="io-direction-view-component-msgbox-msg" class="alert-msg-box" role="alert" data-bind="{visible: IsAlertVisible, css: AlertCssClass}">
+            <button type="button" class="close" aria-label="Close" data-bind="click: closeAlert()"><i class='fa fa-times'></i></button>
+            
+            <div class="alert-msg-title" data-bind="text: AlertTitle"></div>
+            <div data-bind="visible: AlertIsErrorDetailVisible">
+                <div data-bind="text: AlertErrorDetailMsg"></div>
+            </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div id="io-direction-type-table-toolbar" class="columns columns-right btn-group pull-right" data-bind="visible: IsIoDirectionTypeInit">
+            <button id="io-direction-type-component-toogle-tables" class="btn btn-default" type="button" name="toggle" data-bind="attr: {title: ToogleTableDesc}">
+                <i class="fa fa-list-alt"></i>
+            </button>
+
+            <div class="keep-open btn-group" data-bind="attr: {title: ColumnDesc}">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-check-square-o"></i> 
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" data-bind="foreach: toolbarHeaders" id=io-direction-type-component-tables-show-columns-list>
+                    <li>
+                        <label>
+                            <input type="checkbox" data-bind="{checked: IsChecked, click: $data.showHideColumn}">
+                            <div data-bind="{text: $data.Text}"></div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" data-bind="visible: IsIoDirectionTypeInit">
+        <div class="col-sm-12 col-lg-6">
+            <!-- Input analog -->
+            <div class="panel panel panel-primary io-panel" id="io-analog-input">
+                <div class="panel-heading">
+                    <div class="circle paletteDark0"></div>
+                    <h3 class="panel-title" data-bind="text: AnalogInputTitleHeader"></h3>
+                </div>
+                <div class="panel-body noLeftPaddingTableHeader">
+                    <table class="table-bordered table-condensed"
+                        id="io-analog-input-table"
+                        data-icons-prefix="fa"
+                        data-sort-name="PinName"
+                        data-sort-order="asc"
+                        data-classes="table-no-bordered"
+                        data-striped="true"
+                        data-cookie="true"
+                        data-cookie-id-table="inputAnalogTableId"
+                        data-cookie-expire="1y"                      
+                        data-mobile-responsive="true"
+                        data-check-on-init="true"
+                        data-min-width="768">
+                        <thead>
+                            <tr>
+                                <th data-field="PinName" 
+                                    data-sortable="true"
+                                    data-sorter="numericSorter"
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: PinHeader"></th>
+                                <th data-field="ChannelType" 
+                                    data-sortable="true" 
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: ChannelTypeHeader"></th>
+                                <th data-field="VariableName" 
+                                    data-sortable="true"
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: VariableNameHeader"
+                                    data-visible="true"></th>
+                                <th data-field="VariableDescription" 
+                                    data-sortable="true" 
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: VariableDescriptionHeader"></th>
+                                <th data-field="MinVariableValueUom" 
+                                    data-bind="text: VariableMinValueHeader"
+                                    data-formatter="readOnlyPinMinValueFormatter"
+                                    data-halign="center"
+                                    data-align="center"
+                                    data-visible="false"></th> 
+                                <th data-field="MaxVariableValueUom" 
+                                    data-bind="text: VariableMaxValueHeader"
+                                    data-formatter="readOnlyPinMaxValueFormatter"
+                                    data-halign="center"
+                                    data-align="center"
+                                    data-visible="false"></th> 
+                                <th data-field="VariableCurrentValue" 
+                                    data-bind="text: VariableValueHeader"
+                                    data-halign="center"
+                                    data-align="center"
+                                    data-formatter="readOnlyVariableValueFormatter"></th>          
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div> 
+        </div>
+
+        <div class="col-sm-12 col-lg-6">
+            <!-- Output analog -->
+            <div class="panel panel panel-primary io-panel" id="io-analog-output">
+                <div class="panel-heading">
+                    <div class="circle paletteMedium0"></div>
+                    <h3 class="panel-title" data-bind="text: AnalogOutputTitleHeader"></h3>
+                </div>
+                <div class="panel-body noLeftPaddingTableHeader">
+                    <table class="table-bordered table-condensed"
+                        id="io-analog-output-table"
+                        data-icons-prefix="fa"
+                        data-sort-name="PinName"
+                        data-sort-order="asc"
+                        data-classes="table-no-bordered"
+                        data-striped="true"
+                        data-cookie="true"
+                        data-cookie-id-table="outputAnalogTableId"
+                        data-cookie-expire="1y"                      
+                        data-mobile-responsive="true"
+                        data-check-on-init="true"
+                        data-min-width="768">
+                        <thead>
+                            <tr>
+                                <th data-field="PinName" 
+                                    data-sortable="true"
+                                    data-sorter="numericSorter"
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: PinHeader"></th>
+                                <th data-field="ChannelType" 
+                                    data-sortable="true" 
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: ChannelTypeHeader"></th>
+                                <th data-field="VariableName" 
+                                    data-sortable="true" 
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: VariableNameHeader"
+                                    data-visible="true"></th>
+                                <th data-field="VariableDescription" 
+                                    data-sortable="true" 
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: VariableDescriptionHeader"></th>
+                                <th data-field="MinVariableValueUom" 
+                                    data-halign="center"
+                                    data-align="center"
+                                    data-formatter="readOnlyPinMinValueFormatter"
+                                    data-bind="text: VariableMinValueHeader"
+                                    data-visible="false"></th> 
+                                <th data-field="MaxVariableValueUom" 
+                                    data-halign="center"
+                                    data-align="center"
+                                    data-formatter="readOnlyPinMaxValueFormatter"
+                                    data-bind="text: VariableMaxValueHeader"
+                                    data-visible="false"></th> 
+                                <th data-field="VariableCurrentValue"
+                                    data-halign="center"
+                                    data-align="center" 
+                                    data-formatter="readOnlyVariableValueFormatter"     
+                                    data-bind="text: VariableValueHeader"></th> 
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <div class="row" data-bind="visible: IsIoDirectionTypeInit">
+        <!-- Input digital -->
+        <div class="col-xs-12 col-lg-6">
+            <div class="panel panel panel-primary io-panel" id="io-digital-input">
+                <div class="panel-heading">
+                    <div class="circle paletteDark6"></div>
+                    <h3 class="panel-title" data-bind="text: DigitalInputTitleHeader"></h3>
+                </div>
+                <div class="panel-body noLeftPaddingTableHeader">
+                    <table class="table-bordered table-condensed"
+                        id="io-digital-input-table"
+                        data-icons-prefix="fa"
+                        data-sort-name="PinName"
+                        data-sort-order="asc"
+                        data-classes="table-no-bordered"
+                        data-striped="true"
+                        data-cookie="true"
+                        data-cookie-id-table="inputDigitalTableId"
+                        data-cookie-expire="1y"                      
+                        data-mobile-responsive="true"
+                        data-check-on-init="true"
+                        data-min-width="768">
+                        <thead>
+                            <tr>
+                                <th data-field="PinName" 
+                                    data-sortable="true"
+                                    data-sorter="numericSorter" 
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: PinHeader"></th>
+                                <th data-field="ChannelType" 
+                                    data-sortable="true" 
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: ChannelTypeHeader"></th>
+                                <th data-field="VariableName" 
+                                    data-sortable="true" 
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: VariableNameHeader"
+                                    data-visible="true"></th>
+                                <th data-field="VariableDescription" 
+                                    data-sortable="true" 
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: VariableDescriptionHeader"></th>      
+                                <th data-field="VariableCurrentValue" 
+                                    data-bind="text: VariableValueHeader"
+                                    data-align="center"
+                                    data-halign="center"
+                                    data-formatter="readOnlyVariableValueFormatter"></th>                              
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div> 
+        </div>
+
+        <div class="col-xs-12 col-lg-6">
+            <!-- Output digital -->
+            <div class="panel panel panel-primary io-panel" id="io-digital-output">
+                <div class="panel-heading">
+                    <div class="circle paletteMedium6"></div>
+                    <h3 class="panel-title" data-bind="text: DigitalOutputTitleHeader"></h3>
+                </div>
+                <div class="panel-body noLeftPaddingTableHeader">
+                    <table class="table-bordered table-condensed"
+                        id="io-digital-output-table"
+                        data-icons-prefix="fa"
+                        data-sort-name="PinName"
+                        data-sort-order="asc"
+                        data-classes="table-no-bordered"
+                        data-striped="true"
+                        data-cookie="true"
+                        data-cookie-id-table="outputDigitalTableId"
+                        data-cookie-expire="1y"                      
+                        data-mobile-responsive="true"
+                        data-check-on-init="true"
+                        data-min-width="768">
+                        <thead>
+                            <tr>
+                                <th data-field="PinName" 
+                                    data-sortable="true"
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-sorter="numericSorter" 
+                                    data-bind="text: PinHeader"></th>
+                                <th data-field="ChannelType" 
+                                    data-sortable="true" 
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: ChannelTypeHeader"></th>
+                                <th data-field="VariableName" 
+                                    data-bind="text: VariableNameHeader"
+                                    data-sortable="true" 
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-visible="true"></th>
+                                <th data-field="VariableDescription" 
+                                    data-sortable="true" 
+                                    data-halign="left"
+                                    data-align="left"
+                                    data-bind="text: VariableDescriptionHeader"></th>
+                                <th data-field="VariableCurrentValue" 
+                                    data-align="center"
+                                    data-halign="center"
+                                    data-formatter="readOnlyVariableValueFormatter"
+                                    data-bind="text: VariableValueHeader"></th>  
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div> 
+        </div> 
+    </div>
+</div>

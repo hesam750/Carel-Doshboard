@@ -1,0 +1,164 @@
+<!-- Alarm history view -->
+<div class="alarm-history-component col-xs-12">
+	<div class="row">
+		<!-- Settings dialog -->
+		<div class="modal fade" tabindex="-1" role="dialog" id="settingsDialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class='fa fa-times'></i></button>
+						<h2 class="modal-title" data-bind="text: SettingsTitle"></h4>
+					</div>
+
+					<div class="modal-body">
+						<table class="modal-table-settings">
+							<tr>
+								<td><div data-bind="text: SettingsRefreshInterval"></div></td>
+								<td><input type="number" min="0" data-bind="value: RefreshIntervalSecondsValue"></td> 
+							</tr>
+							<tr>
+								<td><div data-bind="text: ExportSettingsSeparatorChar"></div></td>
+								<td><input type="text" maxlength="1" data-bind="value: ExportSettingsSeparatorCharValue"></td> 
+							</tr>
+						</table>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="text: SettingsSave, click: save"></button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="text: SettingsCancel"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Clear confirm dialog -->
+		<div class="modal fade" tabindex="-1" role="dialog" id="alarmHistoryConfirmWipe">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" data-bind="text: WarningTitle"></h4>
+					</div>
+
+					<div class="modal-body">
+						<div data-bind="text: ConfirmWipeMsg"></div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="text: WarningYesTitle, click: wipeAlarms"></button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="text: WarningNoTitle"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Alert msg -->
+		<div id="alarm-view-component-msgbox-msg" class="alert alert-msg-box" role="alert" 
+				data-bind="{visible: IsAlertVisible, css: AlertCssClass}">
+			<button type="button" class="close" aria-label="Close" data-bind="click: closeAlert()"><span aria-hidden="true">&times;</span></button>
+			
+			<div class="alert-msg-title" data-bind="text: AlertTitle"></div>
+			<div data-bind="visible: AlertIsErrorDetailVisible">
+				<div data-bind="text: AlertErrorDetailMsg"></div>
+			</div>
+
+			<table data-bind="visible: AlertIsResetFailedTableVisible">
+				<thead>
+					<tr>
+						<th data-bind="text: AlertAlarmNameHeader"></th>
+						<th data-bind="text: AlertAlarmDescriptionHeader"></th>
+						<th data-bind="text: AlertStartimeHeader"></th>
+				</thead>
+				<tbody data-bind="foreach: AlertNotResetAlarmArray">
+					<tr>
+						<td data-bind="text: AlarmName"></td>
+						<td data-bind="text: AlarmDescription"></td>
+						<td data-bind="text: Starttime"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- Left toolbar: it isn't visible on cField web app because its functionality are moved to navbar -->
+		<div id="alarm-history-toolbar" class="btn-group" data-bind="if: !HideExtraToolbar">
+			<button type="button" class="btn btn-default" data-bind="click: changeLanguage">
+				<i class="fa fa-language"></i>
+			</button>
+			<button type="button" class="btn btn-default" data-bind="click: toggleTimezone">
+				<i class="fa fa-clock-o"></i>
+			</button>
+			<button type="button" class="btn btn-default" data-bind="click: logout">
+				<i class="fa fa-sign-out"></i>
+			</button>
+		</div>
+
+		<div data-bind="visible: IsAlarmInit">
+			<!-- Alarm history table. It uses bootstrap-table library -->
+			<table class="table-bordered table-condensed"
+				id="alarm-history-component-table"
+				data-pagination="true" 
+				data-show-refresh="true"
+				data-show-toggle="true"
+				data-toolbar="#alarm-history-toolbar"
+				data-toolbar-align="left"
+				data-show-columns="true"
+				data-icons-prefix="fa"
+				data-sort-name="StartTime"
+				data-sort-order="desc"
+				data-row-style="alarmHistoryRowStyle"
+				data-bind="attr: {'data-page-size': DataPageSize}"
+				data-bind="attr: {'data-card-view': EnableCardView}"
+				data-cookie="true"
+                data-cookie-id-table="alarmTableId"
+				data-cookie-expire="1y"	
+				data-mobile-responsive="true"
+				data-min-width="768"
+                data-check-on-init="true">
+				<thead>
+					<tr>
+						<th data-field="StartTime" 
+							data-sortable="true" 
+							data-sorter="alarmHistorySortStartTimeTable" 
+							data-sort-name="StateBundle"
+							data-halign="left"
+							data-bind="text: StartTimeHeader"></th>
+						<th data-field="StopTime" 
+							data-sortable="true" 
+							data-sorter="alarmHistorySortStopTimeTable" 
+							data-sort-name="StateBundle"
+							data-halign="left"
+							data-bind="text: StopTimeHeader"></th>
+						<th data-field="Id" 
+							data-bind="text: IdHeader"
+							data-halign="center"
+							data-visible="false"></th>
+						<th data-field="Name" 
+							data-bind="text: NameHeader"
+							data-halign="left"
+							data-visible="true"></th>
+						<th data-field="Description" 
+							data-bind="text: DescriptionHeader"
+							data-halign="left"></th>
+						<th data-field="Var1" 
+							data-bind="text: Var1Header"
+							data-halign="left"></th>
+						<th data-field="Var2"
+							data-bind="text: Var2Header"
+							data-halign="left"></th>
+						<th data-field="Actions" 
+							data-bind="text: ActionHeader"
+							data-align="center"
+							data-halign="left"
+							data-formatter="alarmHistoryOperationFormatter"
+							data-events="alarmHistoryOperationEvents"
+							data-visible="false"></th>
+					</tr>
+				</thead>
+			</table>
+		
+			<button type="button" 
+				class="btn btn-primary right-side-button" 
+				data-bind="text: ExportAlarmTitle, click: exportAlarm, enable: IsExportAlarmEnabled"></button>
+		</div>
+	</div>	
+</div>

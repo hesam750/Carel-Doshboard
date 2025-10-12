@@ -1,0 +1,347 @@
+{
+  "deviceId": "pHC",
+  "channels": {
+    "universal": [
+      {
+        "pin": "1",
+        "displayName": "B1",
+        "defaultDirection": "AIN",
+        "chipId": "1",
+        "channelTypes": {
+          "AIN": [
+            "2",
+            "3",
+            "42",
+            "4",
+            "0",
+            "5"
+          ]
+        }
+      },
+      {
+        "pin": "2",
+        "displayName": "B2",
+        "defaultDirection": "AIN",
+        "chipId": "1",
+        "channelTypes": {
+          "AIN": [
+            "2",
+            "3",
+            "42",
+            "4",
+            "0",
+            "5"
+          ]
+        }
+      },
+      {
+        "pin": "3",
+        "displayName": "B3",
+        "defaultDirection": "AIN",
+        "chipId": "1",
+        "channelTypes": {
+          "AIN": [
+            "3",
+            "5"
+          ]
+        }
+      },
+      {
+        "pin": "4",
+        "displayName": "B4",
+        "defaultDirection": "AIN",
+        "chipId": "2",
+        "channelTypes": {
+          "AIN": [
+            "6"
+          ]
+        }
+      },
+      {
+        "pin": "5",
+        "displayName": "B5",
+        "defaultDirection": "AIN",
+        "chipId": "2",
+        "channelTypes": {
+          "AIN": [
+            "6",
+            "5"
+          ]
+        }
+      },
+      {
+        "pin": "6",
+        "displayName": "B6",
+        "defaultDirection": "AIN",
+        "chipId": "2",
+        "channelTypes": {
+          "AIN": [
+            "0",
+            "7",
+            "8",
+            "9",
+            "16",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "3",
+            "2"
+          ]
+        }
+      },
+      {
+        "pin": "7",
+        "displayName": "U7",
+        "defaultDirection": "AOUT",
+        "chipId": "2",
+        "channelTypes": {
+          "AOUT": [
+            "0"
+          ]
+        }
+      }
+    ],
+    "digitalInput": [
+      {
+        "pin": "1",
+        "displayName": "ID1",
+        "defaultDirection": "DIN",
+        "chipId": "1",
+        "channelTypes": {
+          "DIN": [
+            "5"
+          ]
+        }
+      },
+      {
+        "pin": "2",
+        "displayName": "ID2",
+        "defaultDirection": "DIN",
+        "chipId": "1",
+        "channelTypes": {
+          "DIN": [
+            "5"
+          ]
+        }
+      },
+      {
+        "pin": "3",
+        "displayName": "ID3",
+        "defaultDirection": "DIN",
+        "chipId": "2",
+        "channelTypes": {
+          "DIN": [
+            "5"
+          ]
+        }
+      },
+      {
+        "pin": "4",
+        "displayName": "ID4",
+        "defaultDirection": "DIN",
+        "chipId": "2",
+        "channelTypes": {
+          "DIN": [
+            "5"
+          ]
+        }
+      },
+      {
+        "pin": "5",
+        "displayName": "ID5",
+        "defaultDirection": "DIN",
+        "chipId": "2",
+        "channelTypes": {
+          "DIN": [
+            "5"
+          ]
+        }
+      }
+    ],
+    "digitalOutput": [
+      {
+        "pin": "1",
+        "displayName": "NO1",
+        "defaultDirection": "DOUT",
+        "chipId": "1",
+        "channelTypes": {
+          "DOUT": [
+            "0",
+            "3",
+            "2",
+            "1"
+          ]
+        }
+      },
+      {
+        "pin": "2",
+        "displayName": "NO2",
+        "defaultDirection": "DOUT",
+        "chipId": "1",
+        "channelTypes": {
+          "DOUT": [
+            "0",
+            "3",
+            "2",
+            "1"
+          ]
+        }
+      },
+      {
+        "pin": "3",
+        "displayName": "NO3",
+        "defaultDirection": "DOUT",
+        "chipId": "1",
+        "channelTypes": {
+          "DOUT": [
+            "0",
+            "3",
+            "2",
+            "1"
+          ]
+        }
+      },
+      {
+        "pin": "4",
+        "displayName": "NO4",
+        "defaultDirection": "DOUT",
+        "chipId": "1",
+        "channelTypes": {
+          "DOUT": [
+            "0",
+            "3",
+            "2",
+            "1"
+          ]
+        }
+      },
+      {
+        "pin": "5",
+        "displayName": "NO5",
+        "defaultDirection": "DOUT",
+        "chipId": "2",
+        "channelTypes": {
+          "DOUT": [
+            "0",
+            "3",
+            "2",
+            "1"
+          ]
+        }
+      },
+      {
+        "pin": "6",
+        "displayName": "NO6",
+        "defaultDirection": "DOUT",
+        "chipId": "2",
+        "channelTypes": {
+          "DOUT": [
+            "0",
+            "3",
+            "2",
+            "1"
+          ]
+        }
+      },
+      {
+        "pin": "7",
+        "displayName": "NO7",
+        "defaultDirection": "DOUT",
+        "chipId": "2",
+        "channelTypes": {
+          "DOUT": [
+            "0",
+            "3",
+            "2",
+            "1"
+          ]
+        }
+      },
+      {
+        "pin": "8",
+        "displayName": "NO8",
+        "defaultDirection": "DOUT",
+        "chipId": "2",
+        "channelTypes": {
+          "DOUT": [
+            "0",
+            "3",
+            "2",
+            "1"
+          ]
+        }
+      },
+      {
+        "pin": "9",
+        "displayName": "NO9",
+        "defaultDirection": "DOUT",
+        "chipId": "2",
+        "channelTypes": {
+          "DOUT": [
+            "0",
+            "3",
+            "2",
+            "1"
+          ]
+        }
+      }
+    ]
+  },
+  "channelTypes": {
+    "AOUT": {
+      "0": "AOUT_CompatibleByPWM_Mod",
+      "3": "AOUT_PWMCompWithConv0_10A0",
+      "5": "AOUT_PWM2KHzFreq",
+      "4": "AOUT_CompByPWMModuWithSlewRateControl",
+      "1": "AOUT_PWMInSyncWithMainFreq",
+      "2": "AOUT_PhaseCutInSyncWithMainFreq"
+    },
+    "DOUT": {
+      "0": "DOUT_Standard",
+      "3": "DOUT_TimedRele",
+      "2": "DOUT_CyclicRele",
+      "1": "DOUT_TimedReleNoSync"
+    },
+    "AIN": {
+      "0": "AIN_NTC",
+      "7": "AIN_NTC_Carel",
+      "16": "AIN_NTC_80MINUS",
+      "1": "AIN_PT1000",
+      "2": "AIN_ZeroOneV",
+      "3": "AIN_ZeroTenV",
+      "6": "AIN_ZeroFiveV",
+      "43": "AIN_ZeroDotFive_FourDotFiveV",
+      "38": "AIN_0_5Vdc",
+      "5": "AIN_OnOff",
+      "42": "AIN_ZeroTwentyMA",
+      "4": "AIN_FourTwentyMA",
+      "34": "AIN_PTC_R",
+      "35": "AIN_PT500",
+      "36": "AIN_PT100",
+      "8": "AIN_Custom_Less50T90",
+      "9": "AIN_Custom_10T170",
+      "10": "AIN_Custom1",
+      "11": "AIN_CustomSensata",
+      "12": "AIN_Custom2",
+      "13": "AIN_Custom3",
+      "14": "AIN_ResistanceInputReadingType1",
+      "15": "AIN_ResistanceInputReadingType2",
+      "17": "AIN_PT",
+      "18": "AIN_TAM"
+    },
+    "DI": {
+      "5": "DIN_Standard",
+      "41": "DIN_Freq",
+      "40": "DIN_Count"
+    },
+    "DI_COUNT": {
+      "40": "DIN_Count"
+    },
+    "DI_FREQ": {
+      "41": "DIN_Freq"
+    }
+  }
+}

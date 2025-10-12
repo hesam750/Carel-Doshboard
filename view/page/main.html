@@ -1,0 +1,68 @@
+<div class="main-page" id="main-component">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Left navbar -->
+            <ul class="nav navbar-nav" id="main-component-left-navbar">
+                <li><a href="#" data-bind="click: manageSidebar, attr: {'title': MenuTooltip}"><i class="fa fa-bars fa-lg"></i></a></li>
+                <li><a href="#" data-bind="attr: {'title': HomeTooltip}"><i class="fa fa-home fa-lg"></i></a></li>
+                <li>
+                    <a href="#" data-bind="click: changeLanguage, attr: {'title': LanguageTooltip}">
+                        <div>
+                            <i class="fa fa-globe fa-lg"></i>
+                            <div class="icon-text" data-bind="text: LanguageDescription"></div>
+                        </div>
+                    </a>
+                </li> 
+                <li>
+                    <a href="#" data-bind="visible: IsUserSettingsEnabled, click: openUserDialog, attr: {'title': UserSettingsTooltip}">
+                        <i class="fa fa-user-o fa-lg"></i>
+                    </a>
+                </li>
+                <!-- Now logout is disable. Only refresh is active -->
+                <li><a href="#" data-bind="click: refreshConfiguration, attr: {'title': RefreshTooltip}"><i class="fa fa-refresh fa-lg"></i></a></li>
+            </ul>
+            <!-- Right navbar -->
+            <ul class="nav navbar-nav navbar-right" id="main-component-right-navbar">          
+                <li>
+                    <div id="navbar-logo-container">
+                        <img alt="Brand" src="assets/img/logo.svg" class="hidden-xs" id="navbar-logo">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="wrapper" data-bind="css: {sidebarClosed: isSidebarClosed}">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu" data-bind="foreach: menuItems">
+                <li data-bind="attr: { id: 'sidebar-item-' + $data.Id },
+                                css: { active: $data == $component.activeMenuItem() },
+                                click: $component.goToItem">
+                    <a data-bind="attr: { href: '#' + $data.Id }" >
+                        <span class="fa-stack fa-lg pull-left">
+                            <i data-bind="if: $data.IsIconFont, attr: { class: 'fa fa-' + $data.Icon + ' fa-stack-1x' }"></i>
+                            <img class="menu-icon" data-bind="if: $data.IsIconFont == false, attr: {src: $data.IconPath}">
+                        </span>
+                        <span data-bind="text: $data.DisplayName, css: {white: $data == $component.activeMenuItem() }"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="xyz">
+                <!-- User settings -->
+                <user-settings-component></user-settings-component>
+
+                <!-- Placeholder for component binding -->
+                <div id="componentPlaceholder" data-bind='component: {name: observableComponentName}'></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- <div class="footer">
+        <p>Copyright &#xa9; Carel</p>
+    </div> -->
+<div>

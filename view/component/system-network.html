@@ -1,0 +1,280 @@
+<div class="info-component">
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalConfirmNetworkUpdate">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class='fa fa-times'></i></button>
+                    <h4 class="modal-title" data-bind="{text: ModalTitle}"></h4>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="{text: ModalYesTitle, visible: IsModalConfirmSavingEnabled(), click: updateNetworkParams}"></button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="{text: ModalNoTitle, visible: IsModalConfirmSavingEnabled()}"></button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="{text: ModalCloseTitle, visible: !IsModalConfirmSavingEnabled()}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Alert msg -->
+        <div id="system-view-component-msgbox-msg" class="alert-msg-box" role="alert" data-bind="{visible: IsAlertVisible, css: AlertCssClass}">
+            <button type="button" class="close" aria-label="Close" data-bind="click: closeAlert()"><i class='fa fa-times'></i></button>
+            
+            <div class="alert-msg-title" data-bind="text: AlertTitle"></div>
+            <div data-bind="visible: AlertIsErrorDetailVisible">
+                <div data-bind="text: AlertErrorDetailMsg"></div>
+            </div>
+        </div>
+
+        <div data-bind="visible: IsSystemNetworkApplicationInit">
+            <div class="col-xs-12 col-sm-6">
+                <!-- App -->
+                <div class="panel panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" data-bind="text: ApplicationTitle"></h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="info-component-application-table" data-classes="table-no-bordered" data-show-header="false" data-striped="true">
+                            <thead>
+                                <tr>
+                                    <th data-field="Type"></th>
+                                    <th data-field="Value" data-align="right"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <!-- Memory -->
+                <div class="panel panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" data-bind="text: MemoryTitle"></h3>
+                    </div>
+                    <div class="panel-body noLeftPaddingTableHeader noRightPaddingTableHeader">
+                        <table id="info-component-memory-table" data-classes="table-no-bordered" data-show-header="true" data-striped="true">
+                            <thead>
+                                <tr>
+                                    <th data-field="Type" data-bind="text: TypeTitle" data-halign="left" data-width="33%"></th>
+                                    <th data-field="Value" data-bind="text: SizeMemoryTitle" data-halign="right" data-align="right" data-width="33%"></th>
+                                    <th data-field="Free" data-bind="text: FreeMemoryTitle" data-halign="right" data-align="right" data-width="33%"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <table id="info-component-filesystem-table" data-classes="table-no-bordered" data-show-header="true" data-striped="true">
+                            <thead>
+                                <tr>
+                                    <th data-field="Type" data-bind="text: TypeTitle" data-halign="left" data-width="33%"></th>
+                                    <th data-field="Value" data-bind="text: SizeMemoryTitle" data-halign="right" data-align="right" data-width="33%"></th>
+                                    <th data-field="Free" data-bind="text: FreeMemoryTitle" data-halign="right" data-align="right" data-width="33%"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>   
+            </div> 
+            
+            <div class="col-xs-12 col-sm-6">
+                <!-- System -->
+                <div class="panel panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" data-bind="text: SystemTitle"></h3>
+                    </div>
+                    <div class="panel-body">
+                        <table id="info-component-system-table" data-classes="table-no-bordered" data-show-header="false" data-striped="true">
+                            <thead>
+                                <tr>
+                                    <th data-field="Key"></th>
+                                    <th data-field="Value" data-align="right"></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>     
+                
+                <!-- Network -->
+                <div class="panel panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" data-bind="text: NetworkTitle"></h3>
+                    </div>
+                    <div class="panel-body">
+                        <!-- Hostname -->
+                        <table id="info-component-network-hostname" class="network-config">
+                            <tbody>
+                                <tr>
+                                    <td class="column-key bottomSpace" data-bind="text: NetworkHostnameTitle"></td>
+                                    <td class="column-value bottomSpace">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-10 col-md-9 col-lg-8 pull-right">
+                                                <input class="form-control small-input" type="text" 
+                                                    data-bind="value: NetworkHostnameValue, valueUpdate: 'input', css: { error: !IsHostnameValid() }, attr: { title: NetworkInvalidHostnameMsg }" maxlength="32">                                          
+                                            </div>
+                                        </div>
+                                    </td>                        
+                                </tr>
+                                <tr>
+                                    <td class="column-key bottomSpace" data-bind="text: NetworkMdnsTitle"></td>
+                                    <td class="pull-right"><input class="checkboxClickable" type="checkbox" data-bind="checked: NetworkIsMdnsActiveValue"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="pull-right"><button type="button" class="btn btn-primary btn-xs" data-bind="text: NetworkSaveTitle, click: saveNetworkCommonParam, enable: IsHostnameValid"></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <!-- IP v4 -->
+                        <table id="info-component-network-ipv4" class="network-config">                            
+                            <tbody>
+                                <tr>
+                                    <td class="column-key bottomSpace" data-bind="text: NetworkIpv4IpLabelTitle"></td>
+                                    <td class="column-value bottomSpace">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-10 col-md-9 col-lg-8 pull-right">
+                                                <select class="selectpicker" data-width="100%" data-bind="options: NetworkIpv4Modes, value: NetworkIpv4SelectedMode, optionsText: 'Title'"></select>
+                                            </div>
+                                        </div>
+                                    </td> 
+                                </tr>
+                                <tr data-bind="visible: NetworkIpv4IsManualViewExpanded">
+                                    <td class="column-key bottomSpace" data-bind="text: NetworkIpv4IpTitle"></td>
+                                    <td class="column-value bottomSpace">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-10 col-md-9 col-lg-8 pull-right">
+                                                <input class="form-control small-input" type="text"
+                                                    data-bind="textInput: NetworkIpv4IpValue, 
+                                                        css: { error: NetworkIpv4IsInvalidIp() },
+                                                        attr: { title: NetworkIpv4IpTooltip },
+                                                        enable: NetworkIpv4CanEditValue">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr data-bind="visible: NetworkIpv4IsManualViewExpanded">
+                                    <td class="column-key bottomSpace" data-bind="text: NetworkIpv4MaskTitle"></td>
+                                    <td class="column-value bottomSpace">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-10 col-md-9 col-lg-8 pull-right">
+                                                <input class="form-control small-input" type="text" 
+                                                    data-bind="textInput: NetworkIpv4MaskValue, 
+                                                        css: { error: NetworkIpv4IsInvalidMask() },
+                                                        attr: { title: NetworkIpv4MaskTooltip },
+                                                        enable: NetworkIpv4CanEditValue">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr data-bind="visible: NetworkIpv4IsManualViewExpanded">
+                                    <td class="column-key bottomSpace" data-bind="text: NetworkIpGatewayTitle"></td>
+                                    <td class="column-value bottomSpace">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-10 col-md-9 col-lg-8 pull-right">
+                                                <input class="form-control small-input" type="text" 
+                                                    data-bind="textInput: NetworkIpv4GatewayValue, 
+                                                        css: { error: NetworkIpv4IsInvalidGateway() },
+                                                        attr: { title: NetworkIpv4GatewayTooltip },
+                                                        enable: NetworkIpv4CanEditValue">
+                                            </div>
+                                        </div>   
+                                    </td>
+                                </tr>
+                                <tr data-bind="visible: NetworkIpv4IsManualViewExpanded">
+                                    <td class="column-key bottomSpace" data-bind="text: NetworkIpDnsTitle"></td>
+                                    <td class="column-value bottomSpace">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-10 col-md-9 col-lg-8 pull-right">
+                                                <input class="form-control small-input" type="text" 
+                                                    data-bind="textInput: NetworkIpv4DnsValue, 
+                                                        css: { error: NetworkIpv4IsInvalidDns() },
+                                                        attr: { title: NetworkIpv4DnsTooltip },
+                                                        enable: NetworkIpv4CanEditValue">
+                                            </div>
+                                        </div>                                          
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="pull-right"><button type="button" class="btn btn-primary btn-xs" data-bind="text: NetworkSaveTitle, click: saveNetworkIpv4Param"></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- IP v6 -->
+                        <table id="info-component-network-ipv6" class="network-config" data-bind="visible: CanShowIpv6Section">
+                            <tbody>
+                                <tr>
+                                    <td class="column-key bottomSpace" data-bind="text: NetworkIpv6IpLabelTitle"></td>
+                                    <td class="column-value bottomSpace">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-10 col-md-9 col-lg-8 pull-right">
+                                                <select class="selectpicker" data-width="100%" data-bind="options: NetworkIpv6Modes, value: NetworkIpv6SelectedMode, optionsText: 'Title'"></select>
+                                            </div>
+                                        </div>
+                                    </td> 
+                                </tr>
+                                <tr data-bind="visible: NetworkIpv6IsManualViewExpanded">
+                                    <td class="column-key bottomSpace" data-bind="text: NetworkIpv6LinkLocalTitle"></td>
+                                    <td class="column-value bottomSpace">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 pull-right">
+                                                <input class="form-control small-input" type="text"
+                                                    data-bind="value: NetworkIpv6LinkLocalValue" disabled>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                </tr>
+                                <tr data-bind="visible: NetworkIpv6IsManualViewExpanded">
+                                    <td class="column-key bottomSpace" data-bind="text: NetworkIpv6IpTitle"></td>
+                                    <td class="column-value bottomSpace">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 pull-right">
+                                                <input class="form-control small-input" type="text" 
+                                                    data-bind="textInput: NetworkIpv6IpValue, 
+                                                        css: { error: NetworkIpv6IsInvalidIp() },
+                                                        attr: { title: NetworkIpv6IpTooltip },
+                                                        enable: NetworkIpv6CanEditValue">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr data-bind="visible: NetworkIpv6IsManualViewExpanded">
+                                    <td class="column-key bottomSpace" data-bind="text: NetworkIpGatewayTitle"></td>
+                                    <td class="column-value bottomSpace">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 pull-right">
+                                                <input class="form-control small-input" type="text" 
+                                                    data-bind="textInput: NetworkIpv6GatewayValue, 
+                                                        css: { error: NetworkIpv6IsInvalidGateway() },
+                                                        attr: { title: NetworkIpv6GatewayTooltip },
+                                                        enable: NetworkIpv6CanEditValue">
+                                            </div>
+                                        </div>   
+                                    </td>
+                                </tr>
+                                <tr data-bind="visible: NetworkIpv6IsManualViewExpanded">
+                                    <td class="column-key bottomSpace" data-bind="text: NetworkIpDnsTitle"></td>
+                                    <td class="column-value bottomSpace">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 pull-right">
+                                                <input class="form-control small-input" type="text" 
+                                                    data-bind="textInput: NetworkIpv6DnsValue, 
+                                                        css: { error: NetworkIpv6IsInvalidDns() },
+                                                        attr: { title: NetworkIpv6DnsTooltip },
+                                                        enable: NetworkIpv6CanEditValue">
+                                            </div>
+                                        </div>                                          
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="pull-right"><button type="button" class="btn btn-primary btn-xs" data-bind="text: NetworkSaveTitle, click: saveNetworkIpv6Param"></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
+            </div>
+        <div>
+    <div>
+</div>

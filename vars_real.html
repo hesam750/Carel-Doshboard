@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="stylesheet" href="lib/carel.css" type="text/css"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <meta http-equiv="Content-Language" content="en"/>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+<title>Carel C.pCO Programmable Controller</title>
+<meta name="description" content="Carel C.pCO Programmable Controller microwebsite"/>
+    <style type="text/css">
+    table.curvedEdges { border:10px solid RoyalBlue;-webkit-border-radius:13px;-moz-border-radius:13px;-ms-border-radius:13px;-o-border-radius:13px;border-radius:13px; }
+    table.curvedEdges td, table.curvedEdges th { border-bottom:1px dotted black;padding:5px; }
+    </style>
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="lib/jquery-csv.js"></script>
+    <script type="text/javascript" src="lib/deviceengine.js"></script>
+    <script type="text/javascript">
+        var mRefreshTimeout;
+        var mDeviceEngine = new DeviceEngine();
+        var mDeviceVariables = mDeviceEngine.getAllVariables();
+
+        function fillVariablesTable() {
+            var idx = 0;
+            var tableContent = [];
+
+            tableContent[idx++] = '<tr>';
+            tableContent[idx++] = '<th>ID</th>';
+            tableContent[idx++] = '<th>Name</th>';
+            tableContent[idx++] = '<th>Description</th>';
+            tableContent[idx++] = '<th>Current Value</th>';
+            tableContent[idx++] = '<th>New Value</th>';
+            tableContent[idx++] = '<th>Enable write</th>';
+            tableContent[idx++] = '<th></th>';
+            tableContent[idx++] = '</tr>';
+
+            for( var i = 0; i < mDeviceVariables.length; i++ ) {
+                var variable = mDeviceVariables[i];
+
+                tableContent[idx++] = '<tr>';
+
+                tableContent[idx++] = '<td>' + variable.getId() + '</td>';
+                tableContent[idx++] = '<td>' + variable.getName() + '</td>';
+                tableContent[idx++] = '<td>' + variable.getDesc() + '</td>';
+                tableContent[idx++] = '<td><span name="varValue">' + variable.getValue() + '</span></td>';
+
+                tableContent[idx++] = '<td><textarea name="newValue" rows="1" cols="5" disabled></textarea></td>';
+                tableContent[idx++] = '<td><input type="checkbox" name="enNewValue" onchange="enableWrite(' + i + ')" ' + (variable.canBeWritten() ? '' : 'disabled') + '/></td>';
+                tableContent[idx++] = '<td><input type="button" name="btnSetVar" value="Set" onclick="setVar(' + i + ');" disabled/></td>';
+
+                tableContent[idx++] = '</tr>';
+            }
+
+            $('#varsTable').html(tableContent.join(''));
+        }
+
+        function enableWrite(index) {
+            var newValueElems = $('textarea[name=newValue]');
+            var enNewValueElems = $('input[name=enNewValue]');
+            var btnSetVarElems = $('input[name=btnSetVar]');
+
+            if( enNewValueElems[index].checked ) {
+                newValueElems[index].disabled = false;
+                btnSetVarElems[index].disabled = false;
+            } else {
+                newValueElems[index].disabled = true;
+                btnSetVarElems[index].disabled = true;
+            }
+        }
+
+        function loadNewValueIntoVariable(index) {
+            var newValueElems = $('textarea[name=newValue]');
+            var newValue;
+
+            // potencial validation of acceptable values based on val range, var type and so on
+            switch (mDeviceVariables[index].getType()) {
+                // string variables do not have any constrains, take the value as-is
+                case 'STRING':
+                    newValue = newValueElems[index].value;
+                    break;
+
+                // in general do not admit an empty value (should we do?)
+                default:
+                    // this should be locale dependent, for now a simple hack is to replace
+                    // commas with dots as decimal separator but this is not, in general, a good approach (should consider browser/user locale)
+                    newValue = newValueElems[index].value.replace(',', '.');
+                    if( newValue === '' ) {
+                        return false;
+                    }
+                    break;
+            }
+
+            mDeviceVariables[index].setValue(newValue);
+
+            return true;
+        }
+
+        function setSelectedVars() {
+            var variablesToCommit = [];
+            var enNewValueElems = $('input[name=enNewValue]');
+
+            for( var i = 0; i < mDeviceVariables.length; i++ ) {
+                if( enNewValueElems[i].checked ) {
+                    if( loadNewValueIntoVariable(i) ) {
+                        variablesToCommit.push(mDeviceVariables[i]);
+                    } else {
+                        alert( 'Error processing new value for variable\n' +
+                               '(id="' + mDeviceVariables[i].getId() + '", name="' + mDeviceVariables[i].getName() + '")\n' +
+                               'Check it and try again' );
+                        return;
+                    }
+                }
+            }
+
+            if( variablesToCommit.length > 0 ) {
+                mDeviceEngine.commitVariables( variablesToCommit, deviceEngineResultCallback );
+            } else {
+                alert( 'No variable selected' );
+            }
+        }
+
+        function setVar(index) {
+            if( loadNewValueIntoVariable(index) ) {
+                mDeviceEngine.commitVariables( [mDeviceVariables[index]], deviceEngineResultCallback );
+            } else {
+                alert( 'Error processing new value, check it and try again' );
+            }
+        }
+
+        function deviceEngineResultCallback(result, variables) {
+            var table = $('#varsTable');
+
+            if( result && variables != null ) {
+                for( var i = 0; i < variables.length; i++ ) {
+                    var remoteVar = variables[i];
+
+                    for( var j = 0; j < mDeviceVariables.length; j++ ) {
+                        if( mDeviceVariables[j].getId() === remoteVar.getId() ) {
+                            updateFromRemote(j, remoteVar);
+                            break;
+                        }
+                    }
+                }
+
+                table.css('border', '10px solid RoyalBlue');
+            } else {
+                table.css('border', '10px solid Red');
+            }
+        }
+
+        function updateFromRemote(index, remoteVar) {
+            var valueElems = $('span[name=varValue]');
+
+            if( remoteVar.getStatus() === 'OK' ) {
+                // update our variable's value getting current remote one
+                mDeviceVariables[index].setValue(remoteVar.getValue());
+
+                valueElems[index].innerHTML = mDeviceVariables[index].getValue();
+            } else {
+                var newValueElems = $('textarea[name=newValue]');
+
+                newValueElems[index].value = remoteVar.getStatus();
+            }
+        }
+
+        function restartRefresh(sec) {
+            sec = sec || $('input:text[name=refreshInterval]').val();
+
+            var interval = parseInt(sec);
+
+            clearTimeout(mRefreshTimeout);
+
+            if( interval > 0 ) {
+                mRefreshTimeout = setTimeout(function ()
+                {
+                    var newVars = mDeviceEngine.getAllVariables();
+
+                    deviceEngineResultCallback( (newVars.length > 0), newVars);
+
+                    restartRefresh(sec);
+                }, interval * 1000);
+            }
+        }
+
+        $(window).load(function() {
+            fillVariablesTable();
+        });
+    </script>
+</head>
+
+<body>
+<div id="header">
+<div id="logo"><center>
+<img id="logosl" style="width:900px; padding: 0 0 0 0; margin: 0px; border-top-style: none; border-right-style: none; border-left-style: none; border-bottom-style: none" alt="Carel" src="imgs/logo.jpg"/></center>
+</div><div id="topmenu"><table width="100%"><tr>
+<td align="center"><a href="custompage.htm">DEMO</a></td>
+<td align="center"><a href="pgd/index.htm">PGD</a></td>
+<td align="center"><a href="vars.htm"><i>VARIABLES</i></a></td>
+<td align="center"><a href="alarms.htm">ALARMS</a></td>
+<td align="center"><a href="stats.htm">NET STATS</a></td>
+<td align="center"><a href="logger.htm">LOGGER</a></td>
+<td align="center"><a href="upgrade.htm">UPGRADE</a></td>
+<td align="center"><a href="upload.htm">UPLOAD</a></td>
+<td align="center"><a href="index.htm">HOME</a></td>
+</tr></table></div></div><!-- header -->
+<div id="container"  style="background: url('imgs/csuitebg.jpg')">
+ <div class="spacing"></div><!-- spacing-->
+ <div id="menu">
+       
+<div class="title">SITE MAP</div>
+<div class="menu_cat"><ul>
+<li><a href="custompage.htm">DEMO</a></li>
+<li><a href="pgd/index.htm">PGD</a></li>
+<li><a href="vars.htm"><i>VARIABLES</i></a></li>
+<li><a href="alarms.htm">ALARMS</a></li>
+<li><a href="stats.htm">NET STATS</a></li>
+<li><a href="logger.htm">LOGGER</a></li>
+<li><a href="upgrade.htm">UPGRADE</a></li>
+<li><a href="upload.htm">UPLOAD</a></li>
+<li><a href="index.htm">HOME</a></li>
+</ul></div><br/>
+ </div><!-- menu-->
+ 
+ <div id="main">
+ <div class="maintext">
+  <h3 align="center">C.pCO VARIABLES TABLE</h3>
+    <p>
+        Refresh interval seconds (0 for "no refresh"): <input type="text" name="refreshInterval" value="0"/><input type="button" name="btnUpdateRefresh" onclick="restartRefresh();" value="Update refresh interval"/>
+    </p>
+    <p>
+        <input type="button" onclick="setSelectedVars();" value="Set all selected variables" />
+        <table id="varsTable" class="curvedEdges"></table>
+    </p>
+ </div><!-- maintext-->
+ </div><!-- main-->
+ <div class="spacing"></div><!-- spacing-->
+ <div id="footer">
+<table cellpadding="0" cellspacing="0" border="0">
+<tr><td style="width: 10px; height: 25px"></td>
+<td style="width: 700px; height: 25px; text-align: left"><span class="copyright">Copyright © 2013 Carel SPA</span></td>
+<td style="height: 25px; width: 55px">
+<span class="bottommenu"><a href="/">Credits</a></span></td>
+<td style="height: 25px; width: 60px">
+<span class="bottommenu"><a href="http://validator.w3.org/check?uri=referer"> <img style="border-style: none;" src="imgs/valid-xhtml10.png" alt="Valid XHTML 1.0 Transitional" height="25"/></a> </span></td>
+<td style="height: 25px; width: 60px">
+<span class="bottommenu"><a href="http://jigsaw.w3.org/css-validator/"> <img style="border-style: none;" src="imgs/valid-css.png" alt="Valid CSS" height="25"/></a> </span></td>
+<td style="width: 10px; height: 25px"></td>
+</tr></table></div>
+</div><!-- container-->
+</body>
+</html>

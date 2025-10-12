@@ -1,0 +1,25 @@
+<button type="button" class="btn btn-default" data-bind="attr: {'title': InfoTooltip}, click: getInfo">
+    <i class="fa fa-info-circle"></i>
+</button>
+
+<button type="button" class="btn btn-default" 
+        data-bind="attr: {'title': SaveDesc}, click: setParams, disable: !IsSaveButtonEnabled()">
+    <i class="fa fa-download"></i>
+</button>
+
+<button class="btn btn-default exportToFile" onclick="$('#parameter-component-import-params-form').click();" 
+        data-bind="attr: {'title': ImportDesc()}">
+    <i id="share-icon" class="fa fa-share"></i>
+    <i id="file-icon" class="fa fa-file-o"></i>
+</button>
+<input type="file" id="parameter-component-import-params-form" style="display:none"/>
+
+<button class="btn btn-default" data-bind="{click: saveDevParams, attr: {'title': ExportDesc()}}">
+    <i class="fa fa-floppy-o"></i>
+</button>
+
+<button class="btn btn-default" 
+        data-bind="click: filterCurrentNotEqualToImportedValues, attr: {'title': FilterDesc()}, disable: IsImportParameterDone()">
+    <i data-bind="visible: IsFilterIconVisible" class="fa fa-filter"></i>
+    <i data-bind="visible: !IsFilterIconVisible()" class="fa fa-remove"></i>
+</button>

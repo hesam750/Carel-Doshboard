@@ -1,0 +1,1953 @@
+{
+  "UoM": {
+    "0": {
+      "name": "SquareMeters",
+      "desc": "m^2",
+      "uomToConvZone": {
+        "1": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "1": {
+      "name": "SquareFeet",
+      "desc": "ft^2",
+      "uomToConvZone": {
+        "0": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "2": {
+      "name": "Milliamperes",
+      "desc": "mA"
+    },
+    "3": {
+      "name": "Amperes",
+      "desc": "A"
+    },
+    "4": {
+      "name": "Ohms",
+      "desc": "Ohm"
+    },
+    "5": {
+      "name": "Volts",
+      "desc": "V"
+    },
+    "6": {
+      "name": "Kilovolts",
+      "desc": "kV"
+    },
+    "7": {
+      "name": "Megavolts",
+      "desc": "MV"
+    },
+    "8": {
+      "name": "VoltAmperes",
+      "desc": "VA"
+    },
+    "9": {
+      "name": "KiloVoltAmperes",
+      "desc": "kVA"
+    },
+    "10": {
+      "name": "MegaVoltAmperes",
+      "desc": "MVA"
+    },
+    "11": {
+      "name": "VoltAmperesReactive",
+      "desc": "VAR"
+    },
+    "12": {
+      "name": "KiloVoltAmperesReactive",
+      "desc": "kVAR"
+    },
+    "13": {
+      "name": "MegaVoltAmperesReactive",
+      "desc": "MVAR"
+    },
+    "14": {
+      "name": "DegreesPhase",
+      "desc": "°"
+    },
+    "15": {
+      "name": "PowerFactor",
+      "desc": "cos phi"
+    },
+    "16": {
+      "name": "Joules",
+      "desc": "J",
+      "uomToConvZone": {
+        "20": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "17": {
+      "name": "KiloJoules",
+      "desc": "kJ"
+    },
+    "18": {
+      "name": "WattHours",
+      "desc": "Wh"
+    },
+    "19": {
+      "name": "KiloWattHours",
+      "desc": "kWh"
+    },
+    "20": {
+      "name": "Btus",
+      "desc": "btu",
+      "uomToConvZone": {
+        "16": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "21": {
+      "name": "Therms",
+      "desc": "thm"
+    },
+    "22": {
+      "name": "TonHours",
+      "desc": "tonh"
+    },
+    "23": {
+      "name": "JoulesPerKilogramDryAir",
+      "desc": "J/kg dry air"
+    },
+    "24": {
+      "name": "BtusPerPoundDryAir",
+      "desc": "btu/lb dry air",
+      "uomToConvZone": {
+        "149": [
+          "1"
+        ]
+      }
+    },
+    "25": {
+      "name": "CyclesPerHour",
+      "desc": "cph"
+    },
+    "26": {
+      "name": "CyclesPerMinute",
+      "desc": "cpm"
+    },
+    "27": {
+      "name": "Hertz",
+      "desc": "Hz"
+    },
+    "28": {
+      "name": "GramsOfWaterPerKilogramDryAir",
+      "desc": "gH2O/kg"
+    },
+    "29": {
+      "name": "PercentRelativeHumidity",
+      "desc": "%rh"
+    },
+    "30": {
+      "name": "Millimeters",
+      "desc": "mm",
+      "uomToConvZone": {
+        "32": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "31": {
+      "name": "Meters",
+      "desc": "m",
+      "uomToConvZone": {
+        "33": [
+          "2",
+          "4"
+        ]
+      }
+    },
+    "32": {
+      "name": "Inches",
+      "desc": "in",
+      "uomToConvZone": {
+        "30": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "33": {
+      "name": "Feet",
+      "desc": "ft",
+      "uomToConvZone": {
+        "31": [
+          "1",
+          "3",
+          "6"
+        ]
+      }
+    },
+    "34": {
+      "name": "WattsPerSquareFoot",
+      "desc": "W/ft^2"
+    },
+    "35": {
+      "name": "WattsPerSquareMeter",
+      "desc": "W/m^2"
+    },
+    "36": {
+      "name": "Lumens",
+      "desc": "lm"
+    },
+    "37": {
+      "name": "Lux",
+      "desc": "lx"
+    },
+    "38": {
+      "name": "FootCandles",
+      "desc": "fc"
+    },
+    "39": {
+      "name": "Kilograms",
+      "desc": "kg",
+      "uomToConvZone": {
+        "40": [
+          "2",
+          "4"
+        ]
+      }
+    },
+    "40": {
+      "name": "PoundsMass",
+      "desc": "lb",
+      "uomToConvZone": {
+        "39": [
+          "1",
+          "3",
+          "6"
+        ]
+      }
+    },
+    "41": {
+      "name": "Tons",
+      "desc": "ton"
+    },
+    "42": {
+      "name": "KilogramsPerSecond",
+      "desc": "kg/s"
+    },
+    "43": {
+      "name": "KilogramsPerMinute",
+      "desc": "kg/min"
+    },
+    "44": {
+      "name": "KilogramsPerHour",
+      "desc": "kg/h",
+      "uomToConvZone": {
+        "46": [
+          "2",
+          "4"
+        ]
+      }
+    },
+    "45": {
+      "name": "PoundsMassPerMinute",
+      "desc": "lb/min"
+    },
+    "46": {
+      "name": "PoundsMassPerHour",
+      "desc": "lb/h",
+      "uomToConvZone": {
+        "44": [
+          "1",
+          "3",
+          "6"
+        ]
+      }
+    },
+    "47": {
+      "name": "Watts",
+      "desc": "W",
+      "uomToConvZone": {
+        "51": [
+          "2",
+          "4"
+        ]
+      }
+    },
+    "48": {
+      "name": "Kilowatts",
+      "desc": "kW"
+    },
+    "49": {
+      "name": "Megawatts",
+      "desc": "MW"
+    },
+    "50": {
+      "name": "BtusPerHour",
+      "desc": "btu/h",
+      "uomToConvZone": {
+        "360": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "51": {
+      "name": "HorsePower",
+      "desc": "hp",
+      "uomToConvZone": {
+        "47": [
+          "1",
+          "3",
+          "6"
+        ]
+      }
+    },
+    "52": {
+      "name": "TonsRefrigeration",
+      "desc": "TR",
+      "uomToConvZone": {
+        "359": [
+          "1",
+          "3",
+          "6"
+        ]
+      }
+    },
+    "53": {
+      "name": "Pascals",
+      "desc": "Pa"
+    },
+    "54": {
+      "name": "KiloPascals",
+      "desc": "kPa",
+      "uomToConvZone": {
+        "56": [
+          "2",
+          "4"
+        ],
+        "55": [
+          "3",
+          "6"
+        ]
+      }
+    },
+    "55": {
+      "name": "Bars",
+      "desc": "bar",
+      "uomToConvZone": {
+        "54": [
+          "1"
+        ],
+        "56": [
+          "2",
+          "4"
+        ]
+      }
+    },
+    "56": {
+      "name": "PoundsForcePerSquareInch",
+      "desc": "psi",
+      "uomToConvZone": {
+        "54": [
+          "1"
+        ],
+        "55": [
+          "3",
+          "6"
+        ]
+      }
+    },
+    "57": {
+      "name": "CentimetersOfWater",
+      "desc": "cmH2O",
+      "uomToConvZone": {
+        "58": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "58": {
+      "name": "InchesOfWater",
+      "desc": "inH2O",
+      "uomToConvZone": {
+        "57": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "59": {
+      "name": "MillimetersOfMercury",
+      "desc": "mmHg"
+    },
+    "60": {
+      "name": "CentimetersOfMercury",
+      "desc": "cmHg",
+      "uomToConvZone": {
+        "61": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "61": {
+      "name": "InchesOfMercury",
+      "desc": "inHg",
+      "uomToConvZone": {
+        "60": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "62": {
+      "name": "DegreesCelsius",
+      "desc": "°C",
+      "uomToConvZone": {
+        "64": [
+          "2"
+        ]
+      }
+    },
+    "63": {
+      "name": "DegreesKelvin",
+      "desc": "K"
+    },
+    "64": {
+      "name": "DegreesFahrenheit",
+      "desc": "°F",
+      "uomToConvZone": {
+        "62": [
+          "1",
+          "3",
+          "4",
+          "6"
+        ]
+      }
+    },
+    "65": {
+      "name": "DegreeDaysCelsius",
+      "desc": "degree days Celsius"
+    },
+    "66": {
+      "name": "DegreeDaysFahrenheit",
+      "desc": "degree days Fahrenheit"
+    },
+    "67": {
+      "name": "Years",
+      "desc": "y"
+    },
+    "68": {
+      "name": "Months",
+      "desc": "month"
+    },
+    "69": {
+      "name": "Weeks",
+      "desc": "w"
+    },
+    "70": {
+      "name": "Days",
+      "desc": "d"
+    },
+    "71": {
+      "name": "Hours",
+      "desc": "h"
+    },
+    "72": {
+      "name": "Minutes",
+      "desc": "min"
+    },
+    "73": {
+      "name": "Seconds",
+      "desc": "s"
+    },
+    "74": {
+      "name": "MetersPerSecond",
+      "desc": "m/s",
+      "uomToConvZone": {
+        "76": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "75": {
+      "name": "KilometersPerHour",
+      "desc": "km/h",
+      "uomToConvZone": {
+        "78": [
+          "2",
+          "3"
+        ]
+      }
+    },
+    "76": {
+      "name": "FeetPerSecond",
+      "desc": "ft/s",
+      "uomToConvZone": {
+        "74": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "77": {
+      "name": "FeetPerMinute",
+      "desc": "ft/min",
+      "uomToConvZone": {
+        "163": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "78": {
+      "name": "MilesPerHour",
+      "desc": "mi/h",
+      "uomToConvZone": {
+        "75": [
+          "1",
+          "4",
+          "6"
+        ]
+      }
+    },
+    "79": {
+      "name": "CubicFeet",
+      "desc": "ft^3",
+      "uomToConvZone": {
+        "80": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "80": {
+      "name": "CubicMeters",
+      "desc": "m^3",
+      "uomToConvZone": {
+        "79": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "81": {
+      "name": "ImperialGallons",
+      "desc": "Imp gal",
+      "uomToConvZone": {
+        "82": [
+          "1",
+          "3",
+          "6"
+        ],
+        "83": [
+          "2",
+          "4"
+        ]
+      }
+    },
+    "82": {
+      "name": "Liters",
+      "desc": "l",
+      "uomToConvZone": {
+        "83": [
+          "2",
+          "4"
+        ]
+      }
+    },
+    "83": {
+      "name": "UsGallons",
+      "desc": "U.S. gal",
+      "uomToConvZone": {
+        "82": [
+          "1",
+          "3",
+          "6"
+        ]
+      }
+    },
+    "84": {
+      "name": "CubicFeetPerMinute",
+      "desc": "ft^3/min",
+      "uomToConvZone": {
+        "165": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "85": {
+      "name": "CubicMetersPerSecond",
+      "desc": "ft^3/s",
+      "uomToConvZone": {
+        "142": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "86": {
+      "name": "ImperialGallonsPerMinute",
+      "desc": "Imp gal/min",
+      "uomToConvZone": {
+        "88": [
+          "1",
+          "6"
+        ],
+        "89": [
+          "2",
+          "4"
+        ]
+      }
+    },
+    "87": {
+      "name": "LitersPerSecond",
+      "desc": "l/s",
+      "uomToConvZone": {
+        "356": [
+          "2",
+          "4"
+        ]
+      }
+    },
+    "88": {
+      "name": "LitersPerMinute",
+      "desc": "l/min",
+      "uomToConvZone": {
+        "89": [
+          "2",
+          "4"
+        ],
+        "86": [
+          "3"
+        ]
+      }
+    },
+    "89": {
+      "name": "UsGallonsPerMinute",
+      "desc": "U.S. gal/min",
+      "uomToConvZone": {
+        "88": [
+          "1",
+          "6"
+        ],
+        "86": [
+          "3"
+        ]
+      }
+    },
+    "90": {
+      "name": "DegreesAngular",
+      "desc": "deg"
+    },
+    "91": {
+      "name": "DegreesCelsiusPerHour",
+      "desc": "°C/h",
+      "uomToConvZone": {
+        "93": [
+          "2"
+        ]
+      }
+    },
+    "92": {
+      "name": "DegreesCelsiusPerMinute",
+      "desc": "°C/min",
+      "uomToConvZone": {
+        "94": [
+          "2"
+        ]
+      }
+    },
+    "93": {
+      "name": "DegreesFahrenheitPerHour",
+      "desc": "°F/h",
+      "uomToConvZone": {
+        "91": [
+          "1",
+          "3",
+          "4",
+          "6"
+        ]
+      }
+    },
+    "94": {
+      "name": "DegreesFahrenheitPerMinute",
+      "desc": "°F/min",
+      "uomToConvZone": {
+        "92": [
+          "1",
+          "3",
+          "4",
+          "6"
+        ]
+      }
+    },
+    "95": {
+      "name": "NoUnits",
+      "desc": ""
+    },
+    "96": {
+      "name": "PartsPerMillion",
+      "desc": "ppm"
+    },
+    "97": {
+      "name": "PartsPerBillion",
+      "desc": "ppb"
+    },
+    "98": {
+      "name": "Percent",
+      "desc": "%"
+    },
+    "99": {
+      "name": "PercentPerSecond",
+      "desc": "%/s"
+    },
+    "100": {
+      "name": "PerMinute",
+      "desc": "pm"
+    },
+    "101": {
+      "name": "PerSecond",
+      "desc": "ps"
+    },
+    "102": {
+      "name": "PsiPerDegreeFahrenheit",
+      "desc": "psiF"
+    },
+    "103": {
+      "name": "Radians",
+      "desc": "rad"
+    },
+    "104": {
+      "name": "RevolutionsPerMinute",
+      "desc": "rpm"
+    },
+    "105": {
+      "name": "Currency1",
+      "desc": "Currency1"
+    },
+    "106": {
+      "name": "Currency2",
+      "desc": "Currency2"
+    },
+    "107": {
+      "name": "Currency3",
+      "desc": "Currency3"
+    },
+    "108": {
+      "name": "Currency4",
+      "desc": "Currency4"
+    },
+    "109": {
+      "name": "Currency5",
+      "desc": "Currency5"
+    },
+    "110": {
+      "name": "Currency6",
+      "desc": "Currency6"
+    },
+    "111": {
+      "name": "Currency7",
+      "desc": "Currency7"
+    },
+    "112": {
+      "name": "Currency8",
+      "desc": "Currency8"
+    },
+    "113": {
+      "name": "Currency9",
+      "desc": "Currency9"
+    },
+    "114": {
+      "name": "Currency10",
+      "desc": "Currency10"
+    },
+    "115": {
+      "name": "SquareInches",
+      "desc": "in^2"
+    },
+    "116": {
+      "name": "SquareCentimeters",
+      "desc": "cm^2"
+    },
+    "117": {
+      "name": "BtusPerPound",
+      "desc": "btupp"
+    },
+    "118": {
+      "name": "Centimeters",
+      "desc": "cm"
+    },
+    "119": {
+      "name": "PoundMassPerSecond",
+      "desc": "lb/s"
+    },
+    "120": {
+      "name": "DeltaDegreesFahrenheit",
+      "desc": "°F",
+      "uomToConvZone": {
+        "121": [
+          "1",
+          "3",
+          "4",
+          "6"
+        ]
+      }
+    },
+    "121": {
+      "name": "DeltaDegreesKelvin",
+      "desc": "K",
+      "uomToConvZone": {
+        "120": [
+          "2"
+        ]
+      }
+    },
+    "122": {
+      "name": "KiloHms",
+      "desc": "kOhm"
+    },
+    "123": {
+      "name": "MegoHms",
+      "desc": "MOhm"
+    },
+    "124": {
+      "name": "Millvolts",
+      "desc": "mV"
+    },
+    "125": {
+      "name": "KiloJoulesPerKilogram",
+      "desc": "KJ/kg"
+    },
+    "126": {
+      "name": "MegaJoules",
+      "desc": "MJ"
+    },
+    "127": {
+      "name": "JoulesPerDegreeKelvin",
+      "desc": "J/K"
+    },
+    "128": {
+      "name": "JoulesPerKilogramDegreeKelvin",
+      "desc": "J/kgK"
+    },
+    "129": {
+      "name": "KiloHertz",
+      "desc": "kHz"
+    },
+    "130": {
+      "name": "MegaHertz",
+      "desc": "MHz"
+    },
+    "131": {
+      "name": "PerHour",
+      "desc": "ph"
+    },
+    "132": {
+      "name": "Milliwatts",
+      "desc": "mW"
+    },
+    "133": {
+      "name": "HectoPascals",
+      "desc": "hPa"
+    },
+    "134": {
+      "name": "Millbars",
+      "desc": "mbar"
+    },
+    "135": {
+      "name": "CubicMetersPerHour",
+      "desc": "m^3/h",
+      "uomToConvZone": {
+        "191": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "136": {
+      "name": "LitersPerHour",
+      "desc": "l/h"
+    },
+    "137": {
+      "name": "KilowattHoursPerSquareMeter",
+      "desc": "kWh/m^2"
+    },
+    "138": {
+      "name": "KilowattHoursPerSquareFoot",
+      "desc": "kWh/ft^2"
+    },
+    "139": {
+      "name": "MegaJoulesPerSquareMeter",
+      "desc": "MJ/m^2"
+    },
+    "140": {
+      "name": "MegaJoulesPerSquareFoot",
+      "desc": "MJ/ft^2"
+    },
+    "141": {
+      "name": "WattsPerSquareMeterDegreeKelvin",
+      "desc": "W/m^2K"
+    },
+    "142": {
+      "name": "CubicFeetPerSecond",
+      "desc": "ft^3/s",
+      "uomToConvZone": {
+        "85": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "143": {
+      "name": "PercentObscurationPerFoot",
+      "desc": "% obscuration per foot"
+    },
+    "144": {
+      "name": "PercentObscurationPerMeter",
+      "desc": "% obscuration per meter"
+    },
+    "145": {
+      "name": "MilloHms",
+      "desc": "mOhms"
+    },
+    "146": {
+      "name": "MegawattHours",
+      "desc": "MWh"
+    },
+    "147": {
+      "name": "KiloBtus",
+      "desc": "kbtu"
+    },
+    "148": {
+      "name": "MegaBtus",
+      "desc": "Mbtu"
+    },
+    "149": {
+      "name": "KiloJoulesPerKilogramDyAir",
+      "desc": "kJ/kg dry air",
+      "uomToConvZone": {
+        "24": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "150": {
+      "name": "MegaJoulesPerKilogramDyAir",
+      "desc": "MJ/kg dry air"
+    },
+    "151": {
+      "name": "KiloJoulesPerDegreeKelvin",
+      "desc": "kJ/K"
+    },
+    "152": {
+      "name": "MegaJoulesPerDegreeKelvin",
+      "desc": "MJ/K"
+    },
+    "153": {
+      "name": "Newtons",
+      "desc": "N",
+      "uomToConvZone": {
+        "351": [
+          "2",
+          "4"
+        ]
+      }
+    },
+    "154": {
+      "name": "GramsPerSecond",
+      "desc": "g/s"
+    },
+    "155": {
+      "name": "GramsPerMinute",
+      "desc": "g/min"
+    },
+    "156": {
+      "name": "TonsPerHour",
+      "desc": "ton/h"
+    },
+    "157": {
+      "name": "KiloButsPerHour",
+      "desc": "kbtu/h"
+    },
+    "158": {
+      "name": "HundredthsSeconds",
+      "desc": "cs"
+    },
+    "159": {
+      "name": "Milliseconds",
+      "desc": "ms"
+    },
+    "160": {
+      "name": "NewtonMeters",
+      "desc": "N m",
+      "uomToConvZone": {
+        "353": [
+          "2"
+        ]
+      }
+    },
+    "161": {
+      "name": "MillimetersPerSecond",
+      "desc": "mm/s"
+    },
+    "162": {
+      "name": "MillimetersPerMinute",
+      "desc": "mm/min"
+    },
+    "163": {
+      "name": "MetersPerMinute",
+      "desc": "m/min",
+      "uomToConvZone": {
+        "77": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "164": {
+      "name": "MetersPerHour",
+      "desc": "m/h"
+    },
+    "165": {
+      "name": "CubicMetersPerMinute",
+      "desc": "m^3/min",
+      "uomToConvZone": {
+        "84": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "166": {
+      "name": "MetersPerSecondPerSecond",
+      "desc": "m/s^2"
+    },
+    "167": {
+      "name": "AmperesPerMeters",
+      "desc": "A/m"
+    },
+    "168": {
+      "name": "AmperesPerSquareMeter",
+      "desc": "Am^2"
+    },
+    "169": {
+      "name": "AmpereSquareMeter",
+      "desc": "A/m^2"
+    },
+    "170": {
+      "name": "Farads",
+      "desc": "F"
+    },
+    "171": {
+      "name": "Henrys",
+      "desc": "H"
+    },
+    "172": {
+      "name": "OhmMeters",
+      "desc": "Ohm/m"
+    },
+    "173": {
+      "name": "Siemens",
+      "desc": "S"
+    },
+    "174": {
+      "name": "SiemensPerMetter",
+      "desc": "S/m"
+    },
+    "175": {
+      "name": "Teslas",
+      "desc": "T"
+    },
+    "176": {
+      "name": "VoltsPerDegreeKelvin",
+      "desc": "V/K"
+    },
+    "177": {
+      "name": "VoltsPerMeter",
+      "desc": "V/m"
+    },
+    "178": {
+      "name": "Webers",
+      "desc": "Wb"
+    },
+    "179": {
+      "name": "Candelas",
+      "desc": "cd"
+    },
+    "180": {
+      "name": "CandelasPerSquareMeter",
+      "desc": "cd/m^2"
+    },
+    "181": {
+      "name": "DegreesKelvinPerHour",
+      "desc": "K/h"
+    },
+    "182": {
+      "name": "DegreesKelvinPerMinute",
+      "desc": "K/min"
+    },
+    "183": {
+      "name": "JouleSeconds",
+      "desc": "J/s"
+    },
+    "184": {
+      "name": "RadianPerSecond",
+      "desc": "rad/s"
+    },
+    "185": {
+      "name": "SquareMetersPerNewton",
+      "desc": "N/m^2"
+    },
+    "186": {
+      "name": "KilogramsPerCubicMeter",
+      "desc": "kg/m^3"
+    },
+    "187": {
+      "name": "NewtonSeconds",
+      "desc": "N/s"
+    },
+    "188": {
+      "name": "NewtonsPerMeter",
+      "desc": "N/m",
+      "uomToConvZone": {
+        "353": [
+          "2"
+        ]
+      }
+    },
+    "189": {
+      "name": "WattsPerMeterPerDegreeKelvin",
+      "desc": "W/m/k"
+    },
+    "190": {
+      "name": "MicroSiemens",
+      "desc": "uS"
+    },
+    "191": {
+      "name": "CubicFeetPerHour",
+      "desc": "ft^3/h",
+      "uomToConvZone": {
+        "135": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "192": {
+      "name": "UsGallonsPerHour",
+      "desc": "U.S. gal/h"
+    },
+    "193": {
+      "name": "KiloMeters",
+      "desc": "km",
+      "uomToConvZone": {
+        "352": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "194": {
+      "name": "MicroMeters",
+      "desc": "um"
+    },
+    "195": {
+      "name": "Grams",
+      "desc": "g"
+    },
+    "196": {
+      "name": "Milligrams",
+      "desc": "mg"
+    },
+    "197": {
+      "name": "MilliLiters",
+      "desc": "ml"
+    },
+    "198": {
+      "name": "MilliLitersPerSecond",
+      "desc": "ml/s"
+    },
+    "199": {
+      "name": "Decibels",
+      "desc": "dB"
+    },
+    "200": {
+      "name": "DecibelsMillivolt",
+      "desc": "dBmV"
+    },
+    "201": {
+      "name": "DecibelsVolt",
+      "desc": "dBV"
+    },
+    "202": {
+      "name": "MilliSiemens",
+      "desc": "mS"
+    },
+    "203": {
+      "name": "WattHoursReactive",
+      "desc": "WhR"
+    },
+    "204": {
+      "name": "KilowattHoursReactive",
+      "desc": "kWhR"
+    },
+    "205": {
+      "name": "MegawattHoursReactive",
+      "desc": "MWhR"
+    },
+    "206": {
+      "name": "MillimetersOfWater",
+      "desc": "mmH2O"
+    },
+    "207": {
+      "name": "PerMille",
+      "desc": "pm"
+    },
+    "208": {
+      "name": "GramsPerGram",
+      "desc": "g/g"
+    },
+    "209": {
+      "name": "KilogramsPerKilogram",
+      "desc": "kg/kg"
+    },
+    "210": {
+      "name": "GramsPerKilogram",
+      "desc": "g/kg"
+    },
+    "351": {
+      "name": "PoundsForce",
+      "desc": "lbf",
+      "uomToConvZone": {
+        "153": [
+          "1",
+          "3",
+          "6"
+        ]
+      }
+    },
+    "352": {
+      "name": "Miles",
+      "desc": "mi",
+      "uomToConvZone": {
+        "193": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "353": {
+      "name": "PoundsPerFoot",
+      "desc": "lbf ft",
+      "uomToConvZone": {
+        "160": [
+          "1",
+          "6"
+        ],
+        "188": [
+          "3",
+          "4"
+        ]
+      }
+    },
+    "354": {
+      "name": "Enthalpy",
+      "desc": "kJ/Kg",
+      "uomToConvZone": {
+        "355": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "355": {
+      "name": "EnthalpyBTULb",
+      "desc": "BTU/Lb",
+      "uomToConvZone": {
+        "354": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "356": {
+      "name": "USGallonPerSecond",
+      "desc": "US gps",
+      "uomToConvZone": {
+        "87": [
+          "1",
+          "3",
+          "6"
+        ]
+      }
+    },
+    "357": {
+      "name": "Pressure",
+      "desc": "Pa",
+      "uomToConvZone": {
+        "358": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "358": {
+      "name": "PressureinH20",
+      "desc": "inH2O",
+      "uomToConvZone": {
+        "357": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "359": {
+      "name": "ThermalWatts",
+      "desc": "kW",
+      "uomToConvZone": {
+        "52": [
+          "2",
+          "4"
+        ]
+      }
+    },
+    "360": {
+      "name": "ThermalWattsW",
+      "desc": "W",
+      "uomToConvZone": {
+        "361": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "361": {
+      "name": "ThermalWattsBTUH",
+      "desc": "BTUH",
+      "uomToConvZone": {
+        "360": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "362": {
+      "name": "ElectricalWatts",
+      "desc": "W"
+    },
+    "363": {
+      "name": "Airflow",
+      "desc": "m3h",
+      "uomToConvZone": {
+        "364": [
+          "2",
+          "3",
+          "4"
+        ]
+      }
+    },
+    "364": {
+      "name": "AirflowCFM",
+      "desc": "CFM",
+      "uomToConvZone": {
+        "363": [
+          "1",
+          "6"
+        ]
+      }
+    },
+    "365": {
+      "name": "RevolutionsPerSecond",
+      "desc": "rps"
+    },
+    "366": {
+      "name": "HertzPerSecond",
+      "desc": "Hz/s"
+    },
+    "367": {
+      "name": "MilliHenry",
+      "desc": "mH"
+    },
+    "368": {
+      "name": "Steps",
+      "desc": "steps"
+    },
+    "369": {
+      "name": "CyclesPerSecond",
+      "desc": "cps"
+    },
+    "370": {
+      "name": "DeltaDegreesCelsius",
+      "desc": "°C",
+      "uomToConvZone": {
+        "120": [
+          "2",
+          "3"
+        ]
+      }
+    },
+    "371": {
+      "name": "LibbrePerCubicFeet",
+      "desc": "lb/ft^3"
+    }
+  },
+  "UoMConversionZone": {
+    "0": {
+      "desc": "No Conversion"
+    },
+    "1": {
+      "desc": "SI"
+    },
+    "2": {
+      "desc": "U.S. Customary Units"
+    },
+    "3": {
+      "desc": "Imperial Units"
+    },
+    "4": {
+      "desc": "Canadian"
+    },
+    "5": {
+      "desc": "Carel LON card"
+    },
+    "6": {
+      "desc": "SI pressure (bar)"
+    }
+  },
+  "Timezones": [
+    {
+      "name": "(UTC-12:00) International Date Line West",
+      "posixRule": "DST12"
+    },
+    {
+      "name": "(UTC-11:00) Coordinated Universal Time-11",
+      "posixRule": "LSTD11"
+    },
+    {
+      "name": "(UTC-10:00) Aleutian Islands",
+      "posixRule": "AST10ADT,M3.2.0,M11.1.0"
+    },
+    {
+      "name": "(UTC-10:00) Hawaii",
+      "posixRule": "HST10"
+    },
+    {
+      "name": "(UTC-09:30) Marquesas Islands",
+      "posixRule": "MST9:30"
+    },
+    {
+      "name": "(UTC-09:00) Alaska",
+      "posixRule": "AKST9AKDT,M3.2.0,M11.1.0"
+    },
+    {
+      "name": "(UTC-09:00) Coordinated Universal Time-09",
+      "posixRule": "LSTD9"
+    },
+    {
+      "name": "(UTC-08:00) Baja California",
+      "posixRule": "PST8PDT,M4.1.0,M10.5.0"
+    },
+    {
+      "name": "(UTC-08:00) Coordinated Universal Time-08",
+      "posixRule": "AKDT8"
+    },
+    {
+      "name": "(UTC-08:00) Pacific Time (US & Canada)",
+      "posixRule": "PST8PDT,M3.2.0,M11.1.0"
+    },
+    {
+      "name": "(UTC-07:00) Arizona",
+      "posixRule": "MST7"
+    },
+    {
+      "name": "(UTC-07:00) Chihuahua, La Paz, Mazatlan",
+      "posixRule": "MST7MDT,M4.1.0,M10.5.0"
+    },
+    {
+      "name": "(UTC-07:00) Mountain Time (US & Canada)",
+      "posixRule": "MST7MDT,M3.2.0,M11.1.0"
+    },
+    {
+      "name": "(UTC-06:00) Central America",
+      "posixRule": "CST6"
+    },
+    {
+      "name": "(UTC-06:00) Central Time (US & Canada)",
+      "posixRule": "CST6CDT,M3.2.0,M11.1.0"
+    },
+    {
+      "name": "(UTC-06:00) Easter Island",
+      "posixRule": "COT6COT,M9.1.6/22,M4.1.6/22"
+    },
+    {
+      "name": "(UTC-06:00) Guadalajara, Mexico City, Monterrey",
+      "posixRule": "CST6CDT,M4.1.0,M10.5.0"
+    },
+    {
+      "name": "(UTC-05:00) Bogota, Lima, Quito, Rio Branco",
+      "posixRule": "COT5"
+    },
+    {
+      "name": "(UTC-05:00) Chetumal",
+      "posixRule": "COT5COT,M2.1.0,M1.1.4/0"
+    },
+    {
+      "name": "(UTC-05:00) Eastern Time (US & Canada)",
+      "posixRule": "EST5EDT,M3.2.0,M11.1.0"
+    },
+    {
+      "name": "(UTC-05:00) Havana",
+      "posixRule": "EST5EDT,M3.2.0/0,M11.1.0/1"
+    },
+    {
+      "name": "(UTC-04:00) Asuncion",
+      "posixRule": "PYT4PYST,M10.1.6/23:59:59,M3.4.6/23:59:59"
+    },
+    {
+      "name": "(UTC-04:00) Atlantic Time (Canada)",
+      "posixRule": "AST4ADT,M3.2.0,M11.1.0"
+    },
+    {
+      "name": "(UTC-04:00) Caracas",
+      "posixRule": "VET4:30"
+    },
+    {
+      "name": "(UTC-04:00) Cuiaba",
+      "posixRule": "AMT4AMST,M10.3.6/23:59:59,M2.3.6/23:59:59"
+    },
+    {
+      "name": "(UTC-04:00) Georgetown, La Paz, Manaus, San Juan",
+      "posixRule": "BOT4"
+    },
+    {
+      "name": "(UTC-04:00) Santiago",
+      "posixRule": "CLST4CLST,M10.2.6/23:59:59,M3.2.6/23:59:59"
+    },
+    {
+      "name": "(UTC-03:30) Newfoundland",
+      "posixRule": "NST3:30NDT,M3.2.0,M11.1.0"
+    },
+    {
+      "name": "(UTC-03:00) Araguaina",
+      "posixRule": "CLT3CLT,M1.1.2/0,M2.3.6/23:59:59"
+    },
+    {
+      "name": "(UTC-03:00) Brasilia",
+      "posixRule": "BRT3BRST,M10.3.6/23:59:59,M2.3.6/23:59:59"
+    },
+    {
+      "name": "(UTC-03:00) Cayenne, Fortaleza",
+      "posixRule": "GFT3"
+    },
+    {
+      "name": "(UTC-03:00) City of Buenos Aires",
+      "posixRule": "ART3ART,M1.1.4/0,M3.2.6/23:59:59"
+    },
+    {
+      "name": "(UTC-03:00) Greenland",
+      "posixRule": "WGT3WGST,M3.5.6/22,M10.5.6/23"
+    },
+    {
+      "name": "(UTC-03:00) Montevideo",
+      "posixRule": "UYT3UYST,M10.1.0,M3.2.0"
+    },
+    {
+      "name": "(UTC-03:00) Punta Arenas",
+      "posixRule": "CLT3CLT,M8.2.6/23:59:59,M5.2.6/23:59:59"
+    },
+    {
+      "name": "(UTC-03:00) Saint Pierre and Miquelon",
+      "posixRule": "SPST3SPDT,M3.2.0,M11.1.0"
+    },
+    {
+      "name": "(UTC-03:00) Salvador",
+      "posixRule": "BRT3BRT,M1.1.0/0,M2.4.6/23:59:59"
+    },
+    {
+      "name": "(UTC-02:00) Coordinated Universal Time-02",
+      "posixRule": "LSTD2"
+    },
+    {
+      "name": "(UTC-02:00) Mid-Atlantic - Old",
+      "posixRule": "MST2MDT,M3.5.0,M9.5.0"
+    },
+    {
+      "name": "(UTC-01:00) Azores",
+      "posixRule": "AZOT1AZOST,M3.5.0/0,M10.5.0/1"
+    },
+    {
+      "name": "(UTC-01:00) Cabo Verde Is.",
+      "posixRule": "CVT1"
+    },
+    {
+      "name": "(UTC) Coordinated Universal Time",
+      "posixRule": "CUT0"
+    },
+    {
+      "name": "(UTC+00:00) Dublin, Edinburgh, Lisbon, London",
+      "posixRule": "GMT0BST,M3.5.0/1,M10.5.0"
+    },
+    {
+      "name": "(UTC+00:00) Monrovia, Reykjavik",
+      "posixRule": "GMT0"
+    },
+    {
+      "name": "(UTC+00:00) Sao Tome",
+      "posixRule": "STST0STST,M1.1.2/0,M1.1.2"
+    },
+    {
+      "name": "(UTC+01:00) Casablanca",
+      "posixRule": "WET0WEST,M3.5.0,M10.5.0/3"
+    },
+    {
+      "name": "(UTC+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna",
+      "posixRule": "CET-1CEST,M3.5.0,M10.5.0/3"
+    },
+    {
+      "name": "(UTC+01:00) West Central Africa",
+      "posixRule": "WAT-1"
+    },
+    {
+      "name": "(UTC+02:00) Amman",
+      "posixRule": "EET-2EEST,M3.5.4/23:59:59,M10.5.5/1"
+    },
+    {
+      "name": "(UTC+02:00) Athens, Bucharest",
+      "posixRule": "EET-2EEST,M3.5.0/3,M10.5.0/4"
+    },
+    {
+      "name": "(UTC+02:00) Beirut",
+      "posixRule": "EET-2EEST,M3.5.6/23:59:59,M10.5.6/23:59:59"
+    },
+    {
+      "name": "(UTC+02:00) Cairo",
+      "posixRule": "EET-2EEST,M5.3.4/23:59:59,M9.5.4/23:59:59"
+    },
+    {
+      "name": "(UTC+02:00) Chisinau",
+      "posixRule": "EEST-2EEDT,M3.5.0,M10.5.0/3"
+    },
+    {
+      "name": "(UTC+02:00) Damascus",
+      "posixRule": "EEST-2EEST,M4.1.4/23:59:59,M10.5.4/23:59:59"
+    },
+    {
+      "name": "(UTC+02:00) Gaza, Hebron",
+      "posixRule": "EET-2EET,M3.5.5/0,M10.4.6/1"
+    },
+    {
+      "name": "(UTC+02:00) Harare, Pretoria",
+      "posixRule": "SAST-2"
+    },
+    {
+      "name": "(UTC+02:00) Jerusalem",
+      "posixRule": "IST-2IDT,M3.5.5,M10.5.0"
+    },
+    {
+      "name": "(UTC+02:00) Kaliningrad",
+      "posixRule": "FET-3FET,M3.5.0,M1.1.6/0"
+    },
+    {
+      "name": "(UTC+02:00) Khartoum",
+      "posixRule": "SAST-2SAST,M1.1.0/0,M10.5.2/23:59:59"
+    },
+    {
+      "name": "(UTC+02:00) Tripoli",
+      "posixRule": "EET-2EET,M3.5.5/1,M1.1.2/0"
+    },
+    {
+      "name": "(UTC+02:00) Windhoek",
+      "posixRule": "WAT-1WAST,M9.1.0,M4.1.0"
+    },
+    {
+      "name": "(UTC+03:00) Baghdad",
+      "posixRule": "AST-3AST,M4.1.0/3,M10.1.1/4"
+    },
+    {
+      "name": "(UTC+03:00) Kuwait, Riyadh",
+      "posixRule": "AST-3"
+    },
+    {
+      "name": "(UTC+03:00) Minsk",
+      "posixRule": "AST-3AST,M3.5.0,M1.1.6/0"
+    },
+    {
+      "name": "(UTC+03:00) Moscow, St. Petersburg",
+      "posixRule": "MSK-4MSK,M3.5.0,M1.1.6/0"
+    },
+    {
+      "name": "(UTC+03:00) Nairobi",
+      "posixRule": "EAT-3"
+    },
+    {
+      "name": "(UTC+03:30) Tehran",
+      "posixRule": "IRST-3:30IRDT,M3.3.6/23:59:59,M9.3.1/23:59:59"
+    },
+    {
+      "name": "(UTC+04:00) Abu Dhabi, Muscat",
+      "posixRule": "GST-4"
+    },
+    {
+      "name": "(UTC+04:00) Astrakhan, Ulyanovsk",
+      "posixRule": "GST-4GST,M1.1.5/0,M3.5.0"
+    },
+    {
+      "name": "(UTC+04:00) Baku",
+      "posixRule": "AZT-4AZST,M3.5.0/4,M10.5.0/5"
+    },
+    {
+      "name": "(UTC+04:00) Izhevsk, Samara",
+      "posixRule": "GST-4GST,M3.5.0,M1.1.6/0"
+    },
+    {
+      "name": "(UTC+04:00) Port Louis",
+      "posixRule": "MUT-4MUT,M1.1.4/0,M3.5.0"
+    },
+    {
+      "name": "(UTC+04:00) Saratov",
+      "posixRule": "GST-4GST,M1.1.5/0,M12.1.0"
+    },
+    {
+      "name": "(UTC+04:00) Tbilisi",
+      "posixRule": "GET-4"
+    },
+    {
+      "name": "(UTC+04:00) Volgograd",
+      "posixRule": "GST-4GST,M1.1.1/0,M10.5.0"
+    },
+    {
+      "name": "(UTC+04:00) Yerevan",
+      "posixRule": "AMT-4AMT,M3.5.0,M10.5.0/3"
+    },
+    {
+      "name": "(UTC+04:30) Kabul",
+      "posixRule": "AFT-4:30"
+    },
+    {
+      "name": "(UTC+05:00) Ashgabat, Tashkent",
+      "posixRule": "UZT-5"
+    },
+    {
+      "name": "(UTC+05:00) Ekaterinburg",
+      "posixRule": "YEKT-6YEKT,M3.5.0,M1.1.6/0"
+    },
+    {
+      "name": "(UTC+05:00) Islamabad, Karachi",
+      "posixRule": "PKT-5PKT,M4.2.2/23:59:59,M10.5.6/23:59:59"
+    },
+    {
+      "name": "(UTC+05:00) Qyzylorda",
+      "posixRule": "UZT-5UZT,M1.1.1/0,M12.3.5/0"
+    },
+    {
+      "name": "(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi",
+      "posixRule": "IST-5:30"
+    },
+    {
+      "name": "(UTC+05:45) Kathmandu",
+      "posixRule": "NPT-5:45"
+    },
+    {
+      "name": "(UTC+06:00) Astana",
+      "posixRule": "ALMT-6"
+    },
+    {
+      "name": "(UTC+06:00) Dhaka",
+      "posixRule": "BDT-6BDT,M6.3.5/23,M12.5.4/23:59"
+    },
+    {
+      "name": "(UTC+06:00) Omsk",
+      "posixRule": "ALMT-6ALMT,M1.1.3/0,M10.5.0"
+    },
+    {
+      "name": "(UTC+06:30) Yangon (Rangoon)",
+      "posixRule": "MMT-6:30"
+    },
+    {
+      "name": "(UTC+07:00) Bangkok, Hanoi, Jakarta",
+      "posixRule": "ICT-7"
+    },
+    {
+      "name": "(UTC+07:00) Barnaul, Gorno-Altaysk",
+      "posixRule": "ICT-7ICT,M1.1.5/0,M3.5.0"
+    },
+    {
+      "name": "(UTC+07:00) Hovd",
+      "posixRule": "ICT-7ICT,M3.5.6,M9.4.5/23:59:59"
+    },
+    {
+      "name": "(UTC+07:00) Krasnoyarsk",
+      "posixRule": "KRAT-8KRAT,M3.5.0,M1.1.6/0"
+    },
+    {
+      "name": "(UTC+07:00) Novosibirsk",
+      "posixRule": "NOVT-7NOVT,M3.5.0,M1.1.6/0"
+    },
+    {
+      "name": "(UTC+07:00) Tomsk",
+      "posixRule": "ICT-7ICT,M1.1.5/0,M5.5.0"
+    },
+    {
+      "name": "(UTC+08:00) Beijing, Chongqing, Hong Kong, Urumqi",
+      "posixRule": "CST-8"
+    },
+    {
+      "name": "(UTC+08:00) Irkutsk",
+      "posixRule": "IRKT-9IRKT,M3.5.0,M1.1.6/0"
+    },
+    {
+      "name": "(UTC+08:00) Kuala Lumpur, Singapore",
+      "posixRule": "SGT-8"
+    },
+    {
+      "name": "(UTC+08:00) Perth",
+      "posixRule": "WST-8WST,M1.1.4/0,M3.5.0/3"
+    },
+    {
+      "name": "(UTC+08:00) Ulaanbaatar",
+      "posixRule": "ULAT-8"
+    },
+    {
+      "name": "(UTC+08:45) Eucla",
+      "posixRule": "ACWST-8:45"
+    },
+    {
+      "name": "(UTC+09:00) Chita",
+      "posixRule": "JST-9JST,M1.1.5/0,M3.5.0"
+    },
+    {
+      "name": "(UTC+09:00) Osaka, Sapporo, Tokyo",
+      "posixRule": "JST-9"
+    },
+    {
+      "name": "(UTC+09:00) Pyongyang",
+      "posixRule": "JST-9JST-8:30,M1.1.1/0,M5.1.5/23:30"
+    },
+    {
+      "name": "(UTC+09:00) Seoul",
+      "posixRule": "KST-9"
+    },
+    {
+      "name": "(UTC+09:00) Yakutsk",
+      "posixRule": "YAKT-10YAKT,M3.5.0,M1.1.6/0"
+    },
+    {
+      "name": "(UTC+09:30) Adelaide",
+      "posixRule": "CST-9:30CST,M10.1.0,M4.1.0/3"
+    },
+    {
+      "name": "(UTC+09:30) Darwin",
+      "posixRule": "CST-9:30"
+    },
+    {
+      "name": "(UTC+10:00) Brisbane",
+      "posixRule": "EST-10"
+    },
+    {
+      "name": "(UTC+10:00) Canberra, Melbourne, Sydney",
+      "posixRule": "EST-10EST,M10.1.0,M4.1.0/3"
+    },
+    {
+      "name": "(UTC+10:00) Guam, Port Moresby",
+      "posixRule": "PGT-10"
+    },
+    {
+      "name": "(UTC+10:00) Vladivostok",
+      "posixRule": "VLAT-11VLAT,M3.5.0,M1.1.6/0"
+    },
+    {
+      "name": "(UTC+10:30) Lord Howe Island",
+      "posixRule": "AEST-10:30AEDT-11,M10.1.0,M4.1.0"
+    },
+    {
+      "name": "(UTC+11:00) Bougainville Island",
+      "posixRule": "SBT-11SBT,M12.5.0,M1.1.3/0"
+    },
+    {
+      "name": "(UTC+11:00) Chokurdakh",
+      "posixRule": "SBT-11SBT,M1.1.3/0,M10.5.0"
+    },
+    {
+      "name": "(UTC+11:00) Magadan",
+      "posixRule": "MAGT-12MAGT,M3.5.0,M1.1.6/0"
+    },
+    {
+      "name": "(UTC+11:00) Norfolk Island",
+      "posixRule": "SBT-11SBT-11:30,M1.1.4/0,M10.1.0"
+    },
+    {
+      "name": "(UTC+11:00) Sakhalin",
+      "posixRule": "SBT-11SBT,M1.1.5/0,M3.5.0"
+    },
+    {
+      "name": "(UTC+11:00) Solomon Is., New Caledonia",
+      "posixRule": "SBT-11"
+    },
+    {
+      "name": "(UTC+12:00) Anadyr, Petropavlovsk-Kamchatsky",
+      "posixRule": "LSTD-12LSTD,M3.5.0,M1.1.6/0"
+    },
+    {
+      "name": "(UTC+12:00) Auckland, Wellington",
+      "posixRule": "NZST-12NZDT,M9.5.0,M4.1.0/3"
+    },
+    {
+      "name": "(UTC+12:00) Coordinated Universal Time+12",
+      "posixRule": "LSTD-12"
+    },
+    {
+      "name": "(UTC+12:00) Fiji",
+      "posixRule": "FJT-12FJST,M10.4.0,M1.4.0/3"
+    },
+    {
+      "name": "(UTC+12:00) Petropavlovsk-Kamchatsky - Old",
+      "posixRule": "KST-12KDT,M3.5.0,M10.5.0/3"
+    },
+    {
+      "name": "(UTC+12:45) Chatham Islands",
+      "posixRule": "CIST-12:45CIDT,M9.5.0/2:45,M4.1.0/3:45"
+    },
+    {
+      "name": "(UTC+13:00) Coordinated Universal Time+13",
+      "posixRule": "TOT-13"
+    },
+    {
+      "name": "(UTC+13:00) Samoa",
+      "posixRule": "WSDT-13WST,M9.5.0/0,M4.1.0/1"
+    },
+    {
+      "name": "(UTC+14:00) Kiritimati Island",
+      "posixRule": "LIST-14"
+    },
+    {
+      "name": "(UTC+00:00) Greenwich Mean Time (GMT)",
+      "posixRule": "GMT"
+    }
+  ]
+}
