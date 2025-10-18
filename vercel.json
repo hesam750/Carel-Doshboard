@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/dashboard.html"
+    },
+    {
       "source": "/proxy",
       "destination": "/api/proxy"
     }
