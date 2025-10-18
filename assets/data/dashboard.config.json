@@ -1,5 +1,5 @@
 {
-  "deviceUrl": "http://YOUR_PLC_HOST:PORT/getvar.csv",
+  "deviceUrl": "https://conflicts-licence-deutsche-say.trycloudflare.com/pgd/vars.htm",
   "pollingMs": 1000,
   "units": [
     {
