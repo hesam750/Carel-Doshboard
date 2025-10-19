@@ -183,11 +183,11 @@
   <!-- Minimal deps temporarily disabled to isolate SyntaxError source -->
   <!-- Removed deviceengine.js and pLan-min.js because the distributed files are gzipped and trigger SyntaxError in browser -->
   <!-- Load core libs from CDN to avoid gzipped/invalid local files -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pv9gFj2b6Y3qzHTgR3Sm2NVVvcvIfFlG5X3z3j9v3B9rC8mWjzJpH6pJvF2xAMxTiGzP0zqKj7rCqK8e8jK93A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-min.js" integrity="sha512-2xjYw3mJGUzvPib0M3FcQyabpXUu4kQXmvT4nXH/0o3pK0sYwM2bM9kUSm8WwD8u3b8gk8tCz+qOe3TwYqB7Ww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-8GqF2YkRPG7ySPl2ttf7zqM0KxQO6rH2J6r7M3C9uFJ4cC8v8t2kB5zVn9jKZJf3cV3kQYwQdQpVdXzG9pN0CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha512-J0LAxG4x2nAh9wNwzC4bZcGQA7Qcn0rHjRQ3JgoF6n9uJAxKpKzjJYkSgQmWxfL0YdXqQ3eK0usA1nQ1QkLQ3A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.csv/1.0.21/jquery.csv.min.js" integrity="sha512-tQkBv+Wq7J0p+V7E4YJw2o8QmF2M3fX2r1cJ8kMZl2gGz2nH8lKQpV3VjYlCqZJfQdTq4xYfN6bV3JmQ1Hqv7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/jquery@3.6.4/dist/jquery.min.js'"></script>
+  <script src="https://cdn.jsdelivr.net/npm/knockout@3.5.1/build/output/knockout-latest.js" onerror="this.onerror=null;this.src='https://unpkg.com/knockout@3.5.1/build/output/knockout-latest.js'"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/min/moment-with-locales.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/moment@2.29.4/min/moment-with-locales.min.js'"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/bootstrap@3.4.1/dist/js/bootstrap.min.js'"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-csv@1.0.21/src/jquery.csv.min.js" onerror="this.onerror=null;this.src='https://unpkg.com/jquery-csv@1.0.21/src/jquery.csv.min.js'"></script>
   <script>
     (function(){
       function parseVarsTable(html){
@@ -686,6 +686,9 @@
       }
 
       try {
+        if(!window.ko || !ko.observable){
+          throw new Error('Knockout.js not loaded');
+        }
         var vm = new RootVM();
         // Detect demo mode from query string (?demo=1)
         try {
@@ -710,7 +713,16 @@
         }
         });
         console.log('dashboard app initialized');
-      } catch(e){ console.error('dashboard init error', e); }
+      } catch(e){ 
+        console.error('dashboard init error', e);
+        try {
+          var alertEl = document.querySelector('.alert.alert-danger');
+          if(alertEl){
+            alertEl.style.display = '';
+            alertEl.textContent = 'Init error: ' + ((e && e.message) ? e.message : String(e));
+          }
+        } catch(_){}
+      }
     })();
   </script>
 </body>
