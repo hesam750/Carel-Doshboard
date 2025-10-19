@@ -318,10 +318,19 @@
           inflightAt = now;
           inflight = fetchOnce(deviceUrl).catch(function(err){
             try { console.warn('[Dashboard] fetchVars primary failed', deviceUrl, err); } catch(e){}
-            var alt = deviceUrl.indexOf('getvar.csv') > -1 ? deviceUrl.replace('getvar.csv','vars.htm')
+            var alt1 = deviceUrl.indexOf('getvar.csv') > -1 ? deviceUrl.replace('getvar.csv','vars.htm')
                      : deviceUrl.indexOf('vars.htm') > -1 ? deviceUrl.replace('vars.htm','getvar.csv') : null;
-            if(!alt) throw err;
-            return fetchOnce(alt).then(function(t){ deviceUrl = alt; try { console.info('[Dashboard] switched deviceUrl to', deviceUrl); } catch(e){} return t; });
+            if(!alt1) throw err;
+            return fetchOnce(alt1).then(function(t){ deviceUrl = alt1; try { console.info('[Dashboard] switched deviceUrl to', deviceUrl); } catch(e){} return t; })
+              .catch(function(err2){
+                // Path-level fallback: drop subfolder (e.g., /pgd) and try at domain root
+                try {
+                  var file = /getvar\.csv/i.test(deviceUrl) ? 'getvar.csv' : 'vars.htm';
+                  var u = new URL(deviceUrl);
+                  var rootUrl = u.origin + '/' + file;
+                  return fetchOnce(rootUrl).then(function(t){ deviceUrl = rootUrl; try { console.info('[Dashboard] path fallback to root', deviceUrl); } catch(e){} return t; });
+                } catch(e){ throw err2; }
+              });
           }).then(function(t){
             try { console.debug('[Dashboard] fetchVars ok', { url: deviceUrl, len: (t||'').length }); } catch(e){}
             lastText = t; lastTime = Date.now();
@@ -647,7 +656,9 @@
         self.load = function(){
           return $.getJSON('assets/data/dashboard.config.json').then(function(cfg){
             self.pollingMs = (cfg && cfg.pollingMs) || 1000;
-            if(cfg && cfg.deviceUrl){ adapter = SafeAdapter(cfg.deviceUrl); }
+            var qDev = null; try { var m = (location.search || '').match(/[?&]device=([^&]+)/i); qDev = m ? decodeURIComponent(m[1]) : null; } catch(e) { qDev = null; }
+            var devUrl = qDev || (cfg && cfg.deviceUrl);
+            if(devUrl){ adapter = SafeAdapter(devUrl); }
             var arr = (cfg && cfg.units) || [];
             self.units(arr.map(function(u){ return new UnitVM(u, adapter, self); }));
           }).catch(function(){
