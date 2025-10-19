@@ -325,10 +325,17 @@
               .catch(function(err2){
                 // Path-level fallback: drop subfolder (e.g., /pgd) and try at domain root
                 try {
-                  var file = /getvar\.csv/i.test(deviceUrl) ? 'getvar.csv' : 'vars.htm';
+                  var origWasCsv = /getvar\.csv/i.test(deviceUrl);
                   var u = new URL(deviceUrl);
-                  var rootUrl = u.origin + '/' + file;
-                  return fetchOnce(rootUrl).then(function(t){ deviceUrl = rootUrl; try { console.info('[Dashboard] path fallback to root', deviceUrl); } catch(e){} return t; });
+                  var rootCsv = u.origin + '/getvar.csv';
+                  var rootHtm = u.origin + '/vars.htm';
+                  return fetchOnce(origWasCsv ? rootCsv : rootHtm)
+                    .then(function(t){ deviceUrl = origWasCsv ? rootCsv : rootHtm; try { console.info('[Dashboard] path fallback to root', deviceUrl); } catch(e){} return t; })
+                    .catch(function(err3){
+                      // Final attempt: try the other root file too
+                      var other = origWasCsv ? rootHtm : rootCsv;
+                      return fetchOnce(other).then(function(t){ deviceUrl = other; try { console.info('[Dashboard] root alternate file worked', deviceUrl); } catch(e){} return t; });
+                    });
                 } catch(e){ throw err2; }
               });
           }).then(function(t){
